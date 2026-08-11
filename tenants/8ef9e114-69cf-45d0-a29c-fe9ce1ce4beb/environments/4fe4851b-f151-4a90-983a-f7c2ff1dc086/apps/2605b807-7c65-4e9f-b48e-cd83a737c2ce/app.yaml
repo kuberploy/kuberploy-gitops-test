@@ -1,0 +1,27 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "2605b807-7c65-4e9f-b48e-cd83a737c2ce"
+  name: "builder-fixture"
+spec:
+  projectId: "8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb"
+  applicationId: "2605b807-7c65-4e9f-b48e-cd83a737c2ce"
+  environmentId: "4fe4851b-f151-4a90-983a-f7c2ff1dc086"
+  delivery:
+    mode: image
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/services/2605b807-7c65-4e9f-b48e-cd83a737c2ce/image"
+      digest: "sha256:260dc7c6b583f5fccea456cfcbbe74e1c603d2fd89bcb7b6bf26e61aaf8f3671"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "100Mi"
+    strategy:
+      type: "RollingUpdate"
