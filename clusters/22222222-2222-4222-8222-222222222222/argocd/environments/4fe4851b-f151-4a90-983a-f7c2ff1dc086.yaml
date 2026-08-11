@@ -1,0 +1,125 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: kp-p-8ef9e11469cf45d0a29cfe9ce1ce4beb
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: 4fe4851b-f151-4a90-983a-f7c2ff1dc086
+        kuberploy.io/project-id: 8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb
+    annotations:
+        argocd.argoproj.io/sync-wave: "-10"
+        kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:b2d702054c9931e3e249213330b057ab83d098f81e799093d24f7cf8cf7c234a
+        kuberploy.io/runtime-chart-digest: sha256:8872af1617478fd9766fb04e212dfd6a7e910f0f03a8134c550c293c7e50affc
+spec:
+    sourceRepos:
+        - https://github.com/kuberploy/kuberploy-gitops-test.git
+        - oci://ghcr.io/kuberploy/charts/kuberploy-runtime
+    destinations:
+        - namespace: kp-kuberploy-qualification-development
+          server: https://kubernetes.default.svc
+    clusterResourceWhitelist: []
+    namespaceResourceWhitelist:
+        - group: ""
+          kind: ConfigMap
+        - group: ""
+          kind: Service
+        - group: ""
+          kind: ServiceAccount
+        - group: apps
+          kind: Deployment
+        - group: autoscaling
+          kind: HorizontalPodAutoscaler
+        - group: networking.k8s.io
+          kind: Ingress
+        - group: networking.k8s.io
+          kind: NetworkPolicy
+        - group: policy
+          kind: PodDisruptionBudget
+        - group: traefik.io
+          kind: Middleware
+        - group: cert-manager.io
+          kind: Certificate
+    orphanedResources:
+        warn: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+    name: kp-e-4fe4851bf1514a90983af7c2ff1dc086
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: 4fe4851b-f151-4a90-983a-f7c2ff1dc086
+        kuberploy.io/project-id: 8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb
+    annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
+        kuberploy.io/runtime-chart-digest: sha256:8872af1617478fd9766fb04e212dfd6a7e910f0f03a8134c550c293c7e50affc
+spec:
+    goTemplate: true
+    goTemplateOptions:
+        - missingkey=error
+    generators:
+        - list:
+            elements:
+                - deploymentId: 972cba1b-1822-4b5e-a143-91ac1441b831
+                  applicationId: 2605b807-7c65-4e9f-b48e-cd83a737c2ce
+                  applicationName: kp-d-972cba1b18224b5ea14391ac1441b831
+                  applicationPath: tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/environments/4fe4851b-f151-4a90-983a-f7c2ff1dc086/apps/2605b807-7c65-4e9f-b48e-cd83a737c2ce/app.yaml
+    template:
+        metadata:
+            name: '{{.applicationName}}'
+            namespace: argocd
+            labels:
+                app.kubernetes.io/managed-by: kuberploy
+                kuberploy.io/application-id: '{{.applicationId}}'
+                kuberploy.io/deployment-id: '{{.deploymentId}}'
+                kuberploy.io/environment-id: 4fe4851b-f151-4a90-983a-f7c2ff1dc086
+                kuberploy.io/project-id: 8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb
+                kuberploy.io/service: '{{.applicationId}}'
+            annotations:
+                argocd.argoproj.io/manifest-generate-paths: tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/variables.yaml;tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/environments/4fe4851b-f151-4a90-983a-f7c2ff1dc086/variables.yaml;{{.applicationPath}}
+                kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
+                kuberploy.io/git-indexed-generation: "3"
+                kuberploy.io/git-indexed-revision: 3b789483e920460fb6590a84a467a15ce3856804
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:b2d702054c9931e3e249213330b057ab83d098f81e799093d24f7cf8cf7c234a
+                kuberploy.io/runtime-chart-digest: sha256:8872af1617478fd9766fb04e212dfd6a7e910f0f03a8134c550c293c7e50affc
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.41
+        spec:
+            project: kp-p-8ef9e11469cf45d0a29cfe9ce1ce4beb
+            sources:
+                - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
+                  path: .
+                  targetRevision: sha256:8872af1617478fd9766fb04e212dfd6a7e910f0f03a8134c550c293c7e50affc
+                  helm:
+                    valueFiles:
+                        - $values/tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/variables.yaml
+                        - $values/tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/environments/4fe4851b-f151-4a90-983a-f7c2ff1dc086/variables.yaml
+                        - $values/{{.applicationPath}}
+                    ignoreMissingValueFiles: true
+                    parameters:
+                        - name: kuberployExpectedIdentity.projectId
+                          value: 8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb
+                          forceString: true
+                        - name: kuberployExpectedIdentity.environmentId
+                          value: 4fe4851b-f151-4a90-983a-f7c2ff1dc086
+                          forceString: true
+                        - name: kuberployExpectedIdentity.applicationId
+                          value: '{{.applicationId}}'
+                          forceString: true
+                - repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+                  targetRevision: 3b789483e920460fb6590a84a467a15ce3856804
+                  ref: values
+            destination:
+                namespace: kp-kuberploy-qualification-development
+                server: https://kubernetes.default.svc
+            syncPolicy:
+                automated:
+                    allowEmpty: false
+                    prune: true
+                    selfHeal: true
+                syncOptions:
+                    - CreateNamespace=false
+                    - ServerSideApply=true
