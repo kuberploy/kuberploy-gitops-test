@@ -186,5 +186,5 @@ roleRef:
   name: kuberploy-runtime-observer
 subjects:
   - kind: ServiceAccount
-    name: kuberploy-runtime-observer
+    name: kuberploy-api
     namespace: kuberploy-system
