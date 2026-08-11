@@ -10,8 +10,8 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "-10"
         kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
-        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:0895fed94b75a9cd6a1cc4c6ecb1af47ee1b5b784884e0246ef44428b9e38086
-        kuberploy.io/runtime-chart-digest: sha256:49ec75bc8cdf2ebbc5094a4f632211335d1f3916d713625a1640698f63892ac4
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:29b67866f94546d0d4ba8008981a3209ab63bf70d0ae8a1d764a7183d45e566a
+        kuberploy.io/runtime-chart-digest: sha256:bd0e4362020715648ffc83b7fa535038d43c4bd83dcc89470ad6ee1d7aa40157
 spec:
     sourceRepos:
         - https://github.com/kuberploy/kuberploy-gitops-test.git
@@ -56,7 +56,7 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "0"
         kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
-        kuberploy.io/runtime-chart-digest: sha256:49ec75bc8cdf2ebbc5094a4f632211335d1f3916d713625a1640698f63892ac4
+        kuberploy.io/runtime-chart-digest: sha256:bd0e4362020715648ffc83b7fa535038d43c4bd83dcc89470ad6ee1d7aa40157
 spec:
     goTemplate: true
     goTemplateOptions:
@@ -68,6 +68,7 @@ spec:
                   applicationId: 2605b807-7c65-4e9f-b48e-cd83a737c2ce
                   applicationName: kp-d-972cba1b18224b5ea14391ac1441b831
                   applicationPath: tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/environments/4fe4851b-f151-4a90-983a-f7c2ff1dc086/apps/2605b807-7c65-4e9f-b48e-cd83a737c2ce/app.yaml
+                  valuesRevision: dc72bed270584d9ebdb0ee5c367be13e396ee8b1
     template:
         metadata:
             name: '{{.applicationName}}'
@@ -80,19 +81,16 @@ spec:
                 kuberploy.io/project-id: 8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb
                 kuberploy.io/service: '{{.applicationId}}'
             annotations:
-                argocd.argoproj.io/manifest-generate-paths: tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/variables.yaml;tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/environments/4fe4851b-f151-4a90-983a-f7c2ff1dc086/variables.yaml;{{.applicationPath}}
                 kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
-                kuberploy.io/git-indexed-generation: "10"
-                kuberploy.io/git-indexed-revision: 9020d15b7f2ff98200edc7c975a2d154130bf35a
-                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:0895fed94b75a9cd6a1cc4c6ecb1af47ee1b5b784884e0246ef44428b9e38086
-                kuberploy.io/runtime-chart-digest: sha256:49ec75bc8cdf2ebbc5094a4f632211335d1f3916d713625a1640698f63892ac4
-                kuberploy.io/runtime-chart-version: 0.1.0-rc.45
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:29b67866f94546d0d4ba8008981a3209ab63bf70d0ae8a1d764a7183d45e566a
+                kuberploy.io/runtime-chart-digest: sha256:bd0e4362020715648ffc83b7fa535038d43c4bd83dcc89470ad6ee1d7aa40157
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.48
         spec:
             project: kp-p-8ef9e11469cf45d0a29cfe9ce1ce4beb
             sources:
                 - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
                   path: .
-                  targetRevision: sha256:49ec75bc8cdf2ebbc5094a4f632211335d1f3916d713625a1640698f63892ac4
+                  targetRevision: sha256:bd0e4362020715648ffc83b7fa535038d43c4bd83dcc89470ad6ee1d7aa40157
                   helm:
                     valueFiles:
                         - $values/tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/variables.yaml
@@ -110,7 +108,7 @@ spec:
                           value: '{{.applicationId}}'
                           forceString: true
                 - repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
-                  targetRevision: 9020d15b7f2ff98200edc7c975a2d154130bf35a
+                  targetRevision: '{{.valuesRevision}}'
                   ref: values
             destination:
                 namespace: kp-kuberploy-qualification-development
