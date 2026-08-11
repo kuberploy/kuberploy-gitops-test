@@ -1,0 +1,92 @@
+config:
+  edgeRuntime:
+    enabled: true
+    profiles:
+      traefik:
+        revision: 1
+        mode: managed
+        namespace: kuberploy-system
+        version: v3.7.10
+        deployment:
+          name: edge-traefik
+          containerName: edge-traefik
+          image: docker.io/library/traefik:v3.7.10
+          specDigest: sha256:df44cceef810f3342142e8bd372d34eb3fb35feba288bba2ca8d3e61aa9cbdcf
+        service:
+          name: edge-traefik
+          specDigest: sha256:39f8e852fc78c971181876230590989dc6fb00c983736d12e3cc874aa5ee45fa
+        ingressClass:
+          name: traefik
+          specDigest: sha256:cc5e600aeef9a8ca6783db3d4d04e455476e70729faba413201c377ab3939a98
+        crds:
+          - name: ingressroutes.traefik.io
+            specDigest: sha256:37ce6b9e03bce1edcb5bd1a39ba43be0ca5c4adc02566f82deea6985b388e73f
+          - name: ingressroutetcps.traefik.io
+            specDigest: sha256:4ddf779e90545cd9db9086910aa588b9502b02a9f29b9c6d9535ba5090635440
+          - name: ingressrouteudps.traefik.io
+            specDigest: sha256:e4e2ce7df2d046dcc5760b6ea0ca175139ece79210c1a14f5801a8da62b9aa8c
+          - name: middlewares.traefik.io
+            specDigest: sha256:0a8fe46471014fb1ff34c6a533bd1c7da8de40683395b80fcbe6766df88acb7d
+          - name: middlewaretcps.traefik.io
+            specDigest: sha256:beca381962b45e0fc6924c2aeb41b0df831540a0ab5a540f27e44e9ab3a14c0e
+          - name: serverstransports.traefik.io
+            specDigest: sha256:d1acb5970eb5bd6e4fb00f1380ecc4e446016747085b5f1667a0c40f56081370
+          - name: serverstransporttcps.traefik.io
+            specDigest: sha256:4c6f1e4c4e6dcb407a5df857cc919d22f106bf7f53856dead6e3e548b9d2137b
+          - name: tlsoptions.traefik.io
+            specDigest: sha256:555f3f494e5507e298fcc419bd7618cec185f6d90041f6d81b20c6ff3f6dcdc9
+          - name: tlsstores.traefik.io
+            specDigest: sha256:5c70c14004f195373cf0a9484c6360f1ef54d72204aff5e7b74d9723cb969712
+          - name: traefikservices.traefik.io
+            specDigest: sha256:44ee2efe70fbb52b0b8d3f8479bd26f9fbe1fcd7f65ac420074899dc3ec75ead
+        profileConfigMap: edge-edge-profile
+        requireLoadBalancerReady: true
+        sslip:
+          mode: auto-first-ip
+      certManager:
+        revision: 1
+        mode: managed
+        namespace: cert-manager
+        version: v1.21.1
+        deployments:
+          - name: cert-cert-manager
+            containerName: certmanager-controller
+            image: quay.io/jetstack/cert-manager-controller:v1.21.1
+            specDigest: sha256:6d1cb8a9dbbf7e7ed035ec675ddd10fe81cd49f2e5778d05ddeddf5d92773f53
+          - name: cert-cert-manager-cainjector
+            containerName: certmanager-cainjector
+            image: quay.io/jetstack/cert-manager-cainjector:v1.21.1
+            specDigest: sha256:3a110701e6e705a082ccc43dcd25649a8021ce3f215b7483e1e85bb8d3e4c382
+          - name: cert-cert-manager-webhook
+            containerName: certmanager-webhook
+            image: quay.io/jetstack/cert-manager-webhook:v1.21.1
+            specDigest: sha256:7e1a1dada7e5f2e568fe4c5e94911e6180c901a691bcb41f88b093da4d9f41b2
+        crds:
+          - name: certificaterequests.cert-manager.io
+            specDigest: sha256:1fcc9ae1e29ccb9b24fcc397384f8dc20e51972dcbe2ba4728eec501a391fcf9
+          - name: certificates.cert-manager.io
+            specDigest: sha256:b85cbd5a27ee913b81a321bc39a8e0030595fc497240da3cc2446d7c3889993b
+          - name: challenges.acme.cert-manager.io
+            specDigest: sha256:c0708f8f2b8ef02f097d4d823548568dfad2bb1fec9698ebab6a0b2796c7403f
+          - name: clusterissuers.cert-manager.io
+            specDigest: sha256:811521cc7263e985a215785eb7b8b57d08becc785c747bc0434202d8f9789319
+          - name: issuers.cert-manager.io
+            specDigest: sha256:e7d3ead5adabc778fbe28b3b3aba0c41ec725c3e475d9749ce819362717137e9
+          - name: orders.acme.cert-manager.io
+            specDigest: sha256:d94a72ae62aa1cc308e01bd1a801b913f1c1b9bc9f53f84020d94f378bba60be
+        profileConfigMap: cert-certificate-profile
+        ingressClassName: traefik
+        productionIssuer: kuberploy-letsencrypt-production
+        productionServerClass: letsencrypt-production
+        productionSolverTypes: [http01]
+        productionDNS01Profiles: []
+        stagingIssuer: kuberploy-letsencrypt-staging
+        stagingServerClass: letsencrypt-staging
+        stagingSolverTypes: [http01]
+        stagingDNS01Profiles: []
+    pollIntervalSeconds: 30
+    workLeaseSeconds: 120
+    heartbeatSeconds: 20
+    readinessSeconds: 90
+    minimumBackoffSeconds: 5
+    maximumBackoffSeconds: 300
