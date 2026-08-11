@@ -3,7 +3,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 2
+        revision: 3
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -20,31 +20,31 @@ config:
           specDigest: sha256:cc5e600aeef9a8ca6783db3d4d04e455476e70729faba413201c377ab3939a98
         crds:
           - name: ingressroutes.traefik.io
-            specDigest: sha256:0fed64ce9cc04868eaa0236362a71f87d73014812308b2d46a7d06fa5f6d8cab
+            specDigest: sha256:37ce6b9e03bce1edcb5bd1a39ba43be0ca5c4adc02566f82deea6985b388e73f
           - name: ingressroutetcps.traefik.io
-            specDigest: sha256:51b92fbe43eccecf4d8bf48aab9344f3bcc3c7c43e3040bf8c4dda5800c37c34
+            specDigest: sha256:4ddf779e90545cd9db9086910aa588b9502b02a9f29b9c6d9535ba5090635440
           - name: ingressrouteudps.traefik.io
-            specDigest: sha256:6fa3d3891f2231a1ecb10e0a9206a6c8a1478196207df906fc868b6cc3c2faf3
+            specDigest: sha256:e4e2ce7df2d046dcc5760b6ea0ca175139ece79210c1a14f5801a8da62b9aa8c
           - name: middlewares.traefik.io
-            specDigest: sha256:ead1bfbe7d7d07f2fa62db47edf81d67ac9ec71b34298bf7063dd367afb4d2ac
+            specDigest: sha256:83904b72490015fa9df566adc5327490aafa1d2fbffa11d4214749a8eee2aa4e
           - name: middlewaretcps.traefik.io
-            specDigest: sha256:f9ebb5bed3f443ffbca8f3da57f7c8e06f6e1fb891d9563a6416d6d42e1aa8ac
+            specDigest: sha256:beca381962b45e0fc6924c2aeb41b0df831540a0ab5a540f27e44e9ab3a14c0e
           - name: serverstransports.traefik.io
-            specDigest: sha256:71d74e1cb2e6b47f92552c7807f3f109c210ac81be66ff3c6ea11580097469f3
+            specDigest: sha256:d1acb5970eb5bd6e4fb00f1380ecc4e446016747085b5f1667a0c40f56081370
           - name: serverstransporttcps.traefik.io
-            specDigest: sha256:b7069b094a8216f5dbc12288334d660cab162b722bb47329a06e14affda83f22
+            specDigest: sha256:4c6f1e4c4e6dcb407a5df857cc919d22f106bf7f53856dead6e3e548b9d2137b
           - name: tlsoptions.traefik.io
-            specDigest: sha256:ab012f0c5aa890facd03d87339b59bcc23d0808f00053aa8423b5455f0690491
+            specDigest: sha256:555f3f494e5507e298fcc419bd7618cec185f6d90041f6d81b20c6ff3f6dcdc9
           - name: tlsstores.traefik.io
-            specDigest: sha256:9e969855412d0988c5e35cf62db45ae20e024f75034905fa846956994511c1c5
+            specDigest: sha256:5c70c14004f195373cf0a9484c6360f1ef54d72204aff5e7b74d9723cb969712
           - name: traefikservices.traefik.io
-            specDigest: sha256:cd6a9eb6124e681c82495d7f404404b7bdde9e878cd261860b19e59a73d24dd4
+            specDigest: sha256:44ee2efe70fbb52b0b8d3f8479bd26f9fbe1fcd7f65ac420074899dc3ec75ead
         profileConfigMap: edge-edge-profile
         requireLoadBalancerReady: true
         sslip:
           mode: auto-first-ip
       certManager:
-        revision: 2
+        revision: 3
         mode: managed
         namespace: cert-manager
         version: v1.21.1
@@ -63,17 +63,17 @@ config:
             specDigest: sha256:7e1a1dada7e5f2e568fe4c5e94911e6180c901a691bcb41f88b093da4d9f41b2
         crds:
           - name: certificaterequests.cert-manager.io
-            specDigest: sha256:d53c1dc750524b738bcabc6f3469e6bffb49ddfd9a6399859e009d909df7545a
+            specDigest: sha256:1fcc9ae1e29ccb9b24fcc397384f8dc20e51972dcbe2ba4728eec501a391fcf9
           - name: certificates.cert-manager.io
-            specDigest: sha256:8640c9dddefabab14bd064d3754f10ff30409180716a94ccb39046c71140fc85
+            specDigest: sha256:8ab5e9a5f15d469dcbc92b22ba3ddb10dadac8e02a29210ef2abcfdc85698d6d
           - name: challenges.acme.cert-manager.io
-            specDigest: sha256:a29ba316d08ddfbbe3f887d8936063e3b5579f81dc49b9f8c0cdc0b91c65fc0e
+            specDigest: sha256:a3df3915f698d34f907f54bc60bd90fb4f25c968c0dd1c46d16ec3e54351ac7c
           - name: clusterissuers.cert-manager.io
-            specDigest: sha256:1ce1bd53f2922c68111947b45a29bf4d8fafd330c50ab20983286ff83b038138
+            specDigest: sha256:8f0ddc580c0e9b7ea6918653ce548f6dc5a36543104c2f5000fe8cbc72d556d9
           - name: issuers.cert-manager.io
-            specDigest: sha256:730fb69a687b8a6d97edfbfc4b95aa7ee05630a1857fb926a7141cf4db05db1e
+            specDigest: sha256:3d526fedb2534020914fb30c21e3e766157a20ac648fce4aad7fff0bc6e87a1e
           - name: orders.acme.cert-manager.io
-            specDigest: sha256:f137905e34abc29726e0bc00ea6d929e6eeb5aba7ace9412cd110cde91c3d920
+            specDigest: sha256:d94a72ae62aa1cc308e01bd1a801b913f1c1b9bc9f53f84020d94f378bba60be
         profileConfigMap: cert-certificate-profile
         ingressClassName: traefik
         productionIssuer: kuberploy-letsencrypt-production
