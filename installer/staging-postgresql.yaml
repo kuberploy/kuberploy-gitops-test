@@ -1,0 +1,5 @@
+postgresqlFoundation:
+  auth:
+    existingSecret: kuberploy-postgresql-auth
+  storage:
+    requestedSize: 8Gi
