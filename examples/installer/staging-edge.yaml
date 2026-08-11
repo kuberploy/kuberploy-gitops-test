@@ -1,0 +1,4 @@
+edge:
+  traefik:
+    sslip:
+      mode: auto-first-ip

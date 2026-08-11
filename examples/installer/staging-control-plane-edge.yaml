@@ -3,7 +3,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 3
+        revision: 4
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -44,7 +44,7 @@ config:
         sslip:
           mode: auto-first-ip
       certManager:
-        revision: 3
+        revision: 4
         mode: managed
         namespace: cert-manager
         version: v1.21.1
@@ -80,9 +80,9 @@ config:
         productionServerClass: letsencrypt-production
         productionSolverTypes: [http01]
         productionDNS01Profiles: []
-        stagingIssuer: kuberploy-letsencrypt-staging
-        stagingServerClass: letsencrypt-staging
-        stagingSolverTypes: [http01]
+        stagingIssuer: ""
+        stagingServerClass: ""
+        stagingSolverTypes: []
         stagingDNS01Profiles: []
     pollIntervalSeconds: 30
     workLeaseSeconds: 120
