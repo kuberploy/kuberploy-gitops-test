@@ -9,9 +9,13 @@ spec:
   environmentId: "4fe4851b-f151-4a90-983a-f7c2ff1dc086"
   delivery:
     mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-registry"
+      profileRevision: 3
     release:
       repository: "registry.adminchatmate.com/kuberploy-qualification/projects/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/services/2605b807-7c65-4e9f-b48e-cd83a737c2ce/image"
-      digest: "sha256:260dc7c6b583f5fccea456cfcbbe74e1c603d2fd89bcb7b6bf26e61aaf8f3671"
+      digest: "sha256:260dc64436accc4cef5ab9e0ead7341a0855f9463a457a9f0a2c41d8414a60d3"
   runtime:
     ports:
       -
