@@ -82,8 +82,8 @@ spec:
             annotations:
                 argocd.argoproj.io/manifest-generate-paths: tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/variables.yaml;tenants/8ef9e114-69cf-45d0-a29c-fe9ce1ce4beb/environments/4fe4851b-f151-4a90-983a-f7c2ff1dc086/variables.yaml;{{.applicationPath}}
                 kuberploy.io/git-binding-id: da608b3d-7b11-462a-8955-922526815075
-                kuberploy.io/git-indexed-generation: "3"
-                kuberploy.io/git-indexed-revision: 3b789483e920460fb6590a84a467a15ce3856804
+                kuberploy.io/git-indexed-generation: "4"
+                kuberploy.io/git-indexed-revision: 144d4118a22f3e7827e2798276d775706aa81d44
                 kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:b2d702054c9931e3e249213330b057ab83d098f81e799093d24f7cf8cf7c234a
                 kuberploy.io/runtime-chart-digest: sha256:8872af1617478fd9766fb04e212dfd6a7e910f0f03a8134c550c293c7e50affc
                 kuberploy.io/runtime-chart-version: 0.1.0-rc.41
@@ -110,7 +110,7 @@ spec:
                           value: '{{.applicationId}}'
                           forceString: true
                 - repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
-                  targetRevision: 3b789483e920460fb6590a84a467a15ce3856804
+                  targetRevision: 144d4118a22f3e7827e2798276d775706aa81d44
                   ref: values
             destination:
                 namespace: kp-kuberploy-qualification-development
