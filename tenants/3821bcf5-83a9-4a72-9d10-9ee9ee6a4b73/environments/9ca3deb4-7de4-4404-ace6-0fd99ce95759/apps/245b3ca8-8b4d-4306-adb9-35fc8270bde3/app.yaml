@@ -20,26 +20,6 @@
       }
     },
     "environmentId": "9ca3deb4-7de4-4404-ace6-0fd99ce95759",
-    "middlewares": [
-      {
-        "name": "live-headers",
-        "profileRef": {
-          "assignmentsDigest": "sha256:06e451a67962b47d37179a94108ffb5a30a5a9a6587fd6b0a9518e464ccde8d4",
-          "profileId": "21096bc9-19a2-447b-afff-b073653702a3",
-          "revision": 2,
-          "specDigest": "sha256:ffebbfb3900a8c9cf77f70e9e314ff8b28642dad8d5d744852e6ebbeb38c6ee5"
-        },
-        "spec": {
-          "headers": {
-            "contentTypeNosniff": true,
-            "customResponseHeaders": {
-              "X-Kuberploy-Live": "revision-2"
-            },
-            "frameDeny": true
-          }
-        }
-      }
-    ],
     "projectId": "3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73",
     "runtime": {
       "env": [
