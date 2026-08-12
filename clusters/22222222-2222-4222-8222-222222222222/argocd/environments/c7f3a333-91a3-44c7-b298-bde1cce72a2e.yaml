@@ -10,7 +10,7 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "-10"
         kuberploy.io/git-binding-id: a6b4d9b0-b442-443c-8ff5-10fde53c5944
-        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:c98dfb2f04ef7b18a20cc9f39ddbe297b063341a062cda3bd6a7ee564ff48494
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:62b9d35aea7acb3743500a55a36be9e34f433dc942f7d5380e064363654084c9
         kuberploy.io/runtime-chart-digest: sha256:9a0a17f9053c4c769bbb9efd0946a167d77a982e22cdb77fe385ee3709dfc3a5
 spec:
     sourceRepos:
@@ -82,9 +82,9 @@ spec:
                 kuberploy.io/service: '{{.applicationId}}'
             annotations:
                 kuberploy.io/git-binding-id: a6b4d9b0-b442-443c-8ff5-10fde53c5944
-                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:c98dfb2f04ef7b18a20cc9f39ddbe297b063341a062cda3bd6a7ee564ff48494
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:62b9d35aea7acb3743500a55a36be9e34f433dc942f7d5380e064363654084c9
                 kuberploy.io/runtime-chart-digest: sha256:9a0a17f9053c4c769bbb9efd0946a167d77a982e22cdb77fe385ee3709dfc3a5
-                kuberploy.io/runtime-chart-version: 0.1.0-rc.81
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.82
         spec:
             project: kp-p-c06eb0f93ac344d4b50e68fe0d993064
             sources:
