@@ -1,31 +1,44 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "245b3ca8-8b4d-4306-adb9-35fc8270bde3"
-  name: "builder-fixture"
-spec:
-  projectId: "3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73"
-  applicationId: "245b3ca8-8b4d-4306-adb9-35fc8270bde3"
-  environmentId: "f7a8dc3e-52fc-4128-ad99-7314b837a263"
-  delivery:
-    mode: image
-    registryPull:
-      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
-      profileName: "managed-registry"
-      profileRevision: 5
-    release:
-      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73/services/245b3ca8-8b4d-4306-adb9-35fc8270bde3/image"
-      digest: "sha256:9bb7319c67efc50ca2e1258b822728aec247c1de70e04c21e3d86048c0eb57ef"
-  runtime:
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-    replicas: 1
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "128Mi"
-    strategy:
-      type: "RollingUpdate"
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "245b3ca8-8b4d-4306-adb9-35fc8270bde3",
+    "name": "builder-fixture"
+  },
+  "spec": {
+    "applicationId": "245b3ca8-8b4d-4306-adb9-35fc8270bde3",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-registry",
+        "profileRevision": 5,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:9bb7319c67efc50ca2e1258b822728aec247c1de70e04c21e3d86048c0eb57ef",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73/services/245b3ca8-8b4d-4306-adb9-35fc8270bde3/image"
+      }
+    },
+    "environmentId": "f7a8dc3e-52fc-4128-ad99-7314b837a263",
+    "projectId": "3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73",
+    "runtime": {
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP"
+        }
+      ],
+      "replicas": 2,
+      "resources": {
+        "requests": {
+          "cpu": "100m",
+          "memory": "128Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      }
+    }
+  }
+}
