@@ -1,1 +1,70 @@
-{"apiVersion":"config.kuberploy.io/v1alpha1","kind":"AppConfig","metadata":{"id":"245b3ca8-8b4d-4306-adb9-35fc8270bde3","name":"builder-fixture"},"spec":{"applicationId":"245b3ca8-8b4d-4306-adb9-35fc8270bde3","delivery":{"mode":"image","registryPull":{"profileName":"managed-registry","profileRevision":5,"targetId":"f0b03740-c7a9-4ca0-a852-e807c97d2fc8"},"release":{"digest":"sha256:0acec282587fa362abb96fa2c6e4f9946716272d578b978c00b6a5ef08bbc98f","repository":"registry.adminchatmate.com/kuberploy-qualification/projects/3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73/services/245b3ca8-8b4d-4306-adb9-35fc8270bde3/image"}},"environmentId":"9ca3deb4-7de4-4404-ace6-0fd99ce95759","projectId":"3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73","runtime":{"ports":[{"containerPort":8080,"name":"http","protocol":"TCP"}],"replicas":2,"resources":{"requests":{"cpu":"100m","memory":"128Mi"}},"strategy":{"type":"Recreate"},"env":[{"name":"RC_RUNTIME_ONLY","value":"live-runtime-only"}]}}}
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "245b3ca8-8b4d-4306-adb9-35fc8270bde3",
+    "name": "builder-fixture"
+  },
+  "spec": {
+    "applicationId": "245b3ca8-8b4d-4306-adb9-35fc8270bde3",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-registry",
+        "profileRevision": 5,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:0acec282587fa362abb96fa2c6e4f9946716272d578b978c00b6a5ef08bbc98f",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73/services/245b3ca8-8b4d-4306-adb9-35fc8270bde3/image"
+      }
+    },
+    "environmentId": "9ca3deb4-7de4-4404-ace6-0fd99ce95759",
+    "middlewares": [
+      {
+        "name": "live-headers",
+        "profileRef": {
+          "assignmentsDigest": "sha256:06e451a67962b47d37179a94108ffb5a30a5a9a6587fd6b0a9518e464ccde8d4",
+          "profileId": "21096bc9-19a2-447b-afff-b073653702a3",
+          "revision": 2,
+          "specDigest": "sha256:ffebbfb3900a8c9cf77f70e9e314ff8b28642dad8d5d744852e6ebbeb38c6ee5"
+        },
+        "spec": {
+          "headers": {
+            "contentTypeNosniff": true,
+            "customResponseHeaders": {
+              "X-Kuberploy-Live": "revision-2"
+            },
+            "frameDeny": true
+          }
+        }
+      }
+    ],
+    "projectId": "3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73",
+    "runtime": {
+      "env": [
+        {
+          "name": "RC_RUNTIME_ONLY",
+          "value": "live-runtime-only"
+        }
+      ],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP"
+        }
+      ],
+      "replicas": 2,
+      "resources": {
+        "requests": {
+          "cpu": "100m",
+          "memory": "128Mi"
+        }
+      },
+      "strategy": {
+        "type": "Recreate"
+      }
+    }
+  }
+}
