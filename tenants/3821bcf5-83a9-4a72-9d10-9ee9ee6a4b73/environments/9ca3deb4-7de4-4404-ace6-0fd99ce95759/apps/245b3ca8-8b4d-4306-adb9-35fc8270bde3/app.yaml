@@ -62,62 +62,12 @@
       }
     ],
     "runtime": {
-      "affinity": {
-        "nodeAffinity": {
-          "preferredDuringSchedulingIgnoredDuringExecution": [
-            {
-              "preference": {
-                "matchExpressions": [
-                  {
-                    "key": "kubernetes.io/hostname",
-                    "operator": "Exists"
-                  }
-                ]
-              },
-              "weight": 50
-            }
-          ],
-          "requiredDuringSchedulingIgnoredDuringExecution": {
-            "nodeSelectorTerms": [
-              {
-                "matchExpressions": [
-                  {
-                    "key": "kubernetes.io/os",
-                    "operator": "In",
-                    "values": [
-                      "linux"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        "podAntiAffinity": {
-          "preferredDuringSchedulingIgnoredDuringExecution": [
-            {
-              "podAffinityTerm": {
-                "labelSelector": {
-                  "matchLabels": {
-                    "kuberploy.io/application": "245b3ca8-8b4d-4306-adb9-35fc8270bde3"
-                  }
-                },
-                "topologyKey": "kubernetes.io/hostname"
-              },
-              "weight": 25
-            }
-          ]
-        }
-      },
       "env": [
         {
           "name": "RC_RUNTIME_ONLY",
           "value": "live-runtime-only"
         }
       ],
-      "nodeSelector": {
-        "kubernetes.io/arch": "amd64"
-      },
       "ports": [
         {
           "containerPort": 8080,
@@ -125,7 +75,6 @@
           "protocol": "TCP"
         }
       ],
-      "priorityClassName": "kuberploy-qualification-low",
       "replicas": 2,
       "resources": {
         "requests": {
@@ -133,35 +82,9 @@
           "memory": "128Mi"
         }
       },
-      "schedulingProfile": {
-        "assignmentsDigest": "sha256:1bd807f7905791945749856f3e02169061b01a8ab0a6ed30cdb76cbd03ee07d0",
-        "profileId": "792fcf14-619d-40e9-bc86-f3c5d0d75940",
-        "revision": 3,
-        "specDigest": "sha256:6c090a23ce3d79681f89baeae107e7a9e89ccdfc5db269022793689b5c1802f7"
-      },
       "strategy": {
         "type": "Recreate"
-      },
-      "tolerations": [
-        {
-          "effect": "NoSchedule",
-          "key": "qualification.adminchatmate.com/dedicated",
-          "operator": "Equal",
-          "value": "true"
-        }
-      ],
-      "topologySpreadConstraints": [
-        {
-          "labelSelector": {
-            "matchLabels": {
-              "kuberploy.io/application": "245b3ca8-8b4d-4306-adb9-35fc8270bde3"
-            }
-          },
-          "maxSkew": 1,
-          "topologyKey": "kubernetes.io/hostname",
-          "whenUnsatisfiable": "DoNotSchedule"
-        }
-      ]
+      }
     }
   }
 }
