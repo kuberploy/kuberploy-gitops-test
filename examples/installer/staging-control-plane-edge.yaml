@@ -1,4 +1,6 @@
 config:
+  gitProjection:
+    webhookWakeEnabled: false
   edgeRuntime:
     enabled: true
     profiles:
