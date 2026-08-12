@@ -21,22 +21,7 @@
     },
     "environmentId": "c7f3a333-91a3-44c7-b298-bde1cce72a2e",
     "projectId": "c06eb0f9-3ac3-44d4-b50e-68fe0d993064",
-    "routes": [
-      {
-        "dns": {
-          "mode": "sslip"
-        },
-        "host": "kp-6f06033595560dc0759c.103-117-151-86.sslip.io",
-        "id": "metrics-live",
-        "ingressClassName": "traefik",
-        "middlewareRefs": [],
-        "path": "/",
-        "port": "http",
-        "tls": {
-          "mode": "httpOnly"
-        }
-      }
-    ],
+    "routes": [],
     "runtime": {
       "ports": [
         {
