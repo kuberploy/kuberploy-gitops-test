@@ -3,7 +3,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 6
+        revision: 7
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -14,7 +14,7 @@ config:
           specDigest: sha256:9f8c654105601e5fbe72762bd7b51aaae533c5c2940f856246eda3a16fce89fc
         service:
           name: edge-traefik
-          specDigest: sha256:39f8e852fc78c971181876230590989dc6fb00c983736d12e3cc874aa5ee45fa
+          specDigest: sha256:3fdf50b3853b7d9d9fe005f5c66b4ebff6c1f8376aba8f5bb0c47688cca633bc
         ingressClass:
           name: traefik
           specDigest: sha256:cc5e600aeef9a8ca6783db3d4d04e455476e70729faba413201c377ab3939a98
