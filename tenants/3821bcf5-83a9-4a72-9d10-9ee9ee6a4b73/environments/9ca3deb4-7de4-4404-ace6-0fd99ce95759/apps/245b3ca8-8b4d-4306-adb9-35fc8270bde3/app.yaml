@@ -26,6 +26,17 @@
         {
           "name": "RC_RUNTIME_ONLY",
           "value": "live-runtime-only"
+        },
+        {
+          "name": "RC105_RUNTIME_SECRET",
+          "valueFrom": {
+            "secretBindingRef": {
+              "bindingId": "3ce2cf7b-2caf-4547-927b-287646bccd9b",
+              "key": "password",
+              "name": "rc105-runtime",
+              "version": 1
+            }
+          }
         }
       ],
       "ports": [
