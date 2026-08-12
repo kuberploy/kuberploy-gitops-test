@@ -1,35 +1,65 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "3a1e8696-9300-42c6-92ce-acabae29f50f"
-  name: "builder-fixture"
-spec:
-  projectId: "c06eb0f9-3ac3-44d4-b50e-68fe0d993064"
-  applicationId: "3a1e8696-9300-42c6-92ce-acabae29f50f"
-  environmentId: "c7f3a333-91a3-44c7-b298-bde1cce72a2e"
-  delivery:
-    mode: image
-    registryPull:
-      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
-      profileName: "managed-registry"
-      profileRevision: 3
-    release:
-      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/c06eb0f9-3ac3-44d4-b50e-68fe0d993064/services/3a1e8696-9300-42c6-92ce-acabae29f50f/image"
-      digest: "sha256:d532b1fd7283658b8b17ea8323960579fb91dbf2635eb72d6dc374ce1afdb766"
-  runtime:
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-        servicePort: 80
-    replicas: 1
-    resources:
-      limits:
-        cpu: "250m"
-        memory: "128Mi"
-      requests:
-        cpu: "25m"
-        memory: "32Mi"
-    strategy:
-      type: "RollingUpdate"
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "3a1e8696-9300-42c6-92ce-acabae29f50f",
+    "name": "builder-fixture"
+  },
+  "spec": {
+    "applicationId": "3a1e8696-9300-42c6-92ce-acabae29f50f",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-registry",
+        "profileRevision": 3,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:d532b1fd7283658b8b17ea8323960579fb91dbf2635eb72d6dc374ce1afdb766",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/c06eb0f9-3ac3-44d4-b50e-68fe0d993064/services/3a1e8696-9300-42c6-92ce-acabae29f50f/image"
+      }
+    },
+    "environmentId": "c7f3a333-91a3-44c7-b298-bde1cce72a2e",
+    "projectId": "c06eb0f9-3ac3-44d4-b50e-68fe0d993064",
+    "routes": [
+      {
+        "dns": {
+          "mode": "sslip"
+        },
+        "host": "kp-6f06033595560dc0759c.103-117-151-86.sslip.io",
+        "id": "metrics-live",
+        "ingressClassName": "traefik",
+        "middlewareRefs": [],
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "mode": "httpOnly"
+        }
+      }
+    ],
+    "runtime": {
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "250m",
+          "memory": "128Mi"
+        },
+        "requests": {
+          "cpu": "25m",
+          "memory": "32Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      }
+    }
+  }
+}
