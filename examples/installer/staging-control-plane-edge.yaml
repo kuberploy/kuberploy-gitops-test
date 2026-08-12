@@ -1,7 +1,4 @@
 config:
-  gitProjection:
-    webhookWakeEnabled: false
-    pollIntervalSeconds: 15
   edgeRuntime:
     enabled: true
     profiles:
