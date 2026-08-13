@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kp-prune-order-test
+  namespace: kuberploy-system
+  labels:
+    app.kubernetes.io/managed-by: kuberploy
+    kuberploy.io/qualification: prune-order
+data:
+  proof: foreground-prune
