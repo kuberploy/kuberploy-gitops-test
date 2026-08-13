@@ -11,7 +11,7 @@ metadata:
         argocd.argoproj.io/sync-wave: "-10"
         kuberploy.io/git-binding-id: 3caf7ecc-a13d-4882-a284-f43261dba8b3
         kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:196ba695372532c4bca7f39cba67628ec68f0ebf8aaeeaa89f5da44c03177bab
-        kuberploy.io/runtime-chart-digest: sha256:872d9da30f770a93012f0d29f2d1278d558ac0cf02a740af120723c39addc970
+        kuberploy.io/runtime-chart-digest: sha256:d96e4d8c11c653dbbf78d3046a7f3492cd3ae4b1fd666d151dbaf73208ef1320
 spec:
     sourceRepos:
         - https://github.com/kuberploy/kuberploy-gitops-test.git
@@ -56,7 +56,7 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "0"
         kuberploy.io/git-binding-id: 3caf7ecc-a13d-4882-a284-f43261dba8b3
-        kuberploy.io/runtime-chart-digest: sha256:872d9da30f770a93012f0d29f2d1278d558ac0cf02a740af120723c39addc970
+        kuberploy.io/runtime-chart-digest: sha256:d96e4d8c11c653dbbf78d3046a7f3492cd3ae4b1fd666d151dbaf73208ef1320
 spec:
     goTemplate: true
     goTemplateOptions:
@@ -83,14 +83,14 @@ spec:
             annotations:
                 kuberploy.io/git-binding-id: 3caf7ecc-a13d-4882-a284-f43261dba8b3
                 kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:196ba695372532c4bca7f39cba67628ec68f0ebf8aaeeaa89f5da44c03177bab
-                kuberploy.io/runtime-chart-digest: sha256:872d9da30f770a93012f0d29f2d1278d558ac0cf02a740af120723c39addc970
+                kuberploy.io/runtime-chart-digest: sha256:d96e4d8c11c653dbbf78d3046a7f3492cd3ae4b1fd666d151dbaf73208ef1320
                 kuberploy.io/runtime-chart-version: 0.1.0-rc.153
         spec:
             project: kp-rc153-project-rc153-direct
             sources:
                 - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
                   path: .
-                  targetRevision: sha256:872d9da30f770a93012f0d29f2d1278d558ac0cf02a740af120723c39addc970
+                  targetRevision: sha256:d96e4d8c11c653dbbf78d3046a7f3492cd3ae4b1fd666d151dbaf73208ef1320
                   helm:
                     valueFiles:
                         - $values/tenants/6eddb36b-3b5a-4f88-a8ff-e7ab80110f61/variables.yaml
