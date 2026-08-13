@@ -64,6 +64,11 @@ spec:
     generators:
         - list:
             elements:
+                - deploymentId: 04cde72e-fc67-431c-ac95-a1f6bd9396f9
+                  applicationId: 68b8cb2e-0a23-4d9e-8f3b-b6f7a69ef1f9
+                  applicationName: kp-d-04cde72efc67431cac95a1f6bd9396f9
+                  applicationPath: tenants/6eddb36b-3b5a-4f88-a8ff-e7ab80110f61/environments/43f70dc5-b9df-4a57-a514-983f124bc377/apps/68b8cb2e-0a23-4d9e-8f3b-b6f7a69ef1f9/app.yaml
+                  valuesRevision: 898a5ad588f9d07f4c8998cfd0fa8b1216f63754
                 - deploymentId: 0b2765c4-2ff7-4df8-9210-fb198285da20
                   applicationId: cfcdd52d-553c-4336-9253-169bfeb5eaaa
                   applicationName: kp-d-0b2765c42ff74df89210fb198285da20
