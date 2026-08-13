@@ -1,4 +1,19 @@
 config:
+  helmApplications:
+    enabled: true
+    rendererNamespace: kuberploy-helm-renderer
+    rendererPollMilliseconds: 250
+    workPollMilliseconds: 1000
+    renderLeaseSeconds: 60
+    publishLeaseSeconds: 90
+    readinessLeaseSeconds: 30
+    ociRequestSeconds: 15
+    ociRegistryHosts:
+      - ghcr.io
+    ociAuthHosts:
+      - ghcr.io
+    ociCredentialProfiles: []
+    packageCacheBytes: 67108864
   edgeRuntime:
     enabled: true
     profiles:
