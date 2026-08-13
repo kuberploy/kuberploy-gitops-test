@@ -10,8 +10,8 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "-10"
         kuberploy.io/git-binding-id: 3e1757ac-2638-4408-a64d-6cb59af81993
-        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:dc79b2b19cb42e7a10046b927f59d642a830070fea4ae0583da4dd9371d38ad8
-        kuberploy.io/runtime-chart-digest: sha256:11b2fdda532de47489c4e714980d27812d361a6650b3d3767d492a7fd546a2c6
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:6cb331d91e74778019c4c37a79b7bd07afbef0d58d706fcf7aea18aced6aea54
+        kuberploy.io/runtime-chart-digest: sha256:9f96a3446392938d69928674376f9085dc5712f83b62d678c73eff63d8c220d8
 spec:
     sourceRepos:
         - https://github.com/kuberploy/kuberploy-gitops-test.git
@@ -56,7 +56,7 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "0"
         kuberploy.io/git-binding-id: 3e1757ac-2638-4408-a64d-6cb59af81993
-        kuberploy.io/runtime-chart-digest: sha256:11b2fdda532de47489c4e714980d27812d361a6650b3d3767d492a7fd546a2c6
+        kuberploy.io/runtime-chart-digest: sha256:9f96a3446392938d69928674376f9085dc5712f83b62d678c73eff63d8c220d8
 spec:
     goTemplate: true
     goTemplateOptions:
@@ -82,15 +82,15 @@ spec:
                 kuberploy.io/service: '{{.applicationId}}'
             annotations:
                 kuberploy.io/git-binding-id: 3e1757ac-2638-4408-a64d-6cb59af81993
-                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:dc79b2b19cb42e7a10046b927f59d642a830070fea4ae0583da4dd9371d38ad8
-                kuberploy.io/runtime-chart-digest: sha256:11b2fdda532de47489c4e714980d27812d361a6650b3d3767d492a7fd546a2c6
-                kuberploy.io/runtime-chart-version: 0.1.0-rc.134
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:6cb331d91e74778019c4c37a79b7bd07afbef0d58d706fcf7aea18aced6aea54
+                kuberploy.io/runtime-chart-digest: sha256:9f96a3446392938d69928674376f9085dc5712f83b62d678c73eff63d8c220d8
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.135
         spec:
             project: kp-rc89-qualification-development
             sources:
                 - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
                   path: .
-                  targetRevision: sha256:11b2fdda532de47489c4e714980d27812d361a6650b3d3767d492a7fd546a2c6
+                  targetRevision: sha256:9f96a3446392938d69928674376f9085dc5712f83b62d678c73eff63d8c220d8
                   helm:
                     valueFiles:
                         - $values/tenants/3821bcf5-83a9-4a72-9d10-9ee9ee6a4b73/variables.yaml
