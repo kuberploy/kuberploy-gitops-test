@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: kp-prune-order-test
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-options: PruneLast=true
+    argocd.argoproj.io/sync-wave: "-10"
+spec:
+  sourceRepos:
+    - https://github.com/kuberploy/kuberploy-gitops-test.git
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: kuberploy-system
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: ConfigMap
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kp-prune-order-test
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - list:
+        elements:
+          - name: kp-prune-order-child
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: '{{.name}}'
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: kp-prune-order-test
+      source:
+        repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+        targetRevision: refs/heads/main
+        path: qualification/prune-order-test
+        directory:
+          recurse: true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: kuberploy-system
+      syncPolicy:
+        automated:
+          allowEmpty: false
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=false
+          - ServerSideApply=true
