@@ -1,0 +1,31 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "68b8cb2e-0a23-4d9e-8f3b-b6f7a69ef1f9"
+  name: "rc155-protected-053257"
+spec:
+  projectId: "6eddb36b-3b5a-4f88-a8ff-e7ab80110f61"
+  applicationId: "68b8cb2e-0a23-4d9e-8f3b-b6f7a69ef1f9"
+  environmentId: "43f70dc5-b9df-4a57-a514-983f124bc377"
+  delivery:
+    mode: image
+    release:
+      repository: "registry.k8s.io/e2e-test-images/agnhost"
+      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
+  runtime:
+    args:
+      - "netexec"
+      - "--http-port=8080"
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
