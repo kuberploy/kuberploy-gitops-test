@@ -169,7 +169,7 @@
           "nodeAffinityPolicy": "Honor",
           "nodeTaintsPolicy": "Honor",
           "topologyKey": "kubernetes.io/hostname",
-          "whenUnsatisfiable": "ScheduleAnyway"
+          "whenUnsatisfiable": "DoNotSchedule"
         }
       ],
       "workingDirectory": "/",
