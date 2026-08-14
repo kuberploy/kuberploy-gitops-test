@@ -18,12 +18,6 @@
     "middlewares": [
       {
         "name": "rc156-https-redirect",
-        "profileRef": {
-          "assignmentsDigest": "sha256:e52365bd792d464aff45bdbfbdb051d364170b4d7da016a0e95eab32743a81f6",
-          "profileId": "1fbace6a-a928-4205-8322-98c672101ccb",
-          "revision": 2,
-          "specDigest": "sha256:13e090b054199d212f637a96f1f30c4b77ff90dbb6e0130bd2516327c5ad6d9d"
-        },
         "spec": {
           "redirectScheme": {
             "permanent": true,
