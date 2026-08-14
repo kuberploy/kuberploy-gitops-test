@@ -120,14 +120,15 @@ config:
     minimumBackoffSeconds: 5
     maximumBackoffSeconds: 300
   runtimeSecrets:
-    enabled: false
-    namespaces: []
+    enabled: true
+    namespaces:
+      - kp-rc156-qualification-production
     fingerprintKeyID: runtime-secrets-hmac-v1
     fingerprintSecret:
-      name: ""
+      name: kuberploy-runtime-secrets-fingerprint
       key: runtime-secret-fingerprint.key
     sealingCertificateSecret:
-      name: ""
+      name: kuberploy-runtime-secrets-sealing-certificate
       key: tls.crt
     pollIntervalSeconds: 5
     workLeaseSeconds: 45
@@ -136,7 +137,7 @@ config:
     minimumBackoffSeconds: 2
     maximumBackoffSeconds: 300
   certificateObservation:
-    enabled: false
+    enabled: true
     pollIntervalSeconds: 30
     workLeaseSeconds: 45
     heartbeatSeconds: 10
@@ -144,3 +145,11 @@ config:
     minimumBackoffSeconds: 2
     maximumBackoffSeconds: 300
     maximumAgeSeconds: 90
+  certificateIssuerObserver:
+    enabled: true
+    platformBindingID: 503b40a5-6c43-4cbd-af52-e4cac621b659
+    clusterID: 22222222-2222-4222-8222-222222222222
+    pollIntervalSeconds: 30
+    requestTimeoutSeconds: 10
+    maximumAgeSeconds: 120
+    readinessLeaseSeconds: 180
