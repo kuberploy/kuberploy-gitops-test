@@ -25,12 +25,6 @@
       "command": [
         "/agnhost"
       ],
-      "env": [
-        {
-          "name": "RC156_RUNTIME",
-          "value": "staging-proof"
-        }
-      ],
       "ports": [
         {
           "containerPort": 8080,
@@ -39,48 +33,20 @@
           "servicePort": 80
         }
       ],
-      "probes": {
-        "liveness": {
-          "failureThreshold": 3,
-          "initialDelaySeconds": 2,
-          "periodSeconds": 5,
-          "tcpSocket": {
-            "port": "http"
-          },
-          "timeoutSeconds": 1
-        },
-        "readiness": {
-          "failureThreshold": 3,
-          "periodSeconds": 2,
-          "tcpSocket": {
-            "port": "http"
-          },
-          "timeoutSeconds": 1
-        },
-        "startup": {
-          "failureThreshold": 30,
-          "periodSeconds": 1,
-          "tcpSocket": {
-            "port": "http"
-          },
-          "timeoutSeconds": 1
-        }
-      },
       "replicas": 1,
       "resources": {
         "limits": {
-          "cpu": "300m",
-          "memory": "160Mi"
+          "cpu": "250m",
+          "memory": "128Mi"
         },
         "requests": {
-          "cpu": "30m",
-          "memory": "40Mi"
+          "cpu": "25m",
+          "memory": "32Mi"
         }
       },
       "strategy": {
         "type": "RollingUpdate"
       },
-      "terminationGracePeriodSeconds": 45,
       "workingDirectory": "/",
       "workloadType": "Deployment"
     }
