@@ -10,16 +10,16 @@ metadata:
         kuberploy.io/environment-id: 7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c
         kuberploy.io/project-id: 7ba1ed2f-8b3f-48ee-87bc-44da0f5a9012
     annotations:
-        argocd.argoproj.io/manifest-generate-paths: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/226ffe57-7c64-41f1-ba5a-9672e972b92f/release.yaml
-        kuberploy.io/helm-payload-digest: sha256:e87af63dce12201b48d70723ef78ba7b2c80c5073e0a2362d715c5200d937595
-        kuberploy.io/helm-payload-revision: 948b2f2ea8469836fde377d0f655c9144de6b012
-        kuberploy.io/helm-release-revision: 226ffe57-7c64-41f1-ba5a-9672e972b92f
+        argocd.argoproj.io/manifest-generate-paths: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/433c982c-b35d-4d69-aa91-47c498bc8c46/release.yaml
+        kuberploy.io/helm-payload-digest: sha256:53d36d71ff5d6d69c83167704cf4e9c1ece1a66ba895b0bc7aa2eda36ebd8589
+        kuberploy.io/helm-payload-revision: 06a8308b1c0f2c6eda827714c20933f3c34b172a
+        kuberploy.io/helm-release-revision: 433c982c-b35d-4d69-aa91-47c498bc8c46
 spec:
     project: kp-rc159-helm-qualification-oci
     source:
         repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
-        targetRevision: 948b2f2ea8469836fde377d0f655c9144de6b012
-        path: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/226ffe57-7c64-41f1-ba5a-9672e972b92f
+        targetRevision: 06a8308b1c0f2c6eda827714c20933f3c34b172a
+        path: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/433c982c-b35d-4d69-aa91-47c498bc8c46
         directory:
             recurse: false
             include: release.yaml
