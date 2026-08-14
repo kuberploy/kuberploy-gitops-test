@@ -1,0 +1,57 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: "rc158-http01"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc158-http01"
+  annotations:
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:d61c9738383294a6d922edb054cced92956bce7fa404b6f4be816b6d17a062ce"
+    kuberploy.io/certificate-issuer-revision: "1"
+spec:
+  acme:
+    email: "acme@adminchatmate.com"
+    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: "rc158-http01-account"
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: "traefik"
+            ingressTemplate:
+              metadata:
+                annotations:
+                  external-dns.alpha.kubernetes.io/ingress-hostname-source: "annotation-only"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "kuberploy-ci-observer-01901c8765a388eab9fb"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc158-http01"
+rules:
+  - apiGroups:
+      - "cert-manager.io"
+    resources:
+      - "clusterissuers"
+    resourceNames:
+      - "rc158-http01"
+    verbs:
+      - "get"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "kuberploy-ci-observer-01901c8765a388eab9fb"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc158-http01"
+roleRef:
+  apiGroup: "rbac.authorization.k8s.io"
+  kind: ClusterRole
+  name: "kuberploy-ci-observer-01901c8765a388eab9fb"
+subjects:
+  - kind: ServiceAccount
+    name: "kuberploy-worker"
+    namespace: "kuberploy-system"
