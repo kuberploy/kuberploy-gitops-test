@@ -10,9 +10,15 @@ spec:
   delivery:
     mode: image
     release:
-      repository: "ghcr.io/kuberploy/kuberploy-web"
-      digest: "sha256:fd7fad0920b722cd12930b70be7f3f302307751fdfd7ed3d6ce1fd3dfe726e2e"
+      repository: "registry.k8s.io/e2e-test-images/agnhost"
+      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
   runtime:
+    args:
+      - "netexec"
+      - "--http-port=8080"
+      - "--udp-port=-1"
+    command:
+      - "/agnhost"
     ports:
       -
         containerPort: 8080
@@ -29,5 +35,5 @@ spec:
         memory: "32Mi"
     strategy:
       type: "RollingUpdate"
-    workingDirectory: "/usr/share/nginx/html"
+    workingDirectory: "/"
     workloadType: "Deployment"
