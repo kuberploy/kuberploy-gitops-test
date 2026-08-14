@@ -1,0 +1,33 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "a45f19a8-d332-4a4d-bdea-55cfabaa5c98"
+  name: "web-fixture"
+spec:
+  projectId: "0bc72c28-936f-4925-83f5-05a51d18f4bb"
+  applicationId: "a45f19a8-d332-4a4d-bdea-55cfabaa5c98"
+  environmentId: "490637d0-88fa-40f0-8902-208a2f5aa6bd"
+  delivery:
+    mode: image
+    release:
+      repository: "ghcr.io/kuberploy/kuberploy-web"
+      digest: "sha256:fd7fad0920b722cd12930b70be7f3f302307751fdfd7ed3d6ce1fd3dfe726e2e"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    replicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "128Mi"
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workingDirectory: "/usr/share/nginx/html"
+    workloadType: "Deployment"
