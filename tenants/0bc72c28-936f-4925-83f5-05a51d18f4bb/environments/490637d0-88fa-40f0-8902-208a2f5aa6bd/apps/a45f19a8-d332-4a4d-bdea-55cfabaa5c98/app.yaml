@@ -17,71 +17,6 @@
     "environmentId": "490637d0-88fa-40f0-8902-208a2f5aa6bd",
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
     "runtime": {
-      "affinity": {
-        "nodeAffinity": {
-          "preferredDuringSchedulingIgnoredDuringExecution": [
-            {
-              "preference": {
-                "matchExpressions": [
-                  {
-                    "key": "kubernetes.io/hostname",
-                    "operator": "In",
-                    "values": [
-                      "fl-new-deployment-poc"
-                    ]
-                  }
-                ]
-              },
-              "weight": 75
-            }
-          ],
-          "requiredDuringSchedulingIgnoredDuringExecution": {
-            "nodeSelectorTerms": [
-              {
-                "matchExpressions": [
-                  {
-                    "key": "kubernetes.io/arch",
-                    "operator": "In",
-                    "values": [
-                      "amd64"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        "podAffinity": {
-          "preferredDuringSchedulingIgnoredDuringExecution": [
-            {
-              "podAffinityTerm": {
-                "labelSelector": {
-                  "matchLabels": {
-                    "kuberploy.io/application": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98"
-                  }
-                },
-                "topologyKey": "kubernetes.io/hostname"
-              },
-              "weight": 10
-            }
-          ]
-        },
-        "podAntiAffinity": {
-          "preferredDuringSchedulingIgnoredDuringExecution": [
-            {
-              "podAffinityTerm": {
-                "labelSelector": {
-                  "matchLabels": {
-                    "kuberploy.io/application": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98"
-                  }
-                },
-                "topologyKey": "kubernetes.io/hostname"
-              },
-              "weight": 20
-            }
-          ]
-        }
-      },
       "args": [
         "netexec",
         "--http-port=8080",
@@ -96,9 +31,6 @@
           "value": "staging-proof"
         }
       ],
-      "nodeSelector": {
-        "kubernetes.io/os": "linux"
-      },
       "ports": [
         {
           "containerPort": 8080,
@@ -107,7 +39,6 @@
           "servicePort": 80
         }
       ],
-      "priorityClassName": "rc156-qualification",
       "probes": {
         "liveness": {
           "failureThreshold": 3,
@@ -147,31 +78,9 @@
         }
       },
       "strategy": {
-        "type": "Recreate"
+        "type": "RollingUpdate"
       },
       "terminationGracePeriodSeconds": 45,
-      "tolerations": [
-        {
-          "effect": "PreferNoSchedule",
-          "key": "qualification.kuberploy.io/workload",
-          "operator": "Exists"
-        }
-      ],
-      "topologySpreadConstraints": [
-        {
-          "labelSelector": {
-            "matchLabels": {
-              "kuberploy.io/application": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98"
-            }
-          },
-          "maxSkew": 1,
-          "minDomains": 1,
-          "nodeAffinityPolicy": "Honor",
-          "nodeTaintsPolicy": "Honor",
-          "topologyKey": "kubernetes.io/hostname",
-          "whenUnsatisfiable": "DoNotSchedule"
-        }
-      ],
       "workingDirectory": "/",
       "workloadType": "Deployment"
     }
