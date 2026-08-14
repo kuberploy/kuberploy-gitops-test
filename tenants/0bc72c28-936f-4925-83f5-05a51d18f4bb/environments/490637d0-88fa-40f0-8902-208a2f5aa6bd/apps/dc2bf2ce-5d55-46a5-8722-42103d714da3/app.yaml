@@ -22,19 +22,6 @@
     "environmentId": "490637d0-88fa-40f0-8902-208a2f5aa6bd",
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
     "runtime": {
-      "env": [
-        {
-          "name": "RC157_RUNTIME_SECRET",
-          "valueFrom": {
-            "secretBindingRef": {
-              "bindingId": "8942c097-3ccb-40e6-9b9d-0328c4e6065a",
-              "key": "API_KEY",
-              "name": "rc157-runtime",
-              "version": 2
-            }
-          }
-        }
-      ],
       "ports": [
         {
           "containerPort": 8080,
