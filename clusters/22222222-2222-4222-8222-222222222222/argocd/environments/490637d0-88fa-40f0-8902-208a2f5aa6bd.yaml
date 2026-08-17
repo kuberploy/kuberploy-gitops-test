@@ -80,7 +80,7 @@ spec:
                   applicationId: a45f19a8-d332-4a4d-bdea-55cfabaa5c98
                   applicationName: kp-d-d3eb07716c20433ba96cebff49742c70
                   applicationPath: tenants/0bc72c28-936f-4925-83f5-05a51d18f4bb/environments/490637d0-88fa-40f0-8902-208a2f5aa6bd/apps/a45f19a8-d332-4a4d-bdea-55cfabaa5c98/app.yaml
-                  valuesRevision: aca4159aed76c46864cd671b5b60f26acd66f545
+                  valuesRevision: ef9b439c3f9ef8c8747218324511b7580b0d123d
                 - deploymentId: da8cc933-92be-44c9-aca1-e60c889c7258
                   applicationId: dc2bf2ce-5d55-46a5-8722-42103d714da3
                   applicationName: kp-d-da8cc93392be44c9aca1e60c889c7258
