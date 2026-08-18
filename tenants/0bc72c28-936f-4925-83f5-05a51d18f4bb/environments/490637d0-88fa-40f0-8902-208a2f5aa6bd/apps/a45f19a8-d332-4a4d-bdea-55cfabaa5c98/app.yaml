@@ -68,7 +68,7 @@
           "strategy": { "type": "RollingUpdate" },
           "workingDirectory": "/",
           "workloadType": "Deployment",
-          env: [ { name: RC213_RUNTIME_PROBE, value: remote-preview-only } ]
+          env: []
         }
     }
 }
