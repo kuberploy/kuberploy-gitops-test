@@ -1,5 +1,5 @@
 builder:
-  buildKitImage: registry-rc153.adminchatmate.com/kuberploy/system/buildkit:v0.32.2
+  buildKitImage: registry.adminchatmate.com/kuberploy/system/buildkit:v0.32.2
 
 networkPolicy:
   externalEgressCIDRs:
@@ -25,13 +25,13 @@ config:
     ociRequestSeconds: 15
     ociRegistryHosts:
       - ghcr.io
-      - registry-rc152.adminchatmate.com
+      - registry.adminchatmate.com
     ociAuthHosts:
       - ghcr.io
-      - registry-rc152.adminchatmate.com
+      - registry.adminchatmate.com
     ociCredentialProfiles:
-      - registryHost: registry-rc152.adminchatmate.com
-        authHost: registry-rc152.adminchatmate.com
+      - registryHost: registry.adminchatmate.com
+        authHost: registry.adminchatmate.com
         name: managed-registry-helm
         mode: basic
         secretRef:
