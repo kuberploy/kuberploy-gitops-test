@@ -3,3 +3,4 @@ kind: VariableSet
 values:
   SHARED_REGION: "ap-southeast-1"
   RELEASE_LANE: "project"
+  RC213_FEATURE_PROBE: "project"
