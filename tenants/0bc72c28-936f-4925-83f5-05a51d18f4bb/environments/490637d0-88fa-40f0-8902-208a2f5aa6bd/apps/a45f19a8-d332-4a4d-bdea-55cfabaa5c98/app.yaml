@@ -1,78 +1,124 @@
 {
   "apiVersion": "config.kuberploy.io/v1alpha1",
   "kind": "AppConfig",
-  "metadata": { "id": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98", "name": "web-fixture" },
-  "spec":
-    {
-      "applicationId": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98",
-      "delivery":
-        {
-          "mode": "image",
-          "release":
-            {
-              "digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011\
-                a85",
-              "repository": "registry.k8s.io/e2e-test-images/agnhost"
-            }
-        },
-      "environmentId": "490637d0-88fa-40f0-8902-208a2f5aa6bd",
-      "middlewares":
-        [
-          {
-              name: rc156-https-redirect,
-              spec: { redirectScheme: { scheme: https, permanent: true } }
-            },
-          {
-              name: rc159-basic-auth,
-              spec:
-                {
-                  basicAuth:
-                    {
-                      secretBindingRef:
-                        {
-                          bindingId: 9217f871-d892-43dd-a97c-cf3564230972,
-                          name: rc159-basic-auth,
-                          key: users,
-                          version: 2
-                        },
-                      removeHeader: true
-                    }
-                }
-            },
-          {
-              name: redirect-scheme,
-              spec: { redirectScheme: { scheme: https, permanent: true } }
-            }
-        ],
-      "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
-      "routes":
-        [
-          {
-              "dns": { mode: sslip },
-              "host": "kp-93e0a470a46fd105bcbc.103-117-151-86.sslip.io",
-              "id": "rc159-sslip",
-              "ingressClassName": "traefik",
-              "middlewareRefs": [ rc159-basic-auth, redirect-scheme ],
-              "path": "/",
-              "port": "http",
-              "tls": { mode: httpOnly }
-            }
-        ],
-      "runtime":
-        {
-          "args": [ netexec, --http-port=8080, --udp-port=-1 ],
-          "command": [ /agnhost ],
-          "env": [],
-          "ports": [ { name: http, containerPort: 8080, servicePort: 80, protocol: TCP } ],
-          "replicas": 1,
-          "resources":
-            {
-              "limits": { cpu: 250m, memory: 128Mi },
-              "requests": { "cpu": "25m", "memory": "32Mi" }
-            },
-          "strategy": { "type": "RollingUpdate" },
-          "workingDirectory": "/",
-          "workloadType": "Deployment"
+  "metadata": {
+    "id": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98",
+    "name": "web-fixture"
+  },
+  "spec": {
+    "applicationId": "a45f19a8-d332-4a4d-bdea-55cfabaa5c98",
+    "delivery": {
+      "mode": "image",
+      "release": {
+        "digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85",
+        "repository": "registry.k8s.io/e2e-test-images/agnhost"
+      }
+    },
+    "environmentId": "490637d0-88fa-40f0-8902-208a2f5aa6bd",
+    "middlewares": [
+      {
+        "name": "rc156-https-redirect",
+        "spec": {
+          "redirectScheme": {
+            "permanent": true,
+            "scheme": "https"
+          }
         }
+      },
+      {
+        "name": "rc159-basic-auth",
+        "spec": {
+          "basicAuth": {
+            "removeHeader": true,
+            "secretBindingRef": {
+              "bindingId": "9217f871-d892-43dd-a97c-cf3564230972",
+              "key": "users",
+              "name": "rc159-basic-auth",
+              "version": 2
+            }
+          }
+        }
+      },
+      {
+        "name": "redirect-scheme",
+        "spec": {
+          "redirectScheme": {
+            "permanent": true,
+            "scheme": "https"
+          }
+        }
+      },
+      {
+        "name": "redirect-scheme-2",
+        "profileRef": {
+          "assignmentsDigest": "sha256:e52365bd792d464aff45bdbfbdb051d364170b4d7da016a0e95eab32743a81f6",
+          "profileId": "a1ce6e70-d183-4416-84e1-fea3dd743db5",
+          "revision": 1,
+          "specDigest": "sha256:13e090b054199d212f637a96f1f30c4b77ff90dbb6e0130bd2516327c5ad6d9d"
+        },
+        "spec": {
+          "redirectScheme": {
+            "permanent": true,
+            "scheme": "https"
+          }
+        }
+      }
+    ],
+    "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
+    "routes": [
+      {
+        "dns": {
+          "mode": "sslip"
+        },
+        "host": "kp-93e0a470a46fd105bcbc.103-117-151-86.sslip.io",
+        "id": "rc159-sslip",
+        "ingressClassName": "traefik",
+        "middlewareRefs": [
+          "rc159-basic-auth",
+          "redirect-scheme",
+          "redirect-scheme-2"
+        ],
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "mode": "httpOnly"
+        }
+      }
+    ],
+    "runtime": {
+      "args": [
+        "netexec",
+        "--http-port=8080",
+        "--udp-port=-1"
+      ],
+      "command": [
+        "/agnhost"
+      ],
+      "env": [],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "250m",
+          "memory": "128Mi"
+        },
+        "requests": {
+          "cpu": "25m",
+          "memory": "32Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workingDirectory": "/",
+      "workloadType": "Deployment"
     }
+  }
 }
