@@ -3,4 +3,3 @@ kind: VariableSet
 values:
   RELEASE_LANE: "environment"
   ENV_ONLY: "rc157-parent-change"
-  RC213_FEATURE_PROBE: "environment"
