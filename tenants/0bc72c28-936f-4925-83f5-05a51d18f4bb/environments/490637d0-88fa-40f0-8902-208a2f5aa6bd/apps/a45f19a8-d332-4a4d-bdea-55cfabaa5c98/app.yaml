@@ -68,8 +68,7 @@
           "strategy": { "type": "RollingUpdate" },
           "workingDirectory": "/",
           "workloadType": "Deployment",
-          env: [],
-          nodeSelector: { kubernetes.io/os: linux }
+          env: []
         }
     }
 }
