@@ -11,8 +11,8 @@ metadata:
         argocd.argoproj.io/sync-options: PruneLast=true
         argocd.argoproj.io/sync-wave: "-10"
         kuberploy.io/git-binding-id: 99c7fd17-aded-47a1-897c-c3f3a8dbe360
-        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:30efeee4b95c6dc7fa8838a16ec0b213e4568548f4dc78692f31bdf10ac5a8c0
-        kuberploy.io/runtime-chart-digest: sha256:aaa8862aca87405d4407d418d3a0a5bd36ca67f5a794a966f5ed8e785a0eaa8c
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:c46ab3a81509a3cac8fbe76f65669b0264dd98612e0b135aacbb89afb506e9e7
+        kuberploy.io/runtime-chart-digest: sha256:78f3f8eb3c05b37bb01febdc16fcd65927db1293616453106ba85feac9b0a5b6
 spec:
     sourceRepos:
         - https://github.com/kuberploy/kuberploy-gitops-test.git
@@ -63,7 +63,7 @@ metadata:
     annotations:
         argocd.argoproj.io/sync-wave: "0"
         kuberploy.io/git-binding-id: 99c7fd17-aded-47a1-897c-c3f3a8dbe360
-        kuberploy.io/runtime-chart-digest: sha256:aaa8862aca87405d4407d418d3a0a5bd36ca67f5a794a966f5ed8e785a0eaa8c
+        kuberploy.io/runtime-chart-digest: sha256:78f3f8eb3c05b37bb01febdc16fcd65927db1293616453106ba85feac9b0a5b6
 spec:
     goTemplate: true
     goTemplateOptions:
@@ -80,7 +80,7 @@ spec:
                   applicationId: a45f19a8-d332-4a4d-bdea-55cfabaa5c98
                   applicationName: kp-d-d3eb07716c20433ba96cebff49742c70
                   applicationPath: tenants/0bc72c28-936f-4925-83f5-05a51d18f4bb/environments/490637d0-88fa-40f0-8902-208a2f5aa6bd/apps/a45f19a8-d332-4a4d-bdea-55cfabaa5c98/app.yaml
-                  valuesRevision: ebb9aa1b746bd6ca83cc9add5f1989c7b7e2a14c
+                  valuesRevision: 3b5fb809f1c3a63c977e8ced3e8c7ba2dde32a5e
                 - deploymentId: da8cc933-92be-44c9-aca1-e60c889c7258
                   applicationId: dc2bf2ce-5d55-46a5-8722-42103d714da3
                   applicationName: kp-d-da8cc93392be44c9aca1e60c889c7258
@@ -99,15 +99,15 @@ spec:
                 kuberploy.io/service: '{{.applicationId}}'
             annotations:
                 kuberploy.io/git-binding-id: 99c7fd17-aded-47a1-897c-c3f3a8dbe360
-                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:30efeee4b95c6dc7fa8838a16ec0b213e4568548f4dc78692f31bdf10ac5a8c0
-                kuberploy.io/runtime-chart-digest: sha256:aaa8862aca87405d4407d418d3a0a5bd36ca67f5a794a966f5ed8e785a0eaa8c
-                kuberploy.io/runtime-chart-version: 0.1.0-rc.205
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:c46ab3a81509a3cac8fbe76f65669b0264dd98612e0b135aacbb89afb506e9e7
+                kuberploy.io/runtime-chart-digest: sha256:78f3f8eb3c05b37bb01febdc16fcd65927db1293616453106ba85feac9b0a5b6
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.206
         spec:
             project: kp-rc156-qualification-production
             sources:
                 - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
                   path: .
-                  targetRevision: sha256:aaa8862aca87405d4407d418d3a0a5bd36ca67f5a794a966f5ed8e785a0eaa8c
+                  targetRevision: sha256:78f3f8eb3c05b37bb01febdc16fcd65927db1293616453106ba85feac9b0a5b6
                   helm:
                     valueFiles:
                         - $values/tenants/0bc72c28-936f-4925-83f5-05a51d18f4bb/variables.yaml
