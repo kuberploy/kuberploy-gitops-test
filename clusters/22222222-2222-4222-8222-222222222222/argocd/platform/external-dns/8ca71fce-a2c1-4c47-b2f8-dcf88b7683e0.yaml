@@ -120,11 +120,15 @@
                   "ALL"
                 ]
               },
-              "readOnlyRootFilesystem": true
+              "readOnlyRootFilesystem": true,
+              "runAsGroup": 65532,
+              "runAsNonRoot": true,
+              "runAsUser": 65532
             }
           }
         ],
         "securityContext": {
+          "fsGroup": 65534,
           "runAsNonRoot": true,
           "seccompProfile": {
             "type": "RuntimeDefault"
