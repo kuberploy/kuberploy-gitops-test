@@ -1,0 +1,25 @@
+foundation:
+  enabled: true
+  externalDNS:
+    managed: true
+    adoptExisting: false
+    identity:
+      providerKind: cloudflare
+      credentialSecretRef: external-dns-cloudflare-qualification
+      providerConfigRef: cloudflare-provider-qualification
+      egressConfigRef: cloudflare-egress-qualification
+
+externaldns:
+  txtOwnerId: kuberploy-external-dns-foundation
+  domainFilters:
+    - adminchatmate.com
+  labelFilter: kuberploy.io/dns-integration=cloudflare-foundation
+  provider:
+    name: cloudflare
+  env:
+    - name: CF_API_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: external-dns-cloudflare-qualification
+          key: apiToken
+          optional: false

@@ -131,6 +131,15 @@ config:
     readinessSeconds: 90
     minimumBackoffSeconds: 5
     maximumBackoffSeconds: 300
+  externalDNSOperational:
+    enabled: true
+    platformBindingID: 503b40a5-6c43-4cbd-af52-e4cac621b659
+    clusterID: 22222222-2222-4222-8222-222222222222
+    namespace: kuberploy-system
+    version: v0.21.0
+    image: registry.k8s.io/external-dns/external-dns@sha256:f53faaf71cb270d1ca9dce6ea0c94bfebf1a18696263487f0fbc74b9bf2bd7ff
+    serviceAccount: kuberploy-external-dns-managed
+    pollIntervalSeconds: 5
   runtimeSecrets:
     enabled: true
     namespaces:
