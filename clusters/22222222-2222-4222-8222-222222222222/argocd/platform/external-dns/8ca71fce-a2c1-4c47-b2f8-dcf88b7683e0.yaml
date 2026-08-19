@@ -47,10 +47,10 @@
   "kind": "Deployment",
   "metadata": {
     "annotations": {
-      "kuberploy.io/edge-spec-digest": "sha256:888aa03208c10dde4a28f0dc8bb269f0f214a84805998ad81256945757d13013",
+      "kuberploy.io/edge-spec-digest": "sha256:b1775a017829c1440dd1666c1e96007724920f19a260360cba83281846396f9a",
       "kuberploy.io/egress-config-ref": "cloudflare-egress-qualification",
       "kuberploy.io/provider-config-ref": "cloudflare-provider-qualification",
-      "kuberploy.io/runtime-revision": "1"
+      "kuberploy.io/runtime-revision": "2"
     },
     "labels": {
       "app.kubernetes.io/managed-by": "kuberploy",
@@ -89,12 +89,19 @@
               "--label-filter=kuberploy.io/dns-integration=8ca71fce-a2c1-4c47-b2f8-dcf88b7683e0",
               "--domain-filter=adminchatmate.com"
             ],
-            "envFrom": [
+            "env": [
               {
-                "secretRef": {
-                  "name": "external-dns-cloudflare-qualification"
+                "name": "CF_API_TOKEN",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "apiToken",
+                    "name": "external-dns-cloudflare-qualification",
+                    "optional": false
+                  }
                 }
-              },
+              }
+            ],
+            "envFrom": [
               {
                 "configMapRef": {
                   "name": "cloudflare-provider-qualification"
