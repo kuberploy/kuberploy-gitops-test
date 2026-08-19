@@ -85,7 +85,7 @@ config:
         sslip:
           mode: auto-first-ip
       certManager:
-        revision: 6
+        revision: 7
         mode: managed
         namespace: cert-manager
         version: v1.21.1
