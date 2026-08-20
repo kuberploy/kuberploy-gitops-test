@@ -21,21 +21,6 @@
     },
     "environmentId": "490637d0-88fa-40f0-8902-208a2f5aa6bd",
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
-    "routes": [
-      {
-        "dns": {
-          "integrationRef": "qualification-rc240",
-          "mode": "externalDns"
-        },
-        "host": "kuberploy-qualification.adminchatmate.com",
-        "id": "public",
-        "path": "/",
-        "port": "http",
-        "tls": {
-          "mode": "httpOnly"
-        }
-      }
-    ],
     "runtime": {
       "env": [
         {
