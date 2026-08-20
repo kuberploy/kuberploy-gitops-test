@@ -1,0 +1,205 @@
+{
+  "apiVersion": "v1",
+  "kind": "ServiceAccount",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+    },
+    "name": "kuberploy-external-dns-managed",
+    "namespace": "kuberploy-system"
+  }
+}
+
+---
+{
+  "apiVersion": "v1",
+  "data": {
+    "annotationFilter": "",
+    "credentialSecretRef": "external-dns-cloudflare-qualification",
+    "domainFilters": "adminchatmate.com",
+    "egressConfigRef": "cloudflare-egress-qualification",
+    "labelFilter": "kuberploy.io/dns-integration=c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a",
+    "management": "managed",
+    "policy": "upsert-only",
+    "providerConfigRef": "cloudflare-provider-qualification",
+    "providerKind": "cloudflare",
+    "txtOwnerId": "kuberploy-external-dns-qualification-rc244"
+  },
+  "kind": "ConfigMap",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+    },
+    "name": "external-dns-qualification-rc244-profile",
+    "namespace": "kuberploy-system"
+  }
+}
+
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {
+      "kuberploy.io/edge-spec-digest": "sha256:8da12f8607f8f4aae5cf4d0209a56530b5ae2b8a90b57c73b8e30baefd7d6e54",
+      "kuberploy.io/egress-config-ref": "cloudflare-egress-qualification",
+      "kuberploy.io/provider-config-ref": "cloudflare-provider-qualification",
+      "kuberploy.io/runtime-revision": "1"
+    },
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+    },
+    "name": "external-dns-qualification-rc244",
+    "namespace": "kuberploy-system"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app.kubernetes.io/managed-by": "kuberploy",
+          "app.kubernetes.io/name": "external-dns",
+          "app.kubernetes.io/version": "v0.21.0",
+          "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "args": [
+              "--source=ingress",
+              "--provider=cloudflare",
+              "--registry=txt",
+              "--policy=upsert-only",
+              "--txt-owner-id=kuberploy-external-dns-qualification-rc244",
+              "--label-filter=kuberploy.io/dns-integration=c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a",
+              "--domain-filter=adminchatmate.com"
+            ],
+            "env": [
+              {
+                "name": "CF_API_TOKEN",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "apiToken",
+                    "name": "external-dns-cloudflare-qualification",
+                    "optional": false
+                  }
+                }
+              }
+            ],
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "cloudflare-provider-qualification"
+                }
+              }
+            ],
+            "image": "registry.k8s.io/external-dns/external-dns@sha256:f53faaf71cb270d1ca9dce6ea0c94bfebf1a18696263487f0fbc74b9bf2bd7ff",
+            "name": "external-dns",
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "256Mi"
+              },
+              "requests": {
+                "cpu": "25m",
+                "memory": "64Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "readOnlyRootFilesystem": true,
+              "runAsGroup": 65532,
+              "runAsNonRoot": true,
+              "runAsUser": 65532
+            }
+          }
+        ],
+        "securityContext": {
+          "fsGroup": 65534,
+          "runAsNonRoot": true,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccountName": "kuberploy-external-dns-managed"
+      }
+    }
+  }
+}
+
+---
+{
+  "apiVersion": "rbac.authorization.k8s.io/v1",
+  "kind": "ClusterRole",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+    },
+    "name": "external-dns-qualification-rc244"
+  },
+  "rules": [
+    {
+      "apiGroups": [
+        "networking.k8s.io"
+      ],
+      "resources": [
+        "ingresses"
+      ],
+      "verbs": [
+        "get",
+        "list",
+        "watch"
+      ]
+    }
+  ]
+}
+
+---
+{
+  "apiVersion": "rbac.authorization.k8s.io/v1",
+  "kind": "ClusterRoleBinding",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "c09f5b43-5a6f-4bbe-b9c7-eb08a102c92a"
+    },
+    "name": "external-dns-qualification-rc244"
+  },
+  "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "external-dns-qualification-rc244"
+  },
+  "subjects": [
+    {
+      "kind": "ServiceAccount",
+      "name": "kuberploy-external-dns-managed",
+      "namespace": "kuberploy-system"
+    }
+  ]
+}
