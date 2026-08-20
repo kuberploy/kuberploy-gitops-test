@@ -12,7 +12,7 @@ spec:
     registryPull:
       targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
       profileName: "managed-registry"
-      profileRevision: 2
+      profileRevision: 1
     release:
       repository: "registry.adminchatmate.com/kuberploy-qualification/projects/0bc72c28-936f-4925-83f5-05a51d18f4bb/services/dc2bf2ce-5d55-46a5-8722-42103d714da3/image"
       digest: "sha256:80aeb6398ad7265d2d3409bb0be7530f8b70eb2a8c5b7d25acfedae44fc6b4de"
