@@ -22,7 +22,7 @@
           "integrationRef": "qualification-rc240",
           "mode": "externalDns"
         },
-        "host": "kuberploy-qualification.adminchatmate.com",
+        "host": "external-dns-qualification.adminchatmate.com",
         "id": "external-dns-qualification",
         "path": "/",
         "port": "http",
