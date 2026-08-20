@@ -1,0 +1,42 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "29c89b56-56a6-4354-97d6-662e9adf0f44"
+  name: "rc159-durability"
+spec:
+  projectId: "0bc72c28-936f-4925-83f5-05a51d18f4bb"
+  applicationId: "29c89b56-56a6-4354-97d6-662e9adf0f44"
+  environmentId: "14cc8e8c-5dcc-45c4-beea-54a543bd2f47"
+  delivery:
+    mode: image
+    release:
+      repository: "registry.k8s.io/e2e-test-images/agnhost"
+      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
+  runtime:
+    args:
+      - "netexec"
+      - "--http-port=8080"
+    env:
+      -
+        name: "ENV_ONLY"
+        value: "rc157-parent-change"
+      -
+        name: "RELEASE_LANE"
+        value: "environment"
+      -
+        name: "SHARED_REGION"
+        value: "ap-southeast-1"
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    replicas: 1
+    resources:
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
