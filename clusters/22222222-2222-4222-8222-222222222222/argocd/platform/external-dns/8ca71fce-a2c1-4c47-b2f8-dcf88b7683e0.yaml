@@ -21,7 +21,7 @@
     "credentialSecretRef": "external-dns-cloudflare-qualification",
     "domainFilters": "adminchatmate.com",
     "egressConfigRef": "cloudflare-egress-qualification",
-    "labelFilter": "kuberploy.io/dns-integration=8ca71fce-a2c1-4c47-b2f8-dcf88b7683e0",
+    "labelFilter": "kuberploy.io/dns-integration=qualification-rc240",
     "management": "managed",
     "policy": "upsert-only",
     "providerConfigRef": "cloudflare-provider-qualification",
@@ -47,7 +47,7 @@
   "kind": "Deployment",
   "metadata": {
     "annotations": {
-      "kuberploy.io/edge-spec-digest": "sha256:6b4054339c99d08df0f059e3163d9a8faf25845bfd08d3122a6d3f1c2c6a7136",
+      "kuberploy.io/edge-spec-digest": "sha256:b882fd6eca287ee3c28db872bab118d6b9932fa863376c6f58deaf9b565a8f04",
       "kuberploy.io/egress-config-ref": "cloudflare-egress-qualification",
       "kuberploy.io/provider-config-ref": "cloudflare-provider-qualification",
       "kuberploy.io/runtime-revision": "4"
@@ -86,7 +86,7 @@
               "--registry=txt",
               "--policy=upsert-only",
               "--txt-owner-id=kuberploy-external-dns-qualification",
-              "--label-filter=kuberploy.io/dns-integration=8ca71fce-a2c1-4c47-b2f8-dcf88b7683e0",
+              "--label-filter=kuberploy.io/dns-integration=qualification-rc240",
               "--domain-filter=adminchatmate.com"
             ],
             "env": [
