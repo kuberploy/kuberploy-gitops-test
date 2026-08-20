@@ -47,10 +47,10 @@
   "kind": "Deployment",
   "metadata": {
     "annotations": {
-      "kuberploy.io/edge-spec-digest": "sha256:b882fd6eca287ee3c28db872bab118d6b9932fa863376c6f58deaf9b565a8f04",
+      "kuberploy.io/edge-spec-digest": "sha256:602bf3eab1dba36cd47160bcf4c46866659a8b1a7ece3f47f606086cc088283c",
       "kuberploy.io/egress-config-ref": "cloudflare-egress-qualification",
       "kuberploy.io/provider-config-ref": "cloudflare-provider-qualification",
-      "kuberploy.io/runtime-revision": "4"
+      "kuberploy.io/runtime-revision": "5"
     },
     "labels": {
       "app.kubernetes.io/managed-by": "kuberploy",
