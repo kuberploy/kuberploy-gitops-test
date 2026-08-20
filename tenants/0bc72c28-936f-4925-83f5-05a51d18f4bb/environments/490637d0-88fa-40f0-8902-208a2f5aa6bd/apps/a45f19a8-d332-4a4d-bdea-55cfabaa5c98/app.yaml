@@ -50,21 +50,6 @@
       }
     ],
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
-    "routes": [
-      {
-        "dns": {
-          "integrationRef": "qualification-lifecycle-rc277",
-          "mode": "externalDns"
-        },
-        "host": "external-dns-qualification.adminchatmate.com",
-        "id": "external-dns-lifecycle",
-        "path": "/",
-        "port": "http",
-        "tls": {
-          "mode": "httpOnly"
-        }
-      }
-    ],
     "runtime": {
       "args": [
         "netexec",
