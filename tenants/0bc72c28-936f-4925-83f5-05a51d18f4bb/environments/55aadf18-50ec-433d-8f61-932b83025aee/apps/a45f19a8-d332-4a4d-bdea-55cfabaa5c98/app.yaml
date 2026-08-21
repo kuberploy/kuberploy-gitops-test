@@ -35,7 +35,7 @@ spec:
         name: "http"
         protocol: "TCP"
         servicePort: 80
-    replicas: 1
+    replicas: 2
     resources:
       limits:
         cpu: "250m"
