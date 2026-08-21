@@ -60,6 +60,7 @@
         "/agnhost"
       ],
       "env": [],
+      "podManagementPolicy": "Parallel",
       "ports": [
         {
           "containerPort": 8080,
@@ -80,10 +81,10 @@
         }
       },
       "strategy": {
-        "type": "RollingUpdate"
+        "type": "OnDelete"
       },
       "workingDirectory": "/",
-      "workloadType": "Deployment"
+      "workloadType": "StatefulSet"
     }
   }
 }
