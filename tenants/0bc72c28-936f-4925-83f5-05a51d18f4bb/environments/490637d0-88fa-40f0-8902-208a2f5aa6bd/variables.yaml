@@ -2,4 +2,4 @@ apiVersion: variables.kuberploy.io/v1alpha1
 kind: VariableSet
 values:
   RELEASE_LANE: "environment"
-  ENV_ONLY: "rc157-parent-change"
+  ENV_ONLY: "rc299-effective-parent"
