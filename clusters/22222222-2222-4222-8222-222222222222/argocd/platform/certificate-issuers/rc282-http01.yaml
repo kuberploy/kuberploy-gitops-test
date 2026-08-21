@@ -6,14 +6,14 @@ metadata:
     app.kubernetes.io/managed-by: "kuberploy"
     kuberploy.io/certificate-issuer-profile: "rc282-http01"
   annotations:
-    kuberploy.io/certificate-issuer-spec-digest: "sha256:6fa2a8569012326e35dbbb4024f1cc1b9cf36af87e400afee9beab6c1f6cf878"
-    kuberploy.io/certificate-issuer-revision: "1"
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:ba6723711d3d957354f14b786a3398d1eba0c1087b6446cefeffb967aec75738"
+    kuberploy.io/certificate-issuer-revision: "2"
 spec:
   acme:
     email: "acme-qualification@adminchatmate.com"
-    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    server: "https://acme-v02.api.letsencrypt.org/directory"
     privateKeySecretRef:
-      name: "rc282-http01-account-v1"
+      name: "rc282-http01-account-v2"
     solvers:
       - http01:
           ingress:
