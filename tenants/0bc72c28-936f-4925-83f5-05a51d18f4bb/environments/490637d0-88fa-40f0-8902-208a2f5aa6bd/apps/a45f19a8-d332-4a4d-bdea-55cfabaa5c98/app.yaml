@@ -47,48 +47,9 @@
             "scheme": "https"
           }
         }
-      },
-      {
-        "name": "rc280-basic-auth",
-        "profileRef": {
-          "assignmentsDigest": "sha256:e52365bd792d464aff45bdbfbdb051d364170b4d7da016a0e95eab32743a81f6",
-          "profileId": "4fce892e-13e1-450d-9803-e8b70af0655b",
-          "revision": 2,
-          "specDigest": "sha256:6717ef5007b47920973d6342438c6bc50eaedf007921769da6fd9b1782f020b6"
-        },
-        "spec": {
-          "basicAuth": {
-            "headerField": "X-Kuberploy-User",
-            "removeHeader": true,
-            "secretBindingRef": {
-              "bindingId": "97da5383-9e0d-42ee-88e5-1c8ada545f9b",
-              "key": "users",
-              "name": "rc280-basic-auth",
-              "version": 1
-            }
-          }
-        }
       }
     ],
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
-    "routes": [
-      {
-        "dns": {
-          "mode": "sslip"
-        },
-        "host": "kp-93e0a470a46fd105bcbc.103-117-151-86.sslip.io",
-        "id": "rc280-basic-auth",
-        "ingressClassName": "traefik",
-        "middlewareRefs": [
-          "rc280-basic-auth"
-        ],
-        "path": "/",
-        "port": "http",
-        "tls": {
-          "mode": "httpOnly"
-        }
-      }
-    ],
     "runtime": {
       "args": [
         "netexec",
