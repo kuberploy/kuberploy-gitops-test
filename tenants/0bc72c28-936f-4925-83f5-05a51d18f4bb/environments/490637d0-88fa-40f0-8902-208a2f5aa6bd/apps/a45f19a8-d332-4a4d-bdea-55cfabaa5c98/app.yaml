@@ -47,6 +47,137 @@
             "scheme": "https"
           }
         }
+      },
+      {
+        "name": "rc281-redirect-regex",
+        "spec": {
+          "redirectRegex": {
+            "permanent": true,
+            "regex": "^http://(.*)",
+            "replacement": "https://1"
+          }
+        }
+      },
+      {
+        "name": "rc281-add-prefix",
+        "spec": {
+          "addPrefix": {
+            "prefix": "/api"
+          }
+        }
+      },
+      {
+        "name": "rc281-strip-prefix",
+        "spec": {
+          "stripPrefix": {
+            "forceSlash": false,
+            "prefixes": [
+              "/api"
+            ]
+          }
+        }
+      },
+      {
+        "name": "rc281-strip-prefix-regex",
+        "spec": {
+          "stripPrefixRegex": {
+            "regex": [
+              "^/api/[0-9]+"
+            ]
+          }
+        }
+      },
+      {
+        "name": "rc281-replace-path",
+        "spec": {
+          "replacePath": {
+            "path": "/health"
+          }
+        }
+      },
+      {
+        "name": "rc281-replace-path-regex",
+        "spec": {
+          "replacePathRegex": {
+            "regex": "^/old/(.*)",
+            "replacement": "/new/1"
+          }
+        }
+      },
+      {
+        "name": "rc281-headers",
+        "spec": {
+          "headers": {
+            "contentTypeNosniff": true,
+            "customResponseHeaders": {
+              "X-Kuberploy-Test": "rc281"
+            },
+            "frameDeny": true
+          }
+        }
+      },
+      {
+        "name": "rc281-rate-limit",
+        "spec": {
+          "rateLimit": {
+            "average": 100,
+            "burst": 200,
+            "period": "1s"
+          }
+        }
+      },
+      {
+        "name": "rc281-in-flight",
+        "spec": {
+          "inFlightReq": {
+            "amount": 50
+          }
+        }
+      },
+      {
+        "name": "rc281-ip-allow-list",
+        "spec": {
+          "ipAllowList": {
+            "sourceRange": [
+              "10.0.0.0/8",
+              "192.168.0.0/16"
+            ]
+          }
+        }
+      },
+      {
+        "name": "rc281-compress",
+        "spec": {
+          "compress": {
+            "defaultEncoding": "gzip",
+            "encodings": [
+              "gzip",
+              "br"
+            ],
+            "minResponseBodyBytes": 1024
+          }
+        }
+      },
+      {
+        "name": "rc281-buffering",
+        "spec": {
+          "buffering": {
+            "maxRequestBodyBytes": 1048576,
+            "maxResponseBodyBytes": 1048576,
+            "memRequestBodyBytes": 262144,
+            "memResponseBodyBytes": 262144,
+            "retryExpression": "IsNetworkError() \u0026\u0026 Attempts() \u003c 2"
+          }
+        }
+      },
+      {
+        "name": "rc281-retry",
+        "spec": {
+          "retry": {
+            "attempts": 3,
+            "initialInterval": "100ms"
+          }
+        }
       }
     ],
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
