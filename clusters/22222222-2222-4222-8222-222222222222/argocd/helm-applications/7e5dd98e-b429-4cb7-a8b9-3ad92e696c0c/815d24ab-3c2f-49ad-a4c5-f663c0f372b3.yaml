@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: kp-h-815d24ab3c2f49ada4c5f663c0f372b3
+    namespace: argocd
+    finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    labels:
+        app.kubernetes.io/component: approved-helm-application
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/application-id: 815d24ab-3c2f-49ad-a4c5-f663c0f372b3
+        kuberploy.io/environment-id: 7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c
+        kuberploy.io/project-id: 7ba1ed2f-8b3f-48ee-87bc-44da0f5a9012
+    annotations:
+        argocd.argoproj.io/manifest-generate-paths: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/3177e5f9-59a0-4523-9217-392ec28927e2/release.yaml
+        kuberploy.io/helm-payload-digest: sha256:d2ba8cfece18463031036f2ed16ed501cdad6b61f5d4cd8e3bb86b491516c38b
+        kuberploy.io/helm-payload-revision: fcd220a64311256b0ab0862e54634fb09ef8c5c5
+        kuberploy.io/helm-release-revision: 3177e5f9-59a0-4523-9217-392ec28927e2
+spec:
+    project: kp-rc159-helm-qualification-oci
+    source:
+        repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+        targetRevision: fcd220a64311256b0ab0862e54634fb09ef8c5c5
+        path: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/3177e5f9-59a0-4523-9217-392ec28927e2
+        directory:
+            recurse: false
+            include: release.yaml
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: kp-rc159-helm-qualification-oci
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+            allowEmpty: false
+        syncOptions:
+            - CreateNamespace=false
+            - ServerSideApply=true
