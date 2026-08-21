@@ -59,7 +59,19 @@
       "command": [
         "/agnhost"
       ],
-      "env": [],
+      "env": [
+        {
+          "name": "RC281_RUNTIME_SECRET",
+          "valueFrom": {
+            "secretBindingRef": {
+              "bindingId": "ecc82505-2e07-455b-bb6f-68ec8c8ed0b1",
+              "key": "apiKey",
+              "name": "rc281-runtime-env",
+              "version": 1
+            }
+          }
+        }
+      ],
       "ports": [
         {
           "containerPort": 8080,
