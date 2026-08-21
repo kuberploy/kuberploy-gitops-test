@@ -61,7 +61,8 @@
                     "key": "kubernetes.io/os",
                     "operator": "In",
                     "values": [
-                      "linux"
+                      "linux",
+                      "windows"
                     ]
                   }
                 ]
