@@ -90,21 +90,21 @@ spec:
                   values:
                     - linux
         preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 70
+          - weight: 80
             preference:
               matchExpressions:
                 - key: kubernetes.io/hostname
                   operator: Exists
       podAntiAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 50
+          - weight: 60
             podAffinityTerm:
               topologyKey: kubernetes.io/hostname
               labelSelector:
                 matchLabels:
                   kuberploy.io/application: a45f19a8-d332-4a4d-bdea-55cfabaa5c98
     topologySpreadConstraints:
-      - maxSkew: 1
+      - maxSkew: 2
         topologyKey: kubernetes.io/hostname
         whenUnsatisfiable: ScheduleAnyway
         labelSelector:
@@ -113,6 +113,6 @@ spec:
     tolerations:
       - key: qualification.kuberploy.io/workload
         operator: Equal
-        value: application
+        value: application-edit
         effect: PreferNoSchedule
     priorityClassName: kuberploy-rc293-runtime-test
