@@ -1,42 +1,59 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "dc2bf2ce-5d55-46a5-8722-42103d714da3"
-  name: "rc156-builder-fixture"
-spec:
-  projectId: "0bc72c28-936f-4925-83f5-05a51d18f4bb"
-  applicationId: "dc2bf2ce-5d55-46a5-8722-42103d714da3"
-  environmentId: "490637d0-88fa-40f0-8902-208a2f5aa6bd"
-  delivery:
-    mode: image
-    registryPull:
-      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
-      profileName: "managed-registry"
-      profileRevision: 3
-    release:
-      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/0bc72c28-936f-4925-83f5-05a51d18f4bb/services/dc2bf2ce-5d55-46a5-8722-42103d714da3/image"
-      digest: "sha256:fa1bbb81840065aa1c9c6aa603e5543638c0097c38488510f72ceb3cb636e8ce"
-  runtime:
-    env:
-      -
-        name: "ENV_ONLY"
-        value: "rc157-parent-change"
-      -
-        name: "RELEASE_LANE"
-        value: "environment"
-      -
-        name: "SHARED_REGION"
-        value: "ap-southeast-1"
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-    replicas: 2
-    resources:
-      requests:
-        cpu: "50m"
-        memory: "100Mi"
-    strategy:
-      type: "RollingUpdate"
-    workloadType: "Deployment"
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "dc2bf2ce-5d55-46a5-8722-42103d714da3",
+    "name": "rc156-builder-fixture"
+  },
+  "spec": {
+    "applicationId": "dc2bf2ce-5d55-46a5-8722-42103d714da3",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-registry",
+        "profileRevision": 3,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:32cc874185dfa238c94b1eaeae0c52ae30d5a93aa94c5849180642af2eed4683",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/0bc72c28-936f-4925-83f5-05a51d18f4bb/services/dc2bf2ce-5d55-46a5-8722-42103d714da3/image"
+      }
+    },
+    "environmentId": "490637d0-88fa-40f0-8902-208a2f5aa6bd",
+    "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
+    "runtime": {
+      "env": [
+        {
+          "name": "ENV_ONLY",
+          "value": "rc157-parent-change"
+        },
+        {
+          "name": "RELEASE_LANE",
+          "value": "environment"
+        },
+        {
+          "name": "SHARED_REGION",
+          "value": "ap-southeast-1"
+        }
+      ],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP"
+        }
+      ],
+      "replicas": 2,
+      "resources": {
+        "requests": {
+          "cpu": "50m",
+          "memory": "100Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
