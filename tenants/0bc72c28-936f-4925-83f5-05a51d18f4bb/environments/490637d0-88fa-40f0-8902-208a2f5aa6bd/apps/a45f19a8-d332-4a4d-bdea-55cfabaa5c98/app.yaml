@@ -50,6 +50,22 @@
       }
     ],
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
+    "routes": [
+      {
+        "dns": {
+          "mode": "sslip"
+        },
+        "host": "kp-93e0a470a46fd105bcbc.103-117-151-86.sslip.io",
+        "id": "rc280-sslip",
+        "ingressClassName": "traefik",
+        "middlewareRefs": [],
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "mode": "httpOnly"
+        }
+      }
+    ],
     "runtime": {
       "args": [
         "netexec",
