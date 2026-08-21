@@ -58,7 +58,9 @@
         "host": "kp-93e0a470a46fd105bcbc.103-117-151-86.sslip.io",
         "id": "rc280-sslip",
         "ingressClassName": "traefik",
-        "middlewareRefs": [],
+        "middlewareRefs": [
+          "rc159-basic-auth"
+        ],
         "path": "/",
         "port": "http",
         "tls": {
