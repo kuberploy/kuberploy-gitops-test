@@ -12,16 +12,16 @@ metadata:
         kuberploy.io/environment-id: 7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c
         kuberploy.io/project-id: 7ba1ed2f-8b3f-48ee-87bc-44da0f5a9012
     annotations:
-        argocd.argoproj.io/manifest-generate-paths: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/e5c19785-8c83-42c7-b7d6-e6ebe22ad45d/release.yaml
+        argocd.argoproj.io/manifest-generate-paths: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/ab46e0b3-e40b-454d-8b45-5e7cc3e6125d/release.yaml
         kuberploy.io/helm-payload-digest: sha256:28a1b59501c36ef0aaf52d8270cbaf18fe26f79170292dfbc3b93a041bec080c
-        kuberploy.io/helm-payload-revision: bb4126ed9884654e2a3bb0359d67f60509a72a46
-        kuberploy.io/helm-release-revision: e5c19785-8c83-42c7-b7d6-e6ebe22ad45d
+        kuberploy.io/helm-payload-revision: eb6d0848b5cf522e0ccbc0ae1aa4ccc0d63e8869
+        kuberploy.io/helm-release-revision: ab46e0b3-e40b-454d-8b45-5e7cc3e6125d
 spec:
     project: kp-rc159-helm-qualification-oci
     source:
         repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
-        targetRevision: bb4126ed9884654e2a3bb0359d67f60509a72a46
-        path: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/e5c19785-8c83-42c7-b7d6-e6ebe22ad45d
+        targetRevision: eb6d0848b5cf522e0ccbc0ae1aa4ccc0d63e8869
+        path: clusters/22222222-2222-4222-8222-222222222222/helm-manifests/environments/7e5dd98e-b429-4cb7-a8b9-3ad92e696c0c/applications/815d24ab-3c2f-49ad-a4c5-f663c0f372b3/revisions/ab46e0b3-e40b-454d-8b45-5e7cc3e6125d
         directory:
             recurse: false
             include: release.yaml
