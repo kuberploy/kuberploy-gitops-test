@@ -75,17 +75,17 @@ spec:
                   applicationId: 29c89b56-56a6-4354-97d6-662e9adf0f44
                   applicationName: kp-d-a813dc3c7eb148a3a47ed0cebfcfde15
                   applicationPath: tenants/0bc72c28-936f-4925-83f5-05a51d18f4bb/environments/490637d0-88fa-40f0-8902-208a2f5aa6bd/apps/29c89b56-56a6-4354-97d6-662e9adf0f44/app.yaml
-                  valuesRevision: 71faa0e0e060f62b5acc4f7e932627de6c0a07b6
+                  valuesRevision: 7ddf5c6ed9c424c0523e206e034dd55eb3a78823
                 - deploymentId: d3eb0771-6c20-433b-a96c-ebff49742c70
                   applicationId: a45f19a8-d332-4a4d-bdea-55cfabaa5c98
                   applicationName: kp-d-d3eb07716c20433ba96cebff49742c70
                   applicationPath: tenants/0bc72c28-936f-4925-83f5-05a51d18f4bb/environments/490637d0-88fa-40f0-8902-208a2f5aa6bd/apps/a45f19a8-d332-4a4d-bdea-55cfabaa5c98/app.yaml
-                  valuesRevision: 71faa0e0e060f62b5acc4f7e932627de6c0a07b6
+                  valuesRevision: e3f9e044d9f1761b1efcc5b2039d2dacc305386a
                 - deploymentId: da8cc933-92be-44c9-aca1-e60c889c7258
                   applicationId: dc2bf2ce-5d55-46a5-8722-42103d714da3
                   applicationName: kp-d-da8cc93392be44c9aca1e60c889c7258
                   applicationPath: tenants/0bc72c28-936f-4925-83f5-05a51d18f4bb/environments/490637d0-88fa-40f0-8902-208a2f5aa6bd/apps/dc2bf2ce-5d55-46a5-8722-42103d714da3/app.yaml
-                  valuesRevision: 71faa0e0e060f62b5acc4f7e932627de6c0a07b6
+                  valuesRevision: 7ddf5c6ed9c424c0523e206e034dd55eb3a78823
     template:
         metadata:
             name: '{{.applicationName}}'
