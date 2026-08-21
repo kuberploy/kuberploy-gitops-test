@@ -59,7 +59,19 @@
       "command": [
         "/agnhost"
       ],
-      "env": [],
+      "env": [
+        {
+          "name": "SHARED_REGION",
+          "valueFrom": {
+            "secretBindingRef": {
+              "bindingId": "c69678f9-48b8-4513-84a9-296465f25f9a",
+              "key": "shared_region",
+              "name": "rc299-override-212251",
+              "version": 1
+            }
+          }
+        }
+      ],
       "ports": [
         {
           "containerPort": 8080,
