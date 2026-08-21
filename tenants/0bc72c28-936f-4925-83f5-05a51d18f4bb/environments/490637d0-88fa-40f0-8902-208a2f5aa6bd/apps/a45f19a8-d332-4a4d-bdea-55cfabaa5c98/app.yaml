@@ -51,26 +51,6 @@
     ],
     "projectId": "0bc72c28-936f-4925-83f5-05a51d18f4bb",
     "runtime": {
-      "affinity": {
-        "nodeAffinity": {
-          "requiredDuringSchedulingIgnoredDuringExecution": {
-            "nodeSelectorTerms": [
-              {
-                "matchExpressions": [
-                  {
-                    "key": "kubernetes.io/os",
-                    "operator": "In",
-                    "values": [
-                      "linux",
-                      "windows"
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      },
       "args": [
         "netexec",
         "--http-port=8080",
