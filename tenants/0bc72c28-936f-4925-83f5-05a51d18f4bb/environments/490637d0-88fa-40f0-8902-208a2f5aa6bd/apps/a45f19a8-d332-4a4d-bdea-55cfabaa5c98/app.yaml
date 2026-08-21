@@ -60,9 +60,6 @@
         "/agnhost"
       ],
       "env": [],
-      "nodeSelector": {
-        "kubernetes.io/os": "linux"
-      },
       "ports": [
         {
           "containerPort": 8080,
