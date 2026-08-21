@@ -36,9 +36,6 @@
           "value": "ap-southeast-1"
         }
       ],
-      "nodeSelector": {
-        "kubernetes.io/os": "linux"
-      },
       "ports": [
         {
           "containerPort": 8080,
