@@ -59,22 +59,6 @@
       "command": [
         "/agnhost"
       ],
-      "env": [
-        {
-          "name": "RC304_SECRET",
-          "valueFrom": {
-            "secretBindingRef": {
-              "bindingId": "c3626d4f-7fb9-45a0-8926-3975ff16daad",
-              "key": "value",
-              "name": "rc304-runtime",
-              "version": 2
-            }
-          }
-        }
-      ],
-      "nodeSelector": {
-        "kubernetes.io/os": "linux"
-      },
       "ports": [
         {
           "containerPort": 8080,
