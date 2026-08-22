@@ -14,15 +14,14 @@ spec:
       digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
   runtime:
     args:
-      - "netexec"
-      - "--http-port=8080"
+      - netexec
+      - --http-port=8080
     command:
-      - "/agnhost"
+      - /agnhost
     ports:
-      -
+      - name: http
         containerPort: 8080
-        name: "http"
-        protocol: "TCP"
+        protocol: TCP
     replicas: 1
     resources:
       requests:
@@ -31,6 +30,7 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+    env: []
   routes:
     - id: route-2c66e299b0
       host: "kuberploy-qualification.adminchatmate.com"
@@ -38,4 +38,9 @@ spec:
       ingressClassName: "traefik"
       port: "http"
       tls:
-        mode: httpOnly
+        mode: letsencrypt
+        issuerRef: kuberploy-dns01-production
+        redirectHttp: true
+      dns:
+        mode: manual
+      middlewareRefs: []
