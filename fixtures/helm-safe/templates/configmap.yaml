@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name | quote }}
+    app.kubernetes.io/name: {{ .Values.identity.name | quote }}
+    kuberploy.io/application: {{ .Values.identity.application | quote }}
+    kuberploy.io/environment: {{ .Values.identity.environment | quote }}
+    kuberploy.io/project: {{ .Values.identity.project | quote }}
+data:
+  replicas: {{ .Values.replicas | quote }}

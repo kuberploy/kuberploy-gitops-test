@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  kuberploy-safe:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2026-08-23T04:23:06.126113+07:00"
+    description: Minimal external Helm qualification fixture
+    digest: c43e7ba65795ae9773566ca60cf5b46b8e56af47ce0a6aac655f420fb3c0021f
+    name: kuberploy-safe
+    type: application
+    urls:
+    - kuberploy-safe-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-08-23T04:23:06.125972+07:00"
