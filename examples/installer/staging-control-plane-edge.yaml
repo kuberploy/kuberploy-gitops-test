@@ -143,7 +143,7 @@ config:
   runtimeSecrets:
     enabled: true
     namespaces:
-      - kp-rc314-qualification-rc314
+      - kp-rc315-qualification-rc315
     fingerprintKeyID: runtime-secrets-hmac-v1
     fingerprintSecret:
       name: kuberploy-runtime-secrets-fingerprint
