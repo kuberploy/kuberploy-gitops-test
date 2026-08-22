@@ -42,5 +42,7 @@ spec:
         issuerRef: kuberploy-dns01-production
         redirectHttp: true
       dns:
-        mode: manual
+        mode: externalDns
+        integrationRef: cloudflare-foundation
+        ttl: 300
       middlewareRefs: []
