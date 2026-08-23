@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
     kuberploy.io/runtime-namespace: "true"
     pod-security.kubernetes.io/audit: restricted
@@ -25,7 +25,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -50,7 +50,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -78,7 +78,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -96,7 +96,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -118,6 +118,36 @@ spec:
         - protocol: TCP
           port: 53
 ---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: kuberploy-http01-solver-ingress
+  namespace: kp-rc331-qualification-dev
+  labels:
+    app.kubernetes.io/managed-by: kuberploy
+    kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
+    kuberploy.io/foundation-contract: v2
+    kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
+  annotations:
+    argocd.argoproj.io/sync-wave: "-20"
+spec:
+  podSelector:
+    matchLabels:
+      acme.cert-manager.io/http01-solver: "true"
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kuberploy-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: traefik
+      ports:
+        - protocol: TCP
+          port: 8089
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -126,7 +156,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -177,7 +207,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 5cd7abf6-ae6e-4f82-bc73-6508f5311b89
-    kuberploy.io/foundation-contract: v1
+    kuberploy.io/foundation-contract: v2
     kuberploy.io/project-id: 0928a543-f9f0-475e-92b0-7ae522682a7e
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
