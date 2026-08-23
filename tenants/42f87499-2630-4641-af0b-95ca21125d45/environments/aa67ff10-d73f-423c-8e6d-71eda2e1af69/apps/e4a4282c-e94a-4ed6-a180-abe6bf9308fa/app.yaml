@@ -1,47 +1,103 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "e4a4282c-e94a-4ed6-a180-abe6bf9308fa"
-  name: "oci"
-spec:
-  projectId: "42f87499-2630-4641-af0b-95ca21125d45"
-  applicationId: "e4a4282c-e94a-4ed6-a180-abe6bf9308fa"
-  environmentId: "aa67ff10-d73f-423c-8e6d-71eda2e1af69"
-  delivery:
-    mode: image
-    release:
-      repository: "registry.k8s.io/e2e-test-images/agnhost"
-      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
-  runtime:
-    args:
-      - "netexec"
-      - "--http-port=8080"
-    env:
-      -
-        name: "RC329_MODE"
-        value: "guided"
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-        servicePort: 80
-    replicas: 1
-    resources:
-      limits:
-        cpu: "250m"
-        memory: "128Mi"
-      requests:
-        cpu: "25m"
-        memory: "32Mi"
-    strategy:
-      type: "RollingUpdate"
-    workloadType: "Deployment"
-  routes:
-    - id: route-3359a20370
-      host: "rc329-oci.example.invalid"
-      path: "/"
-      ingressClassName: "traefik"
-      port: "http"
-      tls:
-        mode: httpOnly
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "e4a4282c-e94a-4ed6-a180-abe6bf9308fa",
+    "name": "oci"
+  },
+  "spec": {
+    "applicationId": "e4a4282c-e94a-4ed6-a180-abe6bf9308fa",
+    "delivery": {
+      "mode": "image",
+      "release": {
+        "digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85",
+        "repository": "registry.k8s.io/e2e-test-images/agnhost"
+      }
+    },
+    "environmentId": "aa67ff10-d73f-423c-8e6d-71eda2e1af69",
+    "overrides": {
+      "deployment": {
+        "metadata": {
+          "annotations": {
+            "qualification.kuberploy.io/rc329": "deployment"
+          }
+        },
+        "spec": {
+          "replicas": 2,
+          "revisionHistoryLimit": 4
+        }
+      },
+      "ingress": {
+        "metadata": {
+          "annotations": {
+            "external-dns.alpha.kubernetes.io/cloudflare-proxied": "false",
+            "qualification.kuberploy.io/rc329": "ingress"
+          }
+        }
+      },
+      "service": {
+        "metadata": {
+          "annotations": {
+            "qualification.kuberploy.io/rc329": "service"
+          }
+        }
+      },
+      "serviceAccount": {
+        "metadata": {
+          "annotations": {
+            "eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/rc329-qualification",
+            "qualification.kuberploy.io/rc329": "service-account"
+          }
+        }
+      }
+    },
+    "projectId": "42f87499-2630-4641-af0b-95ca21125d45",
+    "routes": [
+      {
+        "host": "rc329-oci.example.invalid",
+        "id": "route-3359a20370",
+        "ingressClassName": "traefik",
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "mode": "httpOnly"
+        }
+      }
+    ],
+    "runtime": {
+      "args": [
+        "netexec",
+        "--http-port=8080"
+      ],
+      "env": [
+        {
+          "name": "RC329_MODE",
+          "value": "guided"
+        }
+      ],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "250m",
+          "memory": "128Mi"
+        },
+        "requests": {
+          "cpu": "25m",
+          "memory": "32Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
