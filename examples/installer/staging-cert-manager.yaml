@@ -1,0 +1,5 @@
+foundation:
+  issuers:
+    production:
+      enabled: true
+      email: kuberploy-test@adminchatmate.com
