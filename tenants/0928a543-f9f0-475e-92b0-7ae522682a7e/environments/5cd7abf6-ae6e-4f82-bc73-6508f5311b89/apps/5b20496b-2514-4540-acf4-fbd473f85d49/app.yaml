@@ -58,17 +58,4 @@ spec:
       metadata:
         annotations:
           eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc331
-  routes:
-    - id: public
-      host: kuberploy-qualification.adminchatmate.com
-      path: /
-      port: http
-      ingressClassName: traefik
-      dns:
-        mode: externalDns
-        integrationRef: rc331-cloudflare
-        ttl: 60
-      tls:
-        mode: letsencrypt
-        issuerRef: kuberploy-letsencrypt-production
-        redirectHttp: true
+  routes: []
