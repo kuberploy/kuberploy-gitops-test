@@ -140,9 +140,8 @@ config:
     serviceAccount: kuberploy-external-dns-managed
     pollIntervalSeconds: 5
   runtimeSecrets:
-    enabled: true
-    namespaces:
-      - kp-rc316-qualification-rc316
+    enabled: false
+    namespaces: []
     fingerprintKeyID: runtime-secrets-hmac-v1
     fingerprintSecret:
       name: kuberploy-runtime-secrets-fingerprint
@@ -157,7 +156,7 @@ config:
     minimumBackoffSeconds: 2
     maximumBackoffSeconds: 300
   certificateObservation:
-    enabled: true
+    enabled: false
     pollIntervalSeconds: 30
     workLeaseSeconds: 45
     heartbeatSeconds: 10
