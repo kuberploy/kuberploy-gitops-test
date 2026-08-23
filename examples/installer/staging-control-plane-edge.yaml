@@ -134,7 +134,6 @@ config:
   externalDNSOperational:
     enabled: true
     platformBindingID: 41968c7f-301e-41b2-94cd-58dcd519d819
-    clusterID: 12c5ea3f-a5b8-4e82-8fe5-a663d9724215
     namespace: kuberploy-system
     version: v0.21.0
     image: registry.k8s.io/external-dns/external-dns@sha256:f53faaf71cb270d1ca9dce6ea0c94bfebf1a18696263487f0fbc74b9bf2bd7ff
@@ -169,7 +168,6 @@ config:
   certificateIssuerObserver:
     enabled: true
     platformBindingID: 41968c7f-301e-41b2-94cd-58dcd519d819
-    clusterID: 12c5ea3f-a5b8-4e82-8fe5-a663d9724215
     pollIntervalSeconds: 30
     requestTimeoutSeconds: 10
     maximumAgeSeconds: 120
