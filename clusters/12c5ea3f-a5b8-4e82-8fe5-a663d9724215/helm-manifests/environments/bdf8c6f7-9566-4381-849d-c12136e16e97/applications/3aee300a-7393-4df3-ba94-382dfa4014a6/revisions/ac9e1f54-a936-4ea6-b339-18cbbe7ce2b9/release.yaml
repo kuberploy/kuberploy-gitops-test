@@ -1,0 +1,77 @@
+---
+# Source: kuberploy-helm-fixture/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-config
+  namespace: kp-rc316-qualification-dev
+  labels:
+    app.kubernetes.io/instance: helm
+    app.kubernetes.io/name: helm
+    kuberploy.io/application: "3aee300a-7393-4df3-ba94-382dfa4014a6"
+    kuberploy.io/environment: "bdf8c6f7-9566-4381-849d-c12136e16e97"
+    kuberploy.io/project: "4400424f-820d-43bb-ae26-f397af3e4d62"
+  annotations:
+    qualification.kuberploy.io/sensitive-token: "rc316-preview-redaction"
+data:
+  MESSAGE: "rc316-oci"
+
+---
+# Source: kuberploy-helm-fixture/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm
+  namespace: kp-rc316-qualification-dev
+  labels:
+    app.kubernetes.io/instance: helm
+    app.kubernetes.io/name: helm
+    kuberploy.io/application: "3aee300a-7393-4df3-ba94-382dfa4014a6"
+    kuberploy.io/environment: "bdf8c6f7-9566-4381-849d-c12136e16e97"
+    kuberploy.io/project: "4400424f-820d-43bb-ae26-f397af3e4d62"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      kuberploy.io/application: "3aee300a-7393-4df3-ba94-382dfa4014a6"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: helm
+        app.kubernetes.io/name: helm
+        kuberploy.io/application: "3aee300a-7393-4df3-ba94-382dfa4014a6"
+        kuberploy.io/environment: "bdf8c6f7-9566-4381-849d-c12136e16e97"
+        kuberploy.io/project: "4400424f-820d-43bb-ae26-f397af3e4d62"
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: fixture
+          image: registry.k8s.io/e2e-test-images/agnhost@sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85
+          imagePullPolicy: IfNotPresent
+          command: ["/agnhost"]
+          args: ["netexec", "--http-port=8080", "--udp-port=-1", "--http-override=/echo?msg=rc316"]
+          env:
+            - name: QUALIFICATION_VALUE
+              value: "rc316-environment"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
