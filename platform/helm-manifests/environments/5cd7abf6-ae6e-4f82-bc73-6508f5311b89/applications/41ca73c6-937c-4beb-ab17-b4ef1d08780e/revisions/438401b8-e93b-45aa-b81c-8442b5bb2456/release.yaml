@@ -1,0 +1,77 @@
+---
+# Source: kuberploy-helm-fixture/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-config
+  namespace: kp-rc331-qualification-dev
+  labels:
+    app.kubernetes.io/instance: helm
+    app.kubernetes.io/name: helm
+    kuberploy.io/application: "41ca73c6-937c-4beb-ab17-b4ef1d08780e"
+    kuberploy.io/environment: "5cd7abf6-ae6e-4f82-bc73-6508f5311b89"
+    kuberploy.io/project: "0928a543-f9f0-475e-92b0-7ae522682a7e"
+  annotations:
+    qualification.kuberploy.io/sensitive-token: "rc331-git-sensitive"
+data:
+  MESSAGE: "rc331-git-message"
+
+---
+# Source: kuberploy-helm-fixture/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm
+  namespace: kp-rc331-qualification-dev
+  labels:
+    app.kubernetes.io/instance: helm
+    app.kubernetes.io/name: helm
+    kuberploy.io/application: "41ca73c6-937c-4beb-ab17-b4ef1d08780e"
+    kuberploy.io/environment: "5cd7abf6-ae6e-4f82-bc73-6508f5311b89"
+    kuberploy.io/project: "0928a543-f9f0-475e-92b0-7ae522682a7e"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      kuberploy.io/application: "41ca73c6-937c-4beb-ab17-b4ef1d08780e"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: helm
+        app.kubernetes.io/name: helm
+        kuberploy.io/application: "41ca73c6-937c-4beb-ab17-b4ef1d08780e"
+        kuberploy.io/environment: "5cd7abf6-ae6e-4f82-bc73-6508f5311b89"
+        kuberploy.io/project: "0928a543-f9f0-475e-92b0-7ae522682a7e"
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: fixture
+          image: registry.k8s.io/e2e-test-images/agnhost@sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85
+          imagePullPolicy: IfNotPresent
+          command: ["/agnhost"]
+          args: ["netexec", "--http-port=8080", "--udp-port=-1", "--http-override=/echo?msg=rc331-git"]
+          env:
+            - name: QUALIFICATION_VALUE
+              value: "rc331-git-environment"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
