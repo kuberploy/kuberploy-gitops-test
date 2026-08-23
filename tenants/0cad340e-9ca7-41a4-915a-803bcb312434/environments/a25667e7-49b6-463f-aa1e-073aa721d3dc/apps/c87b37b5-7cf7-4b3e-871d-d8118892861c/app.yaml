@@ -1,0 +1,32 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "c87b37b5-7cf7-4b3e-871d-d8118892861c"
+  name: "oci"
+spec:
+  projectId: "0cad340e-9ca7-41a4-915a-803bcb312434"
+  applicationId: "c87b37b5-7cf7-4b3e-871d-d8118892861c"
+  environmentId: "a25667e7-49b6-463f-aa1e-073aa721d3dc"
+  delivery:
+    mode: image
+    release:
+      repository: "ghcr.io/kuberploy/kuberploy-web"
+      digest: "sha256:0cb9c29123fff80c96a182d4d57815bd7ad3857cd5d853bbf9dccc424fa4d7c7"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    replicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "256Mi"
+      requests:
+        cpu: "25m"
+        memory: "64Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
