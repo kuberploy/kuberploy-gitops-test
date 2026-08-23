@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "projectId",
+    "environmentId",
+    "applicationId",
+    "replicas",
+    "message",
+    "sensitiveAnnotation",
+    "environmentValue",
+    "argumentValue"
+  ],
+  "properties": {
+    "projectId": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "environmentId": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "applicationId": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$" },
+    "replicas": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "message": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "sensitiveAnnotation": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "environmentValue": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "argumentValue": { "type": "string", "minLength": 1, "maxLength": 128 }
+  }
+}
