@@ -10,8 +10,8 @@ spec:
   delivery:
     mode: image
     release:
-      repository: "ghcr.io/kuberploy/kuberploy-web"
-      digest: "sha256:0cb9c29123fff80c96a182d4d57815bd7ad3857cd5d853bbf9dccc424fa4d7c7"
+      repository: "registry.k8s.io/pause"
+      digest: "sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a"
   runtime:
     ports:
       -
@@ -22,11 +22,11 @@ spec:
     replicas: 1
     resources:
       limits:
-        cpu: "250m"
-        memory: "256Mi"
-      requests:
-        cpu: "25m"
+        cpu: "100m"
         memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
