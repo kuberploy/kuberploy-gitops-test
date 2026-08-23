@@ -1,32 +1,71 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "c87b37b5-7cf7-4b3e-871d-d8118892861c"
-  name: "oci"
-spec:
-  projectId: "0cad340e-9ca7-41a4-915a-803bcb312434"
-  applicationId: "c87b37b5-7cf7-4b3e-871d-d8118892861c"
-  environmentId: "a25667e7-49b6-463f-aa1e-073aa721d3dc"
-  delivery:
-    mode: image
-    release:
-      repository: "registry.k8s.io/pause"
-      digest: "sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a"
-  runtime:
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-        servicePort: 80
-    replicas: 1
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "64Mi"
-      requests:
-        cpu: "10m"
-        memory: "16Mi"
-    strategy:
-      type: "RollingUpdate"
-    workloadType: "Deployment"
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "c87b37b5-7cf7-4b3e-871d-d8118892861c",
+    "name": "oci"
+  },
+  "spec": {
+    "applicationId": "c87b37b5-7cf7-4b3e-871d-d8118892861c",
+    "delivery": {
+      "mode": "image",
+      "release": {
+        "digest": "sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a",
+        "repository": "registry.k8s.io/pause"
+      }
+    },
+    "environmentId": "a25667e7-49b6-463f-aa1e-073aa721d3dc",
+    "overrides": {
+      "deployment": {
+        "metadata": {
+          "annotations": {
+            "qualification.example.com/rc": "326"
+          }
+        },
+        "spec": {
+          "replicas": 2
+        }
+      },
+      "service": {
+        "metadata": {
+          "annotations": {
+            "qualification.example.com/service": "326"
+          }
+        }
+      },
+      "serviceAccount": {
+        "metadata": {
+          "annotations": {
+            "eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/kuberploy-qualification"
+          }
+        }
+      }
+    },
+    "projectId": "0cad340e-9ca7-41a4-915a-803bcb312434",
+    "runtime": {
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "100m",
+          "memory": "64Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
