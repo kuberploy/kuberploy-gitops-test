@@ -1,0 +1,77 @@
+---
+# Source: kuberploy-helm-fixture/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-config
+  namespace: kp-rc326-qualification-dev
+  labels:
+    app.kubernetes.io/instance: helm
+    app.kubernetes.io/name: helm
+    kuberploy.io/application: "1fd19ada-b355-40f2-8eaf-983ee5e0c3fe"
+    kuberploy.io/environment: "a25667e7-49b6-463f-aa1e-073aa721d3dc"
+    kuberploy.io/project: "0cad340e-9ca7-41a4-915a-803bcb312434"
+  annotations:
+    qualification.kuberploy.io/sensitive-token: "rc326-sensitive-git"
+data:
+  MESSAGE: "git"
+
+---
+# Source: kuberploy-helm-fixture/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm
+  namespace: kp-rc326-qualification-dev
+  labels:
+    app.kubernetes.io/instance: helm
+    app.kubernetes.io/name: helm
+    kuberploy.io/application: "1fd19ada-b355-40f2-8eaf-983ee5e0c3fe"
+    kuberploy.io/environment: "a25667e7-49b6-463f-aa1e-073aa721d3dc"
+    kuberploy.io/project: "0cad340e-9ca7-41a4-915a-803bcb312434"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      kuberploy.io/application: "1fd19ada-b355-40f2-8eaf-983ee5e0c3fe"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: helm
+        app.kubernetes.io/name: helm
+        kuberploy.io/application: "1fd19ada-b355-40f2-8eaf-983ee5e0c3fe"
+        kuberploy.io/environment: "a25667e7-49b6-463f-aa1e-073aa721d3dc"
+        kuberploy.io/project: "0cad340e-9ca7-41a4-915a-803bcb312434"
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: fixture
+          image: registry.k8s.io/e2e-test-images/agnhost@sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85
+          imagePullPolicy: IfNotPresent
+          command: ["/agnhost"]
+          args: ["netexec", "--http-port=8080", "--udp-port=-1", "--http-override=/echo?msg=rc326-git"]
+          env:
+            - name: QUALIFICATION_VALUE
+              value: "rc326-environment-git"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
