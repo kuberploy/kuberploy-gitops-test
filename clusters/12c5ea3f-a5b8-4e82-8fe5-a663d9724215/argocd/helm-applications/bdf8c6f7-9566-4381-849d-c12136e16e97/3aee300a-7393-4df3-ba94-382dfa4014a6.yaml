@@ -12,16 +12,16 @@ metadata:
         kuberploy.io/environment-id: bdf8c6f7-9566-4381-849d-c12136e16e97
         kuberploy.io/project-id: 4400424f-820d-43bb-ae26-f397af3e4d62
     annotations:
-        argocd.argoproj.io/manifest-generate-paths: clusters/12c5ea3f-a5b8-4e82-8fe5-a663d9724215/helm-manifests/environments/bdf8c6f7-9566-4381-849d-c12136e16e97/applications/3aee300a-7393-4df3-ba94-382dfa4014a6/revisions/f427cccd-0bd8-4885-b53c-180426a40f40/release.yaml
-        kuberploy.io/helm-payload-digest: sha256:6502d52662787699d0e3ddd7fc4357363bedf93b8c0bc75ed665d9e15fe4d893
-        kuberploy.io/helm-payload-revision: f9048af30bb6fe5e95eab70b26a00fb7d0c20ebc
-        kuberploy.io/helm-release-revision: f427cccd-0bd8-4885-b53c-180426a40f40
+        argocd.argoproj.io/manifest-generate-paths: clusters/12c5ea3f-a5b8-4e82-8fe5-a663d9724215/helm-manifests/environments/bdf8c6f7-9566-4381-849d-c12136e16e97/applications/3aee300a-7393-4df3-ba94-382dfa4014a6/revisions/afe0f97a-901b-4703-a910-b0d8faf3080e/release.yaml
+        kuberploy.io/helm-payload-digest: sha256:d839dcb35d588c67aa85ae75a8df3552f4a672b668ffebdc082f83e578d71bc6
+        kuberploy.io/helm-payload-revision: 73a83854c2e7a96839ad345aed7c16878ce2ffc8
+        kuberploy.io/helm-release-revision: afe0f97a-901b-4703-a910-b0d8faf3080e
 spec:
     project: kp-rc316-qualification-dev
     source:
         repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
-        targetRevision: f9048af30bb6fe5e95eab70b26a00fb7d0c20ebc
-        path: clusters/12c5ea3f-a5b8-4e82-8fe5-a663d9724215/helm-manifests/environments/bdf8c6f7-9566-4381-849d-c12136e16e97/applications/3aee300a-7393-4df3-ba94-382dfa4014a6/revisions/f427cccd-0bd8-4885-b53c-180426a40f40
+        targetRevision: 73a83854c2e7a96839ad345aed7c16878ce2ffc8
+        path: clusters/12c5ea3f-a5b8-4e82-8fe5-a663d9724215/helm-manifests/environments/bdf8c6f7-9566-4381-849d-c12136e16e97/applications/3aee300a-7393-4df3-ba94-382dfa4014a6/revisions/afe0f97a-901b-4703-a910-b0d8faf3080e
         directory:
             recurse: false
             include: release.yaml
