@@ -36,39 +36,3 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
-  overrides:
-    deployment:
-      metadata:
-        annotations:
-          qualification.kuberploy.io/deployment: rc351f
-      spec:
-        revisionHistoryLimit: 7
-    service:
-      metadata:
-        annotations:
-          qualification.kuberploy.io/service: rc351f
-      spec:
-        sessionAffinity: None
-    ingress:
-      metadata:
-        annotations:
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          qualification.kuberploy.io/ingress: rc351f
-    serviceAccount:
-      metadata:
-        annotations:
-          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc351f
-  routes:
-    - id: public
-      host: kuberploy-qualification.adminchatmate.com
-      path: /
-      port: http
-      ingressClassName: traefik
-      dns:
-        mode: externalDns
-        integrationRef: rc351f-cloudflare
-        ttl: 60
-      tls:
-        mode: letsencrypt
-        issuerRef: kuberploy-letsencrypt-production
-        redirectHttp: true
