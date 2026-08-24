@@ -40,20 +40,20 @@ spec:
     deployment:
       metadata:
         annotations:
-          qualification.kuberploy.io/deployment: rc336
+          qualification.kuberploy.io/deployment: rc331
       spec:
         revisionHistoryLimit: 7
     service:
       metadata:
         annotations:
-          qualification.kuberploy.io/service: rc336
+          qualification.kuberploy.io/service: rc331
       spec:
         sessionAffinity: None
     ingress:
       metadata:
         annotations:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
-          qualification.kuberploy.io/ingress: rc336
+          qualification.kuberploy.io/ingress: rc331
     serviceAccount:
       metadata:
         annotations:
