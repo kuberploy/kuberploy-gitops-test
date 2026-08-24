@@ -1,10 +1,39 @@
-{"apiVersion": "config.kuberploy.io/v1alpha1", "kind": "AppConfig", "metadata": {
-    "id": "9e3cd839-cd77-413a-96cc-915a90492520", "name": "oci"}, "spec": {"applicationId": "9e3cd839-cd77-413a-96cc-915a90492520",
-    "delivery": {"mode": "image", "release": {"digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85",
-        "repository": "registry.k8s.io/e2e-test-images/agnhost"}}, "environmentId": "967eb9b3-2e47-46f0-b379-3a668b970539",
-    "projectId": "c5728a9a-55db-4232-aaf0-a849a1e62e2e", "runtime": {"args": ["netexec",
-        "--http-port=8080", "--udp-port=-1", "--http-override=/echo?msg=rc342-appconfig"],
-      "command": ["/agnhost"], "ports": [{"containerPort": 8080, "name": "http", "protocol": "TCP",
-          "servicePort": 80}], "replicas": 1, "resources": {"limits": {"cpu": "100m",
-          "memory": "64Mi"}, "requests": {"cpu": "10m", "memory": "16Mi"}}, "strategy": {
-        "type": "RollingUpdate"}, "workloadType": "Deployment"}}}
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "9e3cd839-cd77-413a-96cc-915a90492520"
+  name: "oci"
+spec:
+  projectId: "c5728a9a-55db-4232-aaf0-a849a1e62e2e"
+  applicationId: "9e3cd839-cd77-413a-96cc-915a90492520"
+  environmentId: "967eb9b3-2e47-46f0-b379-3a668b970539"
+  delivery:
+    mode: image
+    release:
+      repository: "registry.k8s.io/e2e-test-images/agnhost"
+      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
+  runtime:
+    args:
+      - "netexec"
+      - "--http-port=8080"
+      - "--udp-port=-1"
+      - "--http-override=/echo?msg=rc342-appconfig"
+    command:
+      - "/agnhost"
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
