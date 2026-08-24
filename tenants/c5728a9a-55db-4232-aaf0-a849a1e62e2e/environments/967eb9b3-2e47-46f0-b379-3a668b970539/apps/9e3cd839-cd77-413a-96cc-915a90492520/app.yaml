@@ -21,8 +21,7 @@ spec:
     command:
       - "/agnhost"
     ports:
-      -
-        containerPort: 8080
+      - containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -37,3 +36,39 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+  overrides:
+    deployment:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/deployment: rc342
+      spec:
+        revisionHistoryLimit: 7
+    service:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/service: rc342
+      spec:
+        sessionAffinity: None
+    ingress:
+      metadata:
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          qualification.kuberploy.io/ingress: rc342
+    serviceAccount:
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc342
+  routes:
+    - id: public
+      host: kuberploy-qualification.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: rc342-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: kuberploy-letsencrypt-production
+        redirectHttp: true
