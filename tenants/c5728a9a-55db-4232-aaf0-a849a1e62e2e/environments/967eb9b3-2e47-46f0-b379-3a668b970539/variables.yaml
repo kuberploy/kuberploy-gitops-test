@@ -3,3 +3,4 @@ kind: VariableSet
 values:
   RC342_ENVIRONMENT: "environment"
   RC342_OVERRIDE: "environment"
+  RC344_STATUS: "fixed"
