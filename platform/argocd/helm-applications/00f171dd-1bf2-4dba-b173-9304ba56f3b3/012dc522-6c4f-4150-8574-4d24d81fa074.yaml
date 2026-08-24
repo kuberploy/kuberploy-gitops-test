@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: kp-h-012dc5226c4f415085744d24d81fa074
+    namespace: argocd
+    finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    labels:
+        app.kubernetes.io/component: approved-helm-application
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/application-id: 012dc522-6c4f-4150-8574-4d24d81fa074
+        kuberploy.io/environment-id: 00f171dd-1bf2-4dba-b173-9304ba56f3b3
+        kuberploy.io/project-id: d329f441-87c5-4a54-a00a-be01316f64af
+    annotations:
+        argocd.argoproj.io/manifest-generate-paths: platform/helm-manifests/environments/00f171dd-1bf2-4dba-b173-9304ba56f3b3/applications/012dc522-6c4f-4150-8574-4d24d81fa074/revisions/e1e8064d-64e5-4674-83ba-b2144b11a417/release.yaml
+        kuberploy.io/helm-payload-digest: sha256:a096f2a1df081618abffb38e32d77047acead6386603a42e091aca285e2133ea
+        kuberploy.io/helm-payload-revision: d16a5204b31bc57e3ea5bb9923289df4c4006bf2
+        kuberploy.io/helm-release-revision: e1e8064d-64e5-4674-83ba-b2144b11a417
+spec:
+    project: kp-rc345-qualification-dev
+    source:
+        repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+        targetRevision: d16a5204b31bc57e3ea5bb9923289df4c4006bf2
+        path: platform/helm-manifests/environments/00f171dd-1bf2-4dba-b173-9304ba56f3b3/applications/012dc522-6c4f-4150-8574-4d24d81fa074/revisions/e1e8064d-64e5-4674-83ba-b2144b11a417
+        directory:
+            recurse: false
+            include: release.yaml
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: kp-rc345-qualification-dev
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+            allowEmpty: false
+        syncOptions:
+            - CreateNamespace=false
+            - ServerSideApply=true
