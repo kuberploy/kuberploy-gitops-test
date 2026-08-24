@@ -12,16 +12,16 @@ metadata:
         kuberploy.io/environment-id: 00f171dd-1bf2-4dba-b173-9304ba56f3b3
         kuberploy.io/project-id: d329f441-87c5-4a54-a00a-be01316f64af
     annotations:
-        argocd.argoproj.io/manifest-generate-paths: platform/helm-manifests/environments/00f171dd-1bf2-4dba-b173-9304ba56f3b3/applications/012dc522-6c4f-4150-8574-4d24d81fa074/revisions/4759bdf3-cc03-4eb3-ba36-2938d65ea608/release.yaml
-        kuberploy.io/helm-payload-digest: sha256:7d93201095ee62fba0f687be0a5c3cac3cf5174f907510184c0944a0ec607e20
-        kuberploy.io/helm-payload-revision: 340e847957526b104272c17717093726d91fbee2
-        kuberploy.io/helm-release-revision: 4759bdf3-cc03-4eb3-ba36-2938d65ea608
+        argocd.argoproj.io/manifest-generate-paths: platform/helm-manifests/environments/00f171dd-1bf2-4dba-b173-9304ba56f3b3/applications/012dc522-6c4f-4150-8574-4d24d81fa074/revisions/64843632-7fad-4b26-a878-c55fa64ed6ba/release.yaml
+        kuberploy.io/helm-payload-digest: sha256:a40cab2e0ff31cbdbe294af6b39edaf227d1bd2d054e59ef3ec87a506c067dbc
+        kuberploy.io/helm-payload-revision: cccab8312ba295e056f2a1369b4614f43c0625b6
+        kuberploy.io/helm-release-revision: 64843632-7fad-4b26-a878-c55fa64ed6ba
 spec:
     project: kp-rc345-qualification-dev
     source:
         repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
-        targetRevision: 340e847957526b104272c17717093726d91fbee2
-        path: platform/helm-manifests/environments/00f171dd-1bf2-4dba-b173-9304ba56f3b3/applications/012dc522-6c4f-4150-8574-4d24d81fa074/revisions/4759bdf3-cc03-4eb3-ba36-2938d65ea608
+        targetRevision: cccab8312ba295e056f2a1369b4614f43c0625b6
+        path: platform/helm-manifests/environments/00f171dd-1bf2-4dba-b173-9304ba56f3b3/applications/012dc522-6c4f-4150-8574-4d24d81fa074/revisions/64843632-7fad-4b26-a878-c55fa64ed6ba
         directory:
             recurse: false
             include: release.yaml
