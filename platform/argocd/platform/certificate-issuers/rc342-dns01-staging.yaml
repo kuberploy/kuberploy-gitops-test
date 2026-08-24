@@ -6,12 +6,12 @@ metadata:
     app.kubernetes.io/managed-by: "kuberploy"
     kuberploy.io/certificate-issuer-profile: "rc342-dns01-staging"
   annotations:
-    kuberploy.io/certificate-issuer-spec-digest: "sha256:815f398f4aa6776eb8ef70286124337913646a2b653338b6c932e3163fba46c9"
-    kuberploy.io/certificate-issuer-revision: "1"
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:647a0dad780a5208294c80418aaeadb070da91115e9b6456e2ad58f8e22a95d2"
+    kuberploy.io/certificate-issuer-revision: "2"
 spec:
   acme:
     email: "admin@adminchatmate.com"
-    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    server: "https://acme-v02.api.letsencrypt.org/directory"
     privateKeySecretRef:
       name: "rc342-dns01-staging-account"
     solvers:
