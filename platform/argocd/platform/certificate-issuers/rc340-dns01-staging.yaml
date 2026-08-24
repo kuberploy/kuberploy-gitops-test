@@ -1,0 +1,58 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: "rc340-dns01-staging"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc340-dns01-staging"
+  annotations:
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:7c107327bdc38807284cb32626fe6beb88fea9a074aec3501a0fcd8c1816bac2"
+    kuberploy.io/certificate-issuer-revision: "1"
+spec:
+  acme:
+    email: "admin@adminchatmate.com"
+    server: "https://acme-staging-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: "rc340-dns01-staging-account"
+    solvers:
+      - selector:
+          dnsZones:
+            - "adminchatmate.com"
+        dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: "rc340-cloudflare-dns01"
+              key: "apiToken"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "kuberploy-ci-observer-5f2460c8f1bb4013d9d7"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc340-dns01-staging"
+rules:
+  - apiGroups:
+      - "cert-manager.io"
+    resources:
+      - "clusterissuers"
+    resourceNames:
+      - "rc340-dns01-staging"
+    verbs:
+      - "get"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "kuberploy-ci-observer-5f2460c8f1bb4013d9d7"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc340-dns01-staging"
+roleRef:
+  apiGroup: "rbac.authorization.k8s.io"
+  kind: ClusterRole
+  name: "kuberploy-ci-observer-5f2460c8f1bb4013d9d7"
+subjects:
+  - kind: ServiceAccount
+    name: "kuberploy-worker"
+    namespace: "kuberploy-system"
