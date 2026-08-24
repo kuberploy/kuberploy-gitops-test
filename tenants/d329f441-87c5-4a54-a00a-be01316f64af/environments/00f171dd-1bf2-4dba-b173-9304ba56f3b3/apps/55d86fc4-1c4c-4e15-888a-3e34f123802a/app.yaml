@@ -1,38 +1,90 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "55d86fc4-1c4c-4e15-888a-3e34f123802a"
-  name: "oci"
-spec:
-  projectId: "d329f441-87c5-4a54-a00a-be01316f64af"
-  applicationId: "55d86fc4-1c4c-4e15-888a-3e34f123802a"
-  environmentId: "00f171dd-1bf2-4dba-b173-9304ba56f3b3"
-  delivery:
-    mode: image
-    release:
-      repository: "registry.k8s.io/e2e-test-images/agnhost"
-      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
-  runtime:
-    args:
-      - "netexec"
-      - "--http-port=8080"
-      - "--udp-port=-1"
-      - "--http-override=/echo?msg=rc345-appconfig"
-    command:
-      - "/agnhost"
-    ports:
-      - containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-        servicePort: 80
-    replicas: 1
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "64Mi"
-      requests:
-        cpu: "10m"
-        memory: "16Mi"
-    strategy:
-      type: "RollingUpdate"
-    workloadType: "Deployment"
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "55d86fc4-1c4c-4e15-888a-3e34f123802a",
+    "name": "oci"
+  },
+  "spec": {
+    "applicationId": "55d86fc4-1c4c-4e15-888a-3e34f123802a",
+    "delivery": {
+      "mode": "image",
+      "release": {
+        "digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85",
+        "repository": "registry.k8s.io/e2e-test-images/agnhost"
+      }
+    },
+    "environmentId": "00f171dd-1bf2-4dba-b173-9304ba56f3b3",
+    "middlewares": [
+      {
+        "name": "rc351h-live-header",
+        "profileRef": {
+          "assignmentsDigest": "sha256:f80dd256b1eb494298c16b9ef62d91192619a4d5886e70661233231f38cc0736",
+          "profileId": "6353bc4d-aec3-4106-a42e-a0f4266234a1",
+          "revision": 1,
+          "specDigest": "sha256:d14434e638de9d64249cd217173a95fbad1dcde6297f8a6bf6742fc862d52c78"
+        },
+        "spec": {
+          "headers": {
+            "customResponseHeaders": {
+              "X-Kuberploy-RC": "351"
+            }
+          }
+        }
+      }
+    ],
+    "projectId": "d329f441-87c5-4a54-a00a-be01316f64af",
+    "routes": [
+      {
+        "dns": {
+          "mode": "manual"
+        },
+        "host": "kuberploy-qualification.adminchatmate.com",
+        "id": "rc351h-middleware",
+        "ingressClassName": "traefik",
+        "middlewareRefs": [
+          "rc351h-live-header"
+        ],
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "mode": "httpOnly"
+        }
+      }
+    ],
+    "runtime": {
+      "args": [
+        "netexec",
+        "--http-port=8080",
+        "--udp-port=-1",
+        "--http-override=/echo?msg=rc345-appconfig"
+      ],
+      "command": [
+        "/agnhost"
+      ],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "100m",
+          "memory": "64Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
