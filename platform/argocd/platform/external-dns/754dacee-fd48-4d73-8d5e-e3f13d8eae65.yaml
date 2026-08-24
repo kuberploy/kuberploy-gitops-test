@@ -47,10 +47,10 @@
   "kind": "Deployment",
   "metadata": {
     "annotations": {
-      "kuberploy.io/edge-spec-digest": "sha256:7968973307f1944c3c5a7de5707885f26aead0d4272b1520b427bcf39e3bff61",
+      "kuberploy.io/edge-spec-digest": "sha256:3bd74712e6517f87c3528d2149a82ddae180b0c0d9f6276bfa22c5cb2f282c9a",
       "kuberploy.io/egress-config-ref": "cloudflare-egress-qualification",
       "kuberploy.io/provider-config-ref": "cloudflare-provider-qualification",
-      "kuberploy.io/runtime-revision": "2"
+      "kuberploy.io/runtime-revision": "3"
     },
     "labels": {
       "app.kubernetes.io/managed-by": "kuberploy",
@@ -84,7 +84,11 @@
               "--source=ingress",
               "--provider=cloudflare",
               "--registry=txt",
-              "--txt-prefix=a-",
+              "--txt-prefix=%{record_type}-",
+              "--managed-record-types=A",
+              "--managed-record-types=AAAA",
+              "--managed-record-types=CNAME",
+              "--managed-record-types=TXT",
               "--policy=upsert-only",
               "--txt-owner-id=kuberploy-rc340-qualification",
               "--label-filter=kuberploy.io/dns-integration=rc340-cloudflare",
