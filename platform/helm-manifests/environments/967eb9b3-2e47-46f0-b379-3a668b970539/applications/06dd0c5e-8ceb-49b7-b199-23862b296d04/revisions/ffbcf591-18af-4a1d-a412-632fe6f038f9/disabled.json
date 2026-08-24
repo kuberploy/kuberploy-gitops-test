@@ -1,0 +1,1 @@
+{"apiVersion":"kuberploy.io/v1alpha1","kind":"HelmReleaseDisabledReceipt","releaseRevisionId":"ffbcf591-18af-4a1d-a412-632fe6f038f9","generation":2,"projectId":"c5728a9a-55db-4232-aaf0-a849a1e62e2e","environmentId":"967eb9b3-2e47-46f0-b379-3a668b970539","applicationId":"06dd0c5e-8ceb-49b7-b199-23862b296d04"}
