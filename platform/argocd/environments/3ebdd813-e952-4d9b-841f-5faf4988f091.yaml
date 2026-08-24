@@ -1,0 +1,125 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: kp-rc338-qualification-staging
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: 3ebdd813-e952-4d9b-841f-5faf4988f091
+        kuberploy.io/project-id: 47f48012-64a6-433a-9502-27c0db1c61fe
+    annotations:
+        argocd.argoproj.io/sync-options: PruneLast=true
+        argocd.argoproj.io/sync-wave: "-10"
+        kuberploy.io/git-binding-id: 8cca8222-8af0-42be-9c5c-fd1755f72da3
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:c72505b7d90c588083953db4e7abc0530a7be6defad4cbca1c9d9071a2a48097
+        kuberploy.io/runtime-chart-digest: sha256:ab1ca1ab5e60b4bfb37444404a52bd3c9c9450497ea8ea2e8f7b114fa0aca675
+spec:
+    sourceRepos:
+        - https://github.com/kuberploy/kuberploy-gitops-test.git
+        - oci://ghcr.io/kuberploy/charts/kuberploy-runtime
+    destinations:
+        - namespace: kp-rc338-qualification-staging
+          server: https://kubernetes.default.svc
+    clusterResourceWhitelist: []
+    namespaceResourceWhitelist:
+        - group: ""
+          kind: ConfigMap
+        - group: ""
+          kind: PersistentVolumeClaim
+        - group: ""
+          kind: Service
+        - group: ""
+          kind: ServiceAccount
+        - group: apps
+          kind: Deployment
+        - group: apps
+          kind: StatefulSet
+        - group: autoscaling
+          kind: HorizontalPodAutoscaler
+        - group: batch
+          kind: CronJob
+        - group: batch
+          kind: Job
+        - group: networking.k8s.io
+          kind: Ingress
+        - group: networking.k8s.io
+          kind: NetworkPolicy
+        - group: policy
+          kind: PodDisruptionBudget
+        - group: traefik.io
+          kind: Middleware
+    orphanedResources:
+        warn: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+    name: kp-e-3ebdd813e9524d9b841f5faf4988f091
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: 3ebdd813-e952-4d9b-841f-5faf4988f091
+        kuberploy.io/project-id: 47f48012-64a6-433a-9502-27c0db1c61fe
+    annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        kuberploy.io/git-binding-id: 8cca8222-8af0-42be-9c5c-fd1755f72da3
+        kuberploy.io/runtime-chart-digest: sha256:ab1ca1ab5e60b4bfb37444404a52bd3c9c9450497ea8ea2e8f7b114fa0aca675
+spec:
+    goTemplate: true
+    goTemplateOptions:
+        - missingkey=error
+    generators:
+        - list:
+            elements: []
+    template:
+        metadata:
+            name: '{{.applicationName}}'
+            namespace: argocd
+            labels:
+                app.kubernetes.io/managed-by: kuberploy
+                kuberploy.io/application-id: '{{.applicationId}}'
+                kuberploy.io/deployment-id: '{{.deploymentId}}'
+                kuberploy.io/environment-id: 3ebdd813-e952-4d9b-841f-5faf4988f091
+                kuberploy.io/project-id: 47f48012-64a6-433a-9502-27c0db1c61fe
+                kuberploy.io/service: '{{.applicationId}}'
+            annotations:
+                kuberploy.io/git-binding-id: 8cca8222-8af0-42be-9c5c-fd1755f72da3
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:c72505b7d90c588083953db4e7abc0530a7be6defad4cbca1c9d9071a2a48097
+                kuberploy.io/runtime-chart-digest: sha256:ab1ca1ab5e60b4bfb37444404a52bd3c9c9450497ea8ea2e8f7b114fa0aca675
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.339
+        spec:
+            project: kp-rc338-qualification-staging
+            sources:
+                - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
+                  path: .
+                  targetRevision: sha256:ab1ca1ab5e60b4bfb37444404a52bd3c9c9450497ea8ea2e8f7b114fa0aca675
+                  helm:
+                    valueFiles:
+                        - $values/tenants/47f48012-64a6-433a-9502-27c0db1c61fe/variables.yaml
+                        - $values/tenants/47f48012-64a6-433a-9502-27c0db1c61fe/environments/3ebdd813-e952-4d9b-841f-5faf4988f091/variables.yaml
+                        - $values/{{.applicationPath}}
+                    ignoreMissingValueFiles: true
+                    parameters:
+                        - name: kuberployExpectedIdentity.projectId
+                          value: 47f48012-64a6-433a-9502-27c0db1c61fe
+                          forceString: true
+                        - name: kuberployExpectedIdentity.environmentId
+                          value: 3ebdd813-e952-4d9b-841f-5faf4988f091
+                          forceString: true
+                        - name: kuberployExpectedIdentity.applicationId
+                          value: '{{.applicationId}}'
+                          forceString: true
+                - repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+                  targetRevision: '{{.valuesRevision}}'
+                  ref: values
+            destination:
+                namespace: kp-rc338-qualification-staging
+                server: https://kubernetes.default.svc
+            syncPolicy:
+                automated:
+                    allowEmpty: false
+                    prune: true
+                    selfHeal: true
+                syncOptions:
+                    - CreateNamespace=false
+                    - ServerSideApply=true
