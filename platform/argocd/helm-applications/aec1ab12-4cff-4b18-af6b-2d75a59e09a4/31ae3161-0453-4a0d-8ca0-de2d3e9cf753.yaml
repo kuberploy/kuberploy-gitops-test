@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: kp-h-31ae316104534a0d8ca0de2d3e9cf753
+    namespace: argocd
+    finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    labels:
+        app.kubernetes.io/component: approved-helm-application
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/application-id: 31ae3161-0453-4a0d-8ca0-de2d3e9cf753
+        kuberploy.io/environment-id: aec1ab12-4cff-4b18-af6b-2d75a59e09a4
+        kuberploy.io/project-id: f75773d7-0673-4b74-b9e3-8cefe7aa1bbe
+    annotations:
+        argocd.argoproj.io/manifest-generate-paths: platform/helm-manifests/environments/aec1ab12-4cff-4b18-af6b-2d75a59e09a4/applications/31ae3161-0453-4a0d-8ca0-de2d3e9cf753/revisions/ba1b5906-e9f6-4b44-a38d-1a884b7e23ed/release.yaml
+        kuberploy.io/helm-payload-digest: sha256:a6c06b59c78b0149cf4c4b95c5c9e224c78d8a1ffe1f6681fcdf5b2f79016ea0
+        kuberploy.io/helm-payload-revision: c92906150d04ba6243f0a83511f6f338dd6f3f59
+        kuberploy.io/helm-release-revision: ba1b5906-e9f6-4b44-a38d-1a884b7e23ed
+spec:
+    project: kp-rc356-qualification-development
+    source:
+        repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+        targetRevision: c92906150d04ba6243f0a83511f6f338dd6f3f59
+        path: platform/helm-manifests/environments/aec1ab12-4cff-4b18-af6b-2d75a59e09a4/applications/31ae3161-0453-4a0d-8ca0-de2d3e9cf753/revisions/ba1b5906-e9f6-4b44-a38d-1a884b7e23ed
+        directory:
+            recurse: false
+            include: release.yaml
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: kp-rc356-qualification-development
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+            allowEmpty: false
+        syncOptions:
+            - CreateNamespace=false
+            - ServerSideApply=true
