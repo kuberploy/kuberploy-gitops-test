@@ -141,7 +141,8 @@ config:
     pollIntervalSeconds: 5
   runtimeSecrets:
     enabled: true
-    namespaces: []
+    namespaces:
+      - kuberploy-system
     fingerprintKeyID: runtime-secrets-hmac-v1
     fingerprintSecret:
       name: kuberploy-runtime-secrets-fingerprint
