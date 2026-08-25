@@ -1,0 +1,77 @@
+---
+# Source: kuberploy-helm-fixture/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rc356-helm-config
+  namespace: kp-rc356-qualification-development
+  labels:
+    app.kubernetes.io/instance: rc356-helm
+    app.kubernetes.io/name: rc356-helm
+    kuberploy.io/application: "31ae3161-0453-4a0d-8ca0-de2d3e9cf753"
+    kuberploy.io/environment: "aec1ab12-4cff-4b18-af6b-2d75a59e09a4"
+    kuberploy.io/project: "f75773d7-0673-4b74-b9e3-8cefe7aa1bbe"
+  annotations:
+    qualification.kuberploy.io/sensitive-token: "rc356-git-sensitive"
+data:
+  MESSAGE: "rc356-git-message"
+
+---
+# Source: kuberploy-helm-fixture/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rc356-helm
+  namespace: kp-rc356-qualification-development
+  labels:
+    app.kubernetes.io/instance: rc356-helm
+    app.kubernetes.io/name: rc356-helm
+    kuberploy.io/application: "31ae3161-0453-4a0d-8ca0-de2d3e9cf753"
+    kuberploy.io/environment: "aec1ab12-4cff-4b18-af6b-2d75a59e09a4"
+    kuberploy.io/project: "f75773d7-0673-4b74-b9e3-8cefe7aa1bbe"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      kuberploy.io/application: "31ae3161-0453-4a0d-8ca0-de2d3e9cf753"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: rc356-helm
+        app.kubernetes.io/name: rc356-helm
+        kuberploy.io/application: "31ae3161-0453-4a0d-8ca0-de2d3e9cf753"
+        kuberploy.io/environment: "aec1ab12-4cff-4b18-af6b-2d75a59e09a4"
+        kuberploy.io/project: "f75773d7-0673-4b74-b9e3-8cefe7aa1bbe"
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: fixture
+          image: registry.k8s.io/e2e-test-images/agnhost@sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85
+          imagePullPolicy: IfNotPresent
+          command: ["/agnhost"]
+          args: ["netexec", "--http-port=8080", "--udp-port=-1", "--http-override=/echo?msg=rc356-git"]
+          env:
+            - name: QUALIFICATION_VALUE
+              value: "rc356-git-environment"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
