@@ -7,4 +7,5 @@
       "command": ["/agnhost"], "ports": [{"containerPort": 8080, "name": "http", "protocol": "TCP",
           "servicePort": 80}], "replicas": 1, "resources": {"limits": {"cpu": "100m",
           "memory": "64Mi"}, "requests": {"cpu": "10m", "memory": "16Mi"}}, "strategy": {
-        "type": "RollingUpdate"}, "workloadType": "Deployment", nodeSelector: {kubernetes.io/arch: amd64}}}}
+        "type": "RollingUpdate"}, "workloadType": "Deployment"}}}
+
