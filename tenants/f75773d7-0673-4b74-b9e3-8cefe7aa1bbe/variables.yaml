@@ -1,0 +1,5 @@
+apiVersion: variables.kuberploy.io/v1alpha1
+kind: VariableSet
+values:
+  RC356_PROJECT: "project"
+  RC356_OVERRIDE: "project"
