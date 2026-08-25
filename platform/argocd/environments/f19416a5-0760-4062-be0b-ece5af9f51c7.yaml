@@ -1,0 +1,100 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: kp-rc361-deletion-qualification-rc361-control
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: f19416a5-0760-4062-be0b-ece5af9f51c7
+        kuberploy.io/project-id: 70d3f00a-4d77-4745-b974-0b5cff1a3e33
+    annotations:
+        argocd.argoproj.io/sync-options: PruneLast=true
+        argocd.argoproj.io/sync-wave: "-10"
+        kuberploy.io/git-binding-id: 5c22dd45-2853-43a9-89de-752788a1559a
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:abffeca21d0b9ff667b6a0d18e05b0a5b92c1272915f199063c2749206ced2b3
+        kuberploy.io/runtime-chart-digest: sha256:bfb24a5f400aa01dfcb6920270efc7bf99d904f087d486a92bed7b3407674aca
+spec:
+    sourceRepos:
+        - '*'
+    destinations:
+        - namespace: kp-rc361-deletion-qualification-rc361-control
+          server: https://kubernetes.default.svc
+    clusterResourceWhitelist: []
+    namespaceResourceWhitelist:
+        - group: '*'
+          kind: '*'
+    orphanedResources:
+        warn: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+    name: kp-e-f19416a507604062be0bece5af9f51c7
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: f19416a5-0760-4062-be0b-ece5af9f51c7
+        kuberploy.io/project-id: 70d3f00a-4d77-4745-b974-0b5cff1a3e33
+    annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        kuberploy.io/git-binding-id: 5c22dd45-2853-43a9-89de-752788a1559a
+        kuberploy.io/runtime-chart-digest: sha256:bfb24a5f400aa01dfcb6920270efc7bf99d904f087d486a92bed7b3407674aca
+spec:
+    goTemplate: true
+    goTemplateOptions:
+        - missingkey=error
+    generators:
+        - list:
+            elements: []
+    template:
+        metadata:
+            name: '{{.applicationName}}'
+            namespace: argocd
+            labels:
+                app.kubernetes.io/managed-by: kuberploy
+                kuberploy.io/application-id: '{{.applicationId}}'
+                kuberploy.io/deployment-id: '{{.deploymentId}}'
+                kuberploy.io/environment-id: f19416a5-0760-4062-be0b-ece5af9f51c7
+                kuberploy.io/project-id: 70d3f00a-4d77-4745-b974-0b5cff1a3e33
+                kuberploy.io/service: '{{.applicationId}}'
+            annotations:
+                kuberploy.io/git-binding-id: 5c22dd45-2853-43a9-89de-752788a1559a
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:abffeca21d0b9ff667b6a0d18e05b0a5b92c1272915f199063c2749206ced2b3
+                kuberploy.io/runtime-chart-digest: sha256:bfb24a5f400aa01dfcb6920270efc7bf99d904f087d486a92bed7b3407674aca
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.361
+        spec:
+            project: kp-rc361-deletion-qualification-rc361-control
+            sources:
+                - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
+                  path: .
+                  targetRevision: sha256:bfb24a5f400aa01dfcb6920270efc7bf99d904f087d486a92bed7b3407674aca
+                  helm:
+                    valueFiles:
+                        - $values/tenants/70d3f00a-4d77-4745-b974-0b5cff1a3e33/variables.yaml
+                        - $values/tenants/70d3f00a-4d77-4745-b974-0b5cff1a3e33/environments/f19416a5-0760-4062-be0b-ece5af9f51c7/variables.yaml
+                        - $values/{{.applicationPath}}
+                    ignoreMissingValueFiles: true
+                    parameters:
+                        - name: kuberployExpectedIdentity.projectId
+                          value: 70d3f00a-4d77-4745-b974-0b5cff1a3e33
+                          forceString: true
+                        - name: kuberployExpectedIdentity.environmentId
+                          value: f19416a5-0760-4062-be0b-ece5af9f51c7
+                          forceString: true
+                        - name: kuberployExpectedIdentity.applicationId
+                          value: '{{.applicationId}}'
+                          forceString: true
+                - repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+                  targetRevision: '{{.valuesRevision}}'
+                  ref: values
+            destination:
+                namespace: kp-rc361-deletion-qualification-rc361-control
+                server: https://kubernetes.default.svc
+            syncPolicy:
+                automated:
+                    allowEmpty: false
+                    prune: true
+                    selfHeal: true
+                syncOptions:
+                    - CreateNamespace=false
+                    - ServerSideApply=true
