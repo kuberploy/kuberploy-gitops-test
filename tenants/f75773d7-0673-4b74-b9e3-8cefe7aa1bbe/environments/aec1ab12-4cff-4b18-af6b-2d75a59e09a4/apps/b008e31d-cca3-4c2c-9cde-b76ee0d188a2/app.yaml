@@ -10,12 +10,17 @@ spec:
   delivery:
     mode: image
     release:
-      repository: "docker.io/library/nginx"
-      digest: "sha256:db35bfc6b2951e7f8a72db5db120288c127ffaeeb4a6d4b95a26fead017d5913"
+      repository: "registry.k8s.io/e2e-test-images/agnhost"
+      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
   runtime:
+    args:
+      - "netexec"
+      - "--http-port=8080"
+    command:
+      - "/agnhost"
     ports:
       -
-        containerPort: 80
+        containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -23,14 +28,14 @@ spec:
       liveness:
         failureThreshold: 6
         httpGet:
-          path: "/"
+          path: "/healthz"
           port: "http"
         periodSeconds: 10
         timeoutSeconds: 2
       readiness:
         failureThreshold: 12
         httpGet:
-          path: "/"
+          path: "/healthz"
           port: "http"
         periodSeconds: 5
         timeoutSeconds: 2
