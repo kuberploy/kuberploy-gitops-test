@@ -16,30 +16,6 @@ networkPolicy:
 config:
   helmApplications:
     enabled: true
-    rendererNamespace: kuberploy-helm-renderer
-    rendererPollMilliseconds: 250
-    workPollMilliseconds: 1000
-    renderLeaseSeconds: 60
-    publishLeaseSeconds: 90
-    readinessLeaseSeconds: 30
-    ociRequestSeconds: 15
-    ociRegistryHosts:
-      - ghcr.io
-      - registry.adminchatmate.com
-    ociAuthHosts:
-      - ghcr.io
-      - registry.adminchatmate.com
-    ociCredentialProfiles:
-      - registryHost: registry.adminchatmate.com
-        authHost: registry.adminchatmate.com
-        name: managed-registry-helm
-        mode: basic
-        secretRef:
-          name: registry-lifecycle
-          usernameKey: username
-          passwordKey: password
-          tokenKey: ""
-    packageCacheBytes: 67108864
   edgeRuntime:
     enabled: true
     profiles:
