@@ -140,7 +140,7 @@ config:
     serviceAccount: kuberploy-external-dns-managed
     pollIntervalSeconds: 5
   runtimeSecrets:
-    enabled: false
+    enabled: true
     namespaces: []
     fingerprintKeyID: runtime-secrets-hmac-v1
     fingerprintSecret:
