@@ -1,4 +1,7 @@
 # Kuberploy GitOps qualification repository
 
-Private disposable desired-state repository used by the Kuberploy VM qualification run.
-Kuberploy owns generated paths; humans should not hand-edit generated application documents.
+Public fixture repository for Kuberploy VM qualification.
+
+Reusable installer values and public Helm source fixtures are retained. Each fresh
+qualification starts with empty generated desired-state paths. Kuberploy owns those
+paths during a run; operators clean them before tagging the next fresh baseline.
