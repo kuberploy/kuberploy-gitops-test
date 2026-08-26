@@ -14,8 +14,7 @@ spec:
       digest: "sha256:10af81c9659824cecaa7fe09134c6c318136341b4ae84c4a37f18d9bd8a33eac"
   runtime:
     ports:
-      -
-        containerPort: 9898
+      - containerPort: 9898
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -45,3 +44,36 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+  overrides:
+    deployment:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/deployment: rc372
+      spec:
+        replicas: 2
+        revisionHistoryLimit: 7
+    service:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/service: rc372
+      spec:
+        sessionAffinity: ClientIP
+    ingress:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/ingress: rc372
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    serviceAccount:
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc372
+  routes:
+    - id: public
+      host: kuberploy-qualification.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: manual
+      tls:
+        mode: httpOnly
