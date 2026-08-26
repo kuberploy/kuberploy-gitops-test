@@ -1,0 +1,47 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "c9f4bad1-4d6c-4ee0-9660-823edce70b39"
+  name: "oci"
+spec:
+  projectId: "b87693b1-4925-4049-9814-cf768bac0dd3"
+  applicationId: "c9f4bad1-4d6c-4ee0-9660-823edce70b39"
+  environmentId: "d7ba656e-bad2-4f16-8251-b729dee55894"
+  delivery:
+    mode: image
+    release:
+      repository: "ghcr.io/stefanprodan/podinfo"
+      digest: "sha256:10af81c9659824cecaa7fe09134c6c318136341b4ae84c4a37f18d9bd8a33eac"
+  runtime:
+    ports:
+      -
+        containerPort: 9898
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      liveness:
+        failureThreshold: 3
+        httpGet:
+          path: "/healthz"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 10
+      readiness:
+        failureThreshold: 6
+        httpGet:
+          path: "/readyz"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 5
+    replicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "128Mi"
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
