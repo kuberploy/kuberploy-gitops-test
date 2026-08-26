@@ -1,0 +1,35 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "245d3eb3-3ab1-4fd1-83ee-9a2d9824ce66"
+  name: "rc372-private-oci-credential"
+spec:
+  projectId: "b87693b1-4925-4049-9814-cf768bac0dd3"
+  applicationId: "245d3eb3-3ab1-4fd1-83ee-9a2d9824ce66"
+  environmentId: "d7ba656e-bad2-4f16-8251-b729dee55894"
+  delivery:
+    mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-main"
+      profileRevision: 1
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/b87693b1-4925-4049-9814-cf768bac0dd3/services/245d3eb3-3ab1-4fd1-83ee-9a2d9824ce66/image"
+      digest: "sha256:33d1b67d9e5916de6eb58ea63e4c3bdcb2a7e7913d5b96f542ac86987e62fb01"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "128Mi"
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
