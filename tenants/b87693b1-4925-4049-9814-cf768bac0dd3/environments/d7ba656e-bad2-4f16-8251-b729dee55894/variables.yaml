@@ -3,4 +3,5 @@ kind: VariableSet
 values:
   RC372_ENVIRONMENT: "environment"
   RC372_OVERRIDE: "environment"
-  RC372_STATUS: "fixed"
+  RC372_STATUS: "updated"
+
