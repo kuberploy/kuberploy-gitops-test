@@ -1,0 +1,58 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: "rc391-dns01-production"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc391-dns01-production"
+  annotations:
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:39dbca754b3b4082a9ef31695388deb6832f39de01d6da6593f0b02707a64bb5"
+    kuberploy.io/certificate-issuer-revision: "1"
+spec:
+  acme:
+    email: "admin@adminchatmate.com"
+    server: "https://acme-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: "rc391-dns01-production-account"
+    solvers:
+      - selector:
+          dnsZones:
+            - "adminchatmate.com"
+        dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: "rc391-cloudflare-dns01"
+              key: "apiToken"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "kuberploy-ci-observer-e9df0e98db2081376133"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc391-dns01-production"
+rules:
+  - apiGroups:
+      - "cert-manager.io"
+    resources:
+      - "clusterissuers"
+    resourceNames:
+      - "rc391-dns01-production"
+    verbs:
+      - "get"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "kuberploy-ci-observer-e9df0e98db2081376133"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc391-dns01-production"
+roleRef:
+  apiGroup: "rbac.authorization.k8s.io"
+  kind: ClusterRole
+  name: "kuberploy-ci-observer-e9df0e98db2081376133"
+subjects:
+  - kind: ServiceAccount
+    name: "kuberploy-worker"
+    namespace: "kuberploy-system"
