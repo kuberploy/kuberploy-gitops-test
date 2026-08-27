@@ -1,0 +1,53 @@
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "6da05d06-69ed-48cc-8e58-15a1cd2e2c01",
+    "name": "clone-source"
+  },
+  "spec": {
+    "applicationId": "6da05d06-69ed-48cc-8e58-15a1cd2e2c01",
+    "delivery": {
+      "mode": "image",
+      "release": {
+        "digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85",
+        "repository": "registry.k8s.io/e2e-test-images/agnhost"
+      }
+    },
+    "environmentId": "3a8645c7-3ef3-4e00-a1c2-e71edd60cd20",
+    "projectId": "6b1da853-0bf9-436a-b9e7-4744f7a3586e",
+    "runtime": {
+      "args": [
+        "netexec",
+        "--http-port=8080",
+        "--udp-port=-1"
+      ],
+      "command": [
+        "/agnhost"
+      ],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 2,
+      "resources": {
+        "limits": {
+          "cpu": "100m",
+          "memory": "64Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
