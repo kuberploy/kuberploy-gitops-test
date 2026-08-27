@@ -5,12 +5,12 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
     kuberploy.io/runtime-namespace: "true"
     pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/audit-version: v1.36
-    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: v1.36
     pod-security.kubernetes.io/warn: restricted
     pod-security.kubernetes.io/warn-version: v1.36
@@ -25,7 +25,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -50,7 +50,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -78,7 +78,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -96,7 +96,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -126,7 +126,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -156,7 +156,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
@@ -207,7 +207,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kuberploy
     kuberploy.io/environment-id: 6e01f6c1-6174-4852-89c9-84c9698c7125
-    kuberploy.io/foundation-contract: v2
+    kuberploy.io/foundation-contract: v3
     kuberploy.io/project-id: f2674f0a-afbc-40b4-9286-874de90efdd9
   annotations:
     argocd.argoproj.io/sync-wave: "-20"
