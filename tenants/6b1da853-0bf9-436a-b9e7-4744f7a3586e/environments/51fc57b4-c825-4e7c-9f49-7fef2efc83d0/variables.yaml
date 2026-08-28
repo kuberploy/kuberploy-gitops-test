@@ -1,6 +1,7 @@
 apiVersion: variables.kuberploy.io/v1alpha1
 kind: VariableSet
 values:
-  RC394_ENVIRONMENT: "environment"
-  RC394_OVERRIDE: "environment"
-  RC394_STATUS: "fixed"
+  RC372_ENVIRONMENT: "environment"
+  RC372_OVERRIDE: "environment"
+  RC372_STATUS: "fixed"
+
