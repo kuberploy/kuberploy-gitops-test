@@ -20,7 +20,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 7
+        revision: 8
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -28,7 +28,7 @@ config:
           name: edge-traefik
           containerName: edge-traefik
           image: docker.io/library/traefik:v3.7.10
-          specDigest: sha256:9f8c654105601e5fbe72762bd7b51aaae533c5c2940f856246eda3a16fce89fc
+          specDigest: sha256:1abf780a24e62a76e9c395a1f402e9fb6edb7a529e339025477ddce37669aee4
         service:
           name: edge-traefik
           specDigest: sha256:3fdf50b3853b7d9d9fe005f5c66b4ebff6c1f8376aba8f5bb0c47688cca633bc
@@ -43,7 +43,7 @@ config:
           - name: ingressrouteudps.traefik.io
             specDigest: sha256:e4e2ce7df2d046dcc5760b6ea0ca175139ece79210c1a14f5801a8da62b9aa8c
           - name: middlewares.traefik.io
-            specDigest: sha256:83904b72490015fa9df566adc5327490aafa1d2fbffa11d4214749a8eee2aa4e
+            specDigest: sha256:0a8fe46471014fb1ff34c6a533bd1c7da8de40683395b80fcbe6766df88acb7d
           - name: middlewaretcps.traefik.io
             specDigest: sha256:beca381962b45e0fc6924c2aeb41b0df831540a0ab5a540f27e44e9ab3a14c0e
           - name: serverstransports.traefik.io
