@@ -20,7 +20,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 10
+        revision: 11
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10

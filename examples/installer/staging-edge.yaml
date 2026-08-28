@@ -1,4 +1,5 @@
 edge:
   traefik:
     sslip:
-      mode: auto-first-ip
+      mode: verified-static-ip
+      staticPublicIPv4: 103.117.151.86
