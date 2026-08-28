@@ -20,7 +20,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 11
+        revision: 12
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -28,7 +28,7 @@ config:
           name: edge-traefik
           containerName: edge-traefik
           image: docker.io/library/traefik:v3.7.10
-          specDigest: sha256:1abf780a24e62a76e9c395a1f402e9fb6edb7a529e339025477ddce37669aee4
+          specDigest: sha256:7ab84c94484d74b965283aa082fd7b21de5b5ed3ffe8cbc3e36d8335624e42bf
         service:
           name: edge-traefik
           specDigest: sha256:3fdf50b3853b7d9d9fe005f5c66b4ebff6c1f8376aba8f5bb0c47688cca633bc
