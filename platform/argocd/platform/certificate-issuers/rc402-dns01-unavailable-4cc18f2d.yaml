@@ -1,0 +1,58 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: "rc402-dns01-unavailable-4cc18f2d"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc402-dns01-unavailable-4cc18f2d"
+  annotations:
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:edd4683bf81dc2c78bfa28b156ece3d34adb67af858b959c805b911d73d1dcb4"
+    kuberploy.io/certificate-issuer-revision: "1"
+spec:
+  acme:
+    email: "admin@adminchatmate.com"
+    server: "https://acme-v02.api.letsencrypt.org/directory"
+    privateKeySecretRef:
+      name: "rc402-dns01-unavailable-4cc18f2d-account"
+    solvers:
+      - selector:
+          dnsZones:
+            - "adminchatmate.com"
+        dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: "rc402-dns01-unavailable-4cc18f2d-missing-token"
+              key: "apiToken"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "kuberploy-ci-observer-4927ca562004859cbbb1"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc402-dns01-unavailable-4cc18f2d"
+rules:
+  - apiGroups:
+      - "cert-manager.io"
+    resources:
+      - "clusterissuers"
+    resourceNames:
+      - "rc402-dns01-unavailable-4cc18f2d"
+    verbs:
+      - "get"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: "kuberploy-ci-observer-4927ca562004859cbbb1"
+  labels:
+    app.kubernetes.io/managed-by: "kuberploy"
+    kuberploy.io/certificate-issuer-profile: "rc402-dns01-unavailable-4cc18f2d"
+roleRef:
+  apiGroup: "rbac.authorization.k8s.io"
+  kind: ClusterRole
+  name: "kuberploy-ci-observer-4927ca562004859cbbb1"
+subjects:
+  - kind: ServiceAccount
+    name: "kuberploy-worker"
+    namespace: "kuberploy-system"
