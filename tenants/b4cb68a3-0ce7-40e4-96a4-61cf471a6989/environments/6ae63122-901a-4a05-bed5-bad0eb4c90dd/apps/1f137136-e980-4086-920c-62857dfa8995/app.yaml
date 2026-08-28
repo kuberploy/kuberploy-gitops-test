@@ -1,0 +1,53 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "1f137136-e980-4086-920c-62857dfa8995"
+  name: "ssh-project"
+spec:
+  projectId: "b4cb68a3-0ce7-40e4-96a4-61cf471a6989"
+  applicationId: "1f137136-e980-4086-920c-62857dfa8995"
+  environmentId: "6ae63122-901a-4a05-bed5-bad0eb4c90dd"
+  delivery:
+    mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-main"
+      profileRevision: 1
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/b4cb68a3-0ce7-40e4-96a4-61cf471a6989/services/1f137136-e980-4086-920c-62857dfa8995/image"
+      digest: "sha256:9e13e9e1b00b676ca9af20bd7ad25b328012702e89893d226ae04104c8ea72a2"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      liveness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 10
+        timeoutSeconds: 2
+      readiness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+    replicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "128Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
