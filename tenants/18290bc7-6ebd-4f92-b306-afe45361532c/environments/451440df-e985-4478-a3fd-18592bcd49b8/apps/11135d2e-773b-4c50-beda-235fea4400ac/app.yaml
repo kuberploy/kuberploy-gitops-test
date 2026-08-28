@@ -44,3 +44,4 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+
