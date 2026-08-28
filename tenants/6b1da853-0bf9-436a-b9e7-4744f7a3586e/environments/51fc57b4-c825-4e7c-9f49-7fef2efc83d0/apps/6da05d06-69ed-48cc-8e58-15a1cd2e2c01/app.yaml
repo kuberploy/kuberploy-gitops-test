@@ -1,1 +1,131 @@
-{"apiVersion": "config.kuberploy.io/v1alpha1", "kind": "AppConfig", "metadata": {"id": "6da05d06-69ed-48cc-8e58-15a1cd2e2c01", "name": "clone-source"}, "spec": {"applicationId": "6da05d06-69ed-48cc-8e58-15a1cd2e2c01", "delivery": {"mode": "image", "release": {"digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85", "repository": "registry.k8s.io/e2e-test-images/agnhost"}}, "environmentId": "51fc57b4-c825-4e7c-9f49-7fef2efc83d0", "middlewares": [], "overrides": {"deployment": {"metadata": {"annotations": {"qualification.kuberploy.io/deployment": "rc394"}}, "spec": {"revisionHistoryLimit": 7}}, "ingress": {"metadata": {"annotations": {"external-dns.alpha.kubernetes.io/cloudflare-proxied": "true", "external-dns.alpha.kubernetes.io/target": "103.117.151.86", "qualification.kuberploy.io/ingress": "rc394"}}}, "service": {"metadata": {"annotations": {"qualification.kuberploy.io/service": "rc394"}}, "spec": {"sessionAffinity": "None"}}, "serviceAccount": {"metadata": {"annotations": {"eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/kuberploy-rc394"}}}}, "projectId": "6b1da853-0bf9-436a-b9e7-4744f7a3586e", "routes": [{id: public, host: kuberploy-qualification.adminchatmate.com, path: /, port: http, ingressClassName: traefik, dns: {mode: externalDns, integrationRef: rc391-cloudflare, ttl: 60}, tls: {mode: letsencrypt, issuerRef: rc391-http01-production, redirectHttp: true}}], "runtime": {"args": ["netexec", "--http-port=8080", "--udp-port=-1"], "command": ["/agnhost"], "ports": [{"containerPort": 8080, "name": "http", "protocol": "TCP", "servicePort": 80}], "replicas": 1, "resources": {"limits": {"cpu": "100m", "memory": "64Mi"}, "requests": {"cpu": "10m", "memory": "16Mi"}}, "strategy": {"type": "RollingUpdate"}, "workloadType": "Deployment"}}}
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "6da05d06-69ed-48cc-8e58-15a1cd2e2c01",
+    "name": "clone-source"
+  },
+  "spec": {
+    "applicationId": "6da05d06-69ed-48cc-8e58-15a1cd2e2c01",
+    "delivery": {
+      "mode": "image",
+      "release": {
+        "digest": "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85",
+        "repository": "registry.k8s.io/e2e-test-images/agnhost"
+      }
+    },
+    "environmentId": "51fc57b4-c825-4e7c-9f49-7fef2efc83d0",
+    "middlewares": [
+      {
+        "name": "rc394-live-header-2",
+        "profileRef": {
+          "assignmentsDigest": "sha256:774cd9dde89afcaed97fa293ab6b47683a4cd0ac18b888209b9308789f2e6990",
+          "profileId": "9b4a9a5e-5a13-42e8-a737-7b35e93e55d8",
+          "revision": 1,
+          "specDigest": "sha256:369512cfb75c78d369811ac331fbca8d60949c969b8c32dfe519eafbe6290014"
+        },
+        "spec": {
+          "headers": {
+            "customResponseHeaders": {
+              "X-Kuberploy-RC": "393"
+            }
+          }
+        }
+      }
+    ],
+    "overrides": {
+      "deployment": {
+        "metadata": {
+          "annotations": {
+            "qualification.kuberploy.io/deployment": "rc394"
+          }
+        },
+        "spec": {
+          "revisionHistoryLimit": 7
+        }
+      },
+      "ingress": {
+        "metadata": {
+          "annotations": {
+            "external-dns.alpha.kubernetes.io/cloudflare-proxied": "true",
+            "external-dns.alpha.kubernetes.io/target": "103.117.151.86",
+            "qualification.kuberploy.io/ingress": "rc394"
+          }
+        }
+      },
+      "service": {
+        "metadata": {
+          "annotations": {
+            "qualification.kuberploy.io/service": "rc394"
+          }
+        },
+        "spec": {
+          "sessionAffinity": "None"
+        }
+      },
+      "serviceAccount": {
+        "metadata": {
+          "annotations": {
+            "eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/kuberploy-rc394"
+          }
+        }
+      }
+    },
+    "projectId": "6b1da853-0bf9-436a-b9e7-4744f7a3586e",
+    "routes": [
+      {
+        "dns": {
+          "integrationRef": "rc391-cloudflare",
+          "mode": "externalDns",
+          "ttl": 60
+        },
+        "host": "kuberploy-qualification.adminchatmate.com",
+        "id": "public",
+        "ingressClassName": "traefik",
+        "middlewareRefs": [
+          "rc394-live-header-2"
+        ],
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "issuerRef": "rc391-http01-production",
+          "mode": "letsencrypt",
+          "redirectHttp": true
+        }
+      }
+    ],
+    "runtime": {
+      "args": [
+        "netexec",
+        "--http-port=8080",
+        "--udp-port=-1"
+      ],
+      "command": [
+        "/agnhost"
+      ],
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "100m",
+          "memory": "64Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
