@@ -56,11 +56,6 @@ spec:
                   applicationName: kp-d-2f3a9584884a4799879a1f710b5297b5
                   applicationPath: tenants/6b1da853-0bf9-436a-b9e7-4744f7a3586e/environments/51fc57b4-c825-4e7c-9f49-7fef2efc83d0/apps/6da05d06-69ed-48cc-8e58-15a1cd2e2c01/app.yaml
                   valuesRevision: 485d33fc5111767202bf1adff588f7981a0a6cb2
-                - deploymentId: 8371314d-3147-47b9-80e8-08bcfa8d634a
-                  applicationId: 8dfb20ef-747f-43c1-84a0-84f4a2587692
-                  applicationName: kp-d-8371314d314747b980e808bcfa8d634a
-                  applicationPath: tenants/6b1da853-0bf9-436a-b9e7-4744f7a3586e/environments/51fc57b4-c825-4e7c-9f49-7fef2efc83d0/apps/8dfb20ef-747f-43c1-84a0-84f4a2587692/app.yaml
-                  valuesRevision: a21a68b55e8bbd285dd2f3590473e048ab7ccb96
     template:
         metadata:
             name: '{{.applicationName}}'
