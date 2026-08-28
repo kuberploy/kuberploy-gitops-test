@@ -1,5 +1,4 @@
 apiVersion: variables.kuberploy.io/v1alpha1
 kind: VariableSet
-values:
-  RC405_PROJECT: "project"
-  RC405_OVERRIDE: "project"
+values: {}
+
