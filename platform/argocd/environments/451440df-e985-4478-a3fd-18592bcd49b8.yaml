@@ -50,7 +50,7 @@ spec:
                   applicationId: 11135d2e-773b-4c50-beda-235fea4400ac
                   applicationName: kp-d-c52a12783eb6465b899ac731924350f6
                   applicationPath: tenants/18290bc7-6ebd-4f92-b306-afe45361532c/environments/451440df-e985-4478-a3fd-18592bcd49b8/apps/11135d2e-773b-4c50-beda-235fea4400ac/app.yaml
-                  valuesRevision: fd2561159831f34220bfaae774f3a68510dfe568
+                  valuesRevision: 3df1e9010b7020c9b35c39d75c489e4ccab19341
     template:
         metadata:
             name: '{{.applicationName}}'
