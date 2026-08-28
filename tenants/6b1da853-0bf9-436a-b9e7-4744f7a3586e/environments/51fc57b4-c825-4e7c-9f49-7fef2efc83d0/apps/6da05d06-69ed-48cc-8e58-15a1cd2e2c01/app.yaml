@@ -20,8 +20,7 @@ spec:
     command:
       - "/agnhost"
     ports:
-      -
-        containerPort: 8080
+      - containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -36,3 +35,39 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+  overrides:
+    deployment:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/deployment: rc393
+      spec:
+        revisionHistoryLimit: 7
+    service:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/service: rc393
+      spec:
+        sessionAffinity: None
+    ingress:
+      metadata:
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          qualification.kuberploy.io/ingress: rc393
+    serviceAccount:
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc393
+  routes:
+    - id: public
+      host: kuberploy-qualification.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: rc391-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: rc391-http01-production
+        redirectHttp: true
