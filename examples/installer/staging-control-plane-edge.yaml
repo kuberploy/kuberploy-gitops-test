@@ -20,7 +20,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 8
+        revision: 9
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -59,7 +59,8 @@ config:
         profileConfigMap: edge-edge-profile
         requireLoadBalancerReady: true
         sslip:
-          mode: auto-first-ip
+          mode: verified-static-ip
+          staticPublicIPv4: 103.117.151.86
       certManager:
         revision: 7
         mode: managed
