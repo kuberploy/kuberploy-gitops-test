@@ -69,7 +69,7 @@ spec:
           eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc404
   routes:
     - id: public
-      host: kuberploy-qualification.adminchatmate.com
+      host: kuberploy-app.adminchatmate.com
       path: /
       port: http
       ingressClassName: traefik
