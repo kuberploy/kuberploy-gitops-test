@@ -20,7 +20,7 @@ config:
     enabled: true
     profiles:
       traefik:
-        revision: 9
+        revision: 10
         mode: managed
         namespace: kuberploy-system
         version: v3.7.10
@@ -43,7 +43,7 @@ config:
           - name: ingressrouteudps.traefik.io
             specDigest: sha256:e4e2ce7df2d046dcc5760b6ea0ca175139ece79210c1a14f5801a8da62b9aa8c
           - name: middlewares.traefik.io
-            specDigest: sha256:0a8fe46471014fb1ff34c6a533bd1c7da8de40683395b80fcbe6766df88acb7d
+            specDigest: sha256:83904b72490015fa9df566adc5327490aafa1d2fbffa11d4214749a8eee2aa4e
           - name: middlewaretcps.traefik.io
             specDigest: sha256:beca381962b45e0fc6924c2aeb41b0df831540a0ab5a540f27e44e9ab3a14c0e
           - name: serverstransports.traefik.io
