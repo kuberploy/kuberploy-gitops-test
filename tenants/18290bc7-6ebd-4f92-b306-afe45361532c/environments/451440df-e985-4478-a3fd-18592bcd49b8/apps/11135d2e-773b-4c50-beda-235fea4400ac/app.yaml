@@ -44,5 +44,26 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
-
-
+    env:
+      - name: RC402_RUNTIME_SECRET
+        valueFrom:
+          secretBindingRef:
+            bindingId: 8e36c34e-4df7-48fa-aac6-df356747f18f
+            name: rc402-runtime-fd06f9f0
+            key: apiKey
+            version: 2
+  routes:
+    - id: qualification
+      host: kuberploy-qualification.adminchatmate.com
+      path: /
+      port: http
+      dns:
+        mode: manual
+      tls:
+        mode: customCertificate
+        secretRef:
+          bindingId: f2d4bf80-5ab1-46c6-93e5-874c1a96075d
+          name: rc402-custom-cert-fd06f9f0
+          version: 2
+        redirectHttp: true
+      middlewareRefs: []
