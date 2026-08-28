@@ -51,7 +51,7 @@ spec:
     ingress:
       metadata:
         annotations:
-          external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           qualification.kuberploy.io/ingress: rc393
           external-dns.alpha.kubernetes.io/target: 103.117.151.86
     serviceAccount:
