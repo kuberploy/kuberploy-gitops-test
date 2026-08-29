@@ -18,7 +18,7 @@
     "overrides": {
       "deployment": {
         "spec": {
-          "progressDeadlineSeconds": 10
+          "progressDeadlineSeconds": 60
         }
       }
     },
