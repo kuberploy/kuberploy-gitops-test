@@ -45,6 +45,12 @@
           "name": "http",
           "protocol": "TCP",
           "servicePort": 80
+        },
+        {
+          "containerPort": 9999,
+          "name": "dead",
+          "protocol": "TCP",
+          "servicePort": 9999
         }
       ],
       "probes": {
@@ -59,14 +65,12 @@
           "timeoutSeconds": 2
         },
         "readiness": {
-          "failureThreshold": 3,
-          "httpGet": {
-            "path": "/qualification-never-ready",
-            "port": "http",
-            "scheme": "HTTP"
+          "failureThreshold": 1,
+          "periodSeconds": 1,
+          "tcpSocket": {
+            "port": "dead"
           },
-          "periodSeconds": 3,
-          "timeoutSeconds": 2
+          "timeoutSeconds": 1
         },
         "startup": {
           "failureThreshold": 30,
