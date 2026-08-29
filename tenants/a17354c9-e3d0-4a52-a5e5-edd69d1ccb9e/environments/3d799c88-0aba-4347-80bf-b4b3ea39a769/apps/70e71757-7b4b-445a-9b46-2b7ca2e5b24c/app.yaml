@@ -1,0 +1,30 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "70e71757-7b4b-445a-9b46-2b7ca2e5b24c"
+  name: "public-oci"
+spec:
+  projectId: "a17354c9-e3d0-4a52-a5e5-edd69d1ccb9e"
+  applicationId: "70e71757-7b4b-445a-9b46-2b7ca2e5b24c"
+  environmentId: "3d799c88-0aba-4347-80bf-b4b3ea39a769"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/hashicorp/http-echo"
+      digest: "sha256:fcb75f691c8b0414d670ae570240cbf95502cc18a9ba57e982ecac589760a186"
+  runtime:
+    args:
+      - "-text=rc412-public-oci"
+    ports:
+      -
+        containerPort: 5678
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "100Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
