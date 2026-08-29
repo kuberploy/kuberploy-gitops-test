@@ -80,7 +80,7 @@ spec:
         annotations:
           eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc413
   routes:
-    - id: public
+    - id: dns01
       host: kuberploy-app-test.adminchatmate.com
       path: /
       port: http
@@ -91,6 +91,6 @@ spec:
         ttl: 60
       tls:
         mode: letsencrypt
-        issuerRef: kuberploy-http01-production
+        issuerRef: kuberploy-dns01-production
         redirectHttp: true
-
+      middlewareRefs: []
