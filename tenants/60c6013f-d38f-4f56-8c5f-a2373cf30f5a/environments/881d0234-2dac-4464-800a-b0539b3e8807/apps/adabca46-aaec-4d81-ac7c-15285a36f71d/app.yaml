@@ -1,176 +1,110 @@
-{
-  "apiVersion": "config.kuberploy.io/v1alpha1",
-  "kind": "AppConfig",
-  "metadata": {
-    "id": "adabca46-aaec-4d81-ac7c-15285a36f71d",
-    "name": "web"
-  },
-  "spec": {
-    "applicationId": "adabca46-aaec-4d81-ac7c-15285a36f71d",
-    "delivery": {
-      "mode": "image",
-      "registryPull": {
-        "profileName": "managed-main",
-        "profileRevision": 1,
-        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
-      },
-      "release": {
-        "digest": "sha256:d780e05b25ea9e213411c15327d676d41de0e571ae62c0d34d38cc7f6979a4ef",
-        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/60c6013f-d38f-4f56-8c5f-a2373cf30f5a/services/adabca46-aaec-4d81-ac7c-15285a36f71d/image"
-      }
-    },
-    "environmentId": "881d0234-2dac-4464-800a-b0539b3e8807",
-    "middlewares": [
-      {
-        "name": "rc402-live-header-6e5cf0b3",
-        "profileRef": {
-          "assignmentsDigest": "sha256:26c841797cf0074a7f9a4c5a8c893da32b423a44a4e17e4d37d2ec5c4116bcd6",
-          "profileId": "84e22068-4757-4bc1-8b46-0ec8b0b86153",
-          "revision": 1,
-          "specDigest": "sha256:fffdd90095267f37327bdc0bb4ea346ee19c298bff9a657e22059dd5a8a8390a"
-        },
-        "spec": {
-          "headers": {
-            "customResponseHeaders": {
-              "X-Kuberploy-RC": "402"
-            }
-          }
-        }
-      }
-    ],
-    "overrides": {
-      "deployment": {
-        "metadata": {
-          "annotations": {
-            "qualification.kuberploy.io/deployment": "rc402"
-          }
-        },
-        "spec": {
-          "revisionHistoryLimit": 7
-        }
-      },
-      "ingress": {
-        "metadata": {
-          "annotations": {
-            "external-dns.alpha.kubernetes.io/cloudflare-proxied": "true",
-            "external-dns.alpha.kubernetes.io/target": "103.117.151.86",
-            "qualification.kuberploy.io/ingress": "rc402"
-          }
-        }
-      },
-      "service": {
-        "metadata": {
-          "annotations": {
-            "qualification.kuberploy.io/service": "rc402"
-          }
-        },
-        "spec": {
-          "sessionAffinity": "None"
-        }
-      },
-      "serviceAccount": {
-        "metadata": {
-          "annotations": {
-            "eks.amazonaws.com/role-arn": "arn:aws:iam::123456789012:role/kuberploy-rc402"
-          }
-        }
-      }
-    },
-    "projectId": "60c6013f-d38f-4f56-8c5f-a2373cf30f5a",
-    "routes": [
-      {
-        "dns": {
-          "integrationRef": "kuberploy-cloudflare",
-          "mode": "externalDns",
-          "ttl": 60
-        },
-        "host": "kuberploy-qualification.adminchatmate.com",
-        "id": "public",
-        "ingressClassName": "traefik",
-        "middlewareRefs": [
-          "rc402-live-header-6e5cf0b3"
-        ],
-        "path": "/",
-        "port": "http",
-        "tls": {
-          "issuerRef": "kuberploy-http01-production",
-          "mode": "letsencrypt",
-          "redirectHttp": true
-        }
-      },
-      {
-        "dns": {
-          "integrationRef": "kuberploy-cloudflare",
-          "mode": "externalDns",
-          "ttl": 60
-        },
-        "host": "kuberploy-dns01.adminchatmate.com",
-        "id": "dns01",
-        "ingressClassName": "traefik",
-        "middlewareRefs": [],
-        "path": "/",
-        "port": "http",
-        "tls": {
-          "issuerRef": "kuberploy-dns01-production",
-          "mode": "letsencrypt",
-          "redirectHttp": true
-        }
-      }
-    ],
-    "runtime": {
-      "ports": [
-        {
-          "containerPort": 8080,
-          "name": "http",
-          "protocol": "TCP",
-          "servicePort": 80
-        }
-      ],
-      "probes": {
-        "liveness": {
-          "failureThreshold": 3,
-          "httpGet": {
-            "path": "/",
-            "port": "http",
-            "scheme": "HTTP"
-          },
-          "periodSeconds": 10,
-          "timeoutSeconds": 2
-        },
-        "readiness": {
-          "failureThreshold": 3,
-          "httpGet": {
-            "path": "/",
-            "port": "http",
-            "scheme": "HTTP"
-          },
-          "periodSeconds": 3,
-          "timeoutSeconds": 2
-        },
-        "startup": {
-          "failureThreshold": 30,
-          "periodSeconds": 2,
-          "tcpSocket": {
-            "port": "http"
-          },
-          "timeoutSeconds": 1
-        }
-      },
-      "replicas": 1,
-      "resources": {
-        "limits": {
-          "cpu": "100m",
-          "memory": "64Mi"
-        },
-        "requests": {
-          "cpu": "10m",
-          "memory": "16Mi"
-        }
-      },
-      "strategy": {
-        "type": "RollingUpdate"
-      },
-      "workloadType": "Deployment"
-    }
-  }
-}
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "adabca46-aaec-4d81-ac7c-15285a36f71d"
+  name: "web"
+spec:
+  projectId: "60c6013f-d38f-4f56-8c5f-a2373cf30f5a"
+  applicationId: "adabca46-aaec-4d81-ac7c-15285a36f71d"
+  environmentId: "881d0234-2dac-4464-800a-b0539b3e8807"
+  delivery:
+    mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-main"
+      profileRevision: 1
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/60c6013f-d38f-4f56-8c5f-a2373cf30f5a/services/adabca46-aaec-4d81-ac7c-15285a36f71d/image"
+      digest: "sha256:d780e05b25ea9e213411c15327d676d41de0e571ae62c0d34d38cc7f6979a4ef"
+  runtime:
+    ports:
+      - containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      liveness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 10
+        timeoutSeconds: 2
+      readiness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+      startup:
+        failureThreshold: 30
+        periodSeconds: 2
+        tcpSocket:
+          port: "http"
+        timeoutSeconds: 1
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
+  overrides:
+    deployment:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/deployment: rc402
+      spec:
+        revisionHistoryLimit: 7
+    service:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/service: rc402
+      spec:
+        sessionAffinity: None
+    ingress:
+      metadata:
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: 103.117.151.86
+          qualification.kuberploy.io/ingress: rc402
+    serviceAccount:
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc402
+  routes:
+    - id: public
+      host: kuberploy-qualification.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: kuberploy-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: kuberploy-http01-production
+        redirectHttp: true
+    - id: dns01
+      host: kuberploy-dns01.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: kuberploy-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: kuberploy-dns01-production
+        redirectHttp: true
+      middlewareRefs: []
+
