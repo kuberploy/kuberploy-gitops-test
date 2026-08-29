@@ -63,6 +63,7 @@ spec:
           qualification.kuberploy.io/deployment: rc413
       spec:
         revisionHistoryLimit: 7
+        replicas: 2
     service:
       metadata:
         annotations:
