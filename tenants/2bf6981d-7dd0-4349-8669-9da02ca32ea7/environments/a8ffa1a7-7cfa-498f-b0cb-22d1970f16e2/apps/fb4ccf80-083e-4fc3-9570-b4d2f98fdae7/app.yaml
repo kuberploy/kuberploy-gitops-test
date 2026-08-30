@@ -15,7 +15,7 @@
         "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
       },
       "release": {
-        "digest": "sha256:6137eb01fcb7cf7c0197205c21c7aed915a871294064147a09b4ce22b4cb73e4",
+        "digest": "sha256:6670fe98d71e3d1e3dbbc24b0197ef47d00e57bb9cbc6e0023bbe4e0a5560d60",
         "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/2bf6981d-7dd0-4349-8669-9da02ca32ea7/services/fb4ccf80-083e-4fc3-9570-b4d2f98fdae7/image"
       }
     },
