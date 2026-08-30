@@ -18,8 +18,7 @@ spec:
       digest: "sha256:39a5ce791410f83eff57014cc4736ebef86bd20189699847c5a6d6a0c96f0475"
   runtime:
     ports:
-      -
-        containerPort: 8080
+      - containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -57,4 +56,7 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
-
+  overrides:
+    deployment:
+      spec:
+        replicas: 2
