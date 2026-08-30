@@ -18,8 +18,7 @@ spec:
       digest: "sha256:bb4be7f7a76a495ac45b26ec00d49b915087212dc3e22c54386109ff5410a410"
   runtime:
     ports:
-      -
-        containerPort: 8080
+      - containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -57,3 +56,40 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+  overrides:
+    deployment:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/deployment: rc414
+      spec:
+        revisionHistoryLimit: 7
+    service:
+      metadata:
+        annotations:
+          qualification.kuberploy.io/service: rc414
+      spec:
+        sessionAffinity: None
+    ingress:
+      metadata:
+        annotations:
+          external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+          external-dns.alpha.kubernetes.io/target: 103.117.151.86
+          qualification.kuberploy.io/ingress: rc414
+    serviceAccount:
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc414
+  routes:
+    - id: public
+      host: kuberploy-app-test.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: kuberploy-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: kuberploy-http01-production
+        redirectHttp: true
