@@ -1,0 +1,35 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "cde548d9-e71e-4d3a-a904-5b93646f7c72"
+  name: "rc414-private-oci-47141d01"
+spec:
+  projectId: "bbdc9ba9-af3f-45c1-af6b-c04650eada8c"
+  applicationId: "cde548d9-e71e-4d3a-a904-5b93646f7c72"
+  environmentId: "a7fdeec1-3c68-40cf-a4da-ce956a678208"
+  delivery:
+    mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-main"
+      profileRevision: 1
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/bbdc9ba9-af3f-45c1-af6b-c04650eada8c/services/cde548d9-e71e-4d3a-a904-5b93646f7c72/image"
+      digest: "sha256:5f1956a16918827fda956c1db094cb74354d85e78287b6b38269205e4f73c7ba"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "128Mi"
+      requests:
+        cpu: "25m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
