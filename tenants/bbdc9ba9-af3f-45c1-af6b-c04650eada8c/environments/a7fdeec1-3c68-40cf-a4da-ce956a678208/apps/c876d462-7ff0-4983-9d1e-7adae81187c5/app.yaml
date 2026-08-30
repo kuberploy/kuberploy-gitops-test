@@ -15,7 +15,7 @@ spec:
       profileRevision: 1
     release:
       repository: "registry.adminchatmate.com/kuberploy-qualification/projects/bbdc9ba9-af3f-45c1-af6b-c04650eada8c/services/c876d462-7ff0-4983-9d1e-7adae81187c5/image"
-      digest: "sha256:ee9bf1322ff006482acd5aff07a3dd38ae34b2477db84ea6ad189dea544c5492"
+      digest: "sha256:39a5ce791410f83eff57014cc4736ebef86bd20189699847c5a6d6a0c96f0475"
   runtime:
     ports:
       -
