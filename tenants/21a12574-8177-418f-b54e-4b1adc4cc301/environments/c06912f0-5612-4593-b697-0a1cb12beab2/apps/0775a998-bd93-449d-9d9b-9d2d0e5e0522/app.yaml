@@ -18,8 +18,7 @@ spec:
       digest: "sha256:d2d1bd737182b4231b72fceb2c63411470582d1fe6bd0f3a6c8c8a9132811935"
   runtime:
     ports:
-      -
-        containerPort: 8080
+      - containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -57,3 +56,18 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+  routes:
+    - id: dns01
+      host: kuberploy-dns01.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: kuberploy-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: kuberploy-dns01-production
+        redirectHttp: true
+      middlewareRefs: []
