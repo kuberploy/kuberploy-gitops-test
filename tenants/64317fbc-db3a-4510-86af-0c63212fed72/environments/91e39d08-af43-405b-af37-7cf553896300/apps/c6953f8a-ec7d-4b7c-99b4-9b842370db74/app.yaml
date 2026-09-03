@@ -1,53 +1,72 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "c6953f8a-ec7d-4b7c-99b4-9b842370db74"
-  name: "web"
-spec:
-  projectId: "64317fbc-db3a-4510-86af-0c63212fed72"
-  applicationId: "c6953f8a-ec7d-4b7c-99b4-9b842370db74"
-  environmentId: "91e39d08-af43-405b-af37-7cf553896300"
-  delivery:
-    mode: image
-    registryPull:
-      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
-      profileName: "managed-main"
-      profileRevision: 1
-    release:
-      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/64317fbc-db3a-4510-86af-0c63212fed72/services/c6953f8a-ec7d-4b7c-99b4-9b842370db74/image"
-      digest: "sha256:82d5dbe1efa8829bc2554c4c10df94e4c3be739b2add51c7418a93500b5df8b1"
-  runtime:
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-        servicePort: 80
-    probes:
-      liveness:
-        failureThreshold: 3
-        httpGet:
-          path: "/"
-          port: "http"
-          scheme: "HTTP"
-        periodSeconds: 10
-        timeoutSeconds: 2
-      readiness:
-        failureThreshold: 3
-        httpGet:
-          path: "/"
-          port: "http"
-          scheme: "HTTP"
-        periodSeconds: 3
-        timeoutSeconds: 2
-    replicas: 1
-    resources:
-      limits:
-        cpu: "250m"
-        memory: "128Mi"
-      requests:
-        cpu: "10m"
-        memory: "16Mi"
-    strategy:
-      type: "RollingUpdate"
-    workloadType: "Deployment"
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "c6953f8a-ec7d-4b7c-99b4-9b842370db74",
+    "name": "web"
+  },
+  "spec": {
+    "applicationId": "c6953f8a-ec7d-4b7c-99b4-9b842370db74",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-main",
+        "profileRevision": 1,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:f3675e4daa1047e83a73edacf6bd6869054c132e6646e10468adc5d9174c0492",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/64317fbc-db3a-4510-86af-0c63212fed72/services/c6953f8a-ec7d-4b7c-99b4-9b842370db74/image"
+      }
+    },
+    "environmentId": "91e39d08-af43-405b-af37-7cf553896300",
+    "projectId": "64317fbc-db3a-4510-86af-0c63212fed72",
+    "runtime": {
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "probes": {
+        "liveness": {
+          "failureThreshold": 3,
+          "httpGet": {
+            "path": "/",
+            "port": "http",
+            "scheme": "HTTP"
+          },
+          "periodSeconds": 10,
+          "timeoutSeconds": 2
+        },
+        "readiness": {
+          "failureThreshold": 3,
+          "httpGet": {
+            "path": "/",
+            "port": "http",
+            "scheme": "HTTP"
+          },
+          "periodSeconds": 3,
+          "timeoutSeconds": 2
+        }
+      },
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "250m",
+          "memory": "128Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
