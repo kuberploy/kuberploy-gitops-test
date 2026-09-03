@@ -1,0 +1,67 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "c8828716-56f0-42d3-b448-d88f87e7f123"
+  name: "rc414-public-oci-20260903105643"
+spec:
+  projectId: "38e0b936-3e0f-46e1-89e4-74317f32a297"
+  applicationId: "c8828716-56f0-42d3-b448-d88f87e7f123"
+  environmentId: "8815ff1f-0ca1-4358-81bd-e727cbc2e226"
+  delivery:
+    mode: image
+    release:
+      repository: "registry.k8s.io/e2e-test-images/agnhost"
+      digest: "sha256:99c6b4bb4a1e1df3f0b3752168c89358794d02258ebebc26bf21c29399011a85"
+  runtime:
+    args:
+      - "netexec"
+      - "--http-port=8080"
+      - "--udp-port=-1"
+    command:
+      - "/agnhost"
+    env:
+      -
+        name: "RC414_RUNTIME"
+        value: "initial"
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      liveness:
+        failureThreshold: 3
+        httpGet:
+          path: "/echo?msg=live"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 10
+        timeoutSeconds: 2
+      readiness:
+        failureThreshold: 3
+        httpGet:
+          path: "/echo?msg=ready"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+      startup:
+        failureThreshold: 30
+        periodSeconds: 2
+        tcpSocket:
+          port: "http"
+        timeoutSeconds: 1
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    terminationGracePeriodSeconds: 20
+    workingDirectory: "/"
+    workloadType: "Deployment"
