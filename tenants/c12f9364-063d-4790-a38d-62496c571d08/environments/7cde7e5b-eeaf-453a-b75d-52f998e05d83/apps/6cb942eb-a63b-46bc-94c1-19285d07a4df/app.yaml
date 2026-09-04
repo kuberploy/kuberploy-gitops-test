@@ -56,6 +56,10 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+    command:
+      - /definitely-not-present
+    args:
+      - qualification
   overrides:
     deployment:
       metadata:
@@ -63,6 +67,7 @@ spec:
           qualification.kuberploy.io/deployment: rc414
       spec:
         revisionHistoryLimit: 7
+        progressDeadlineSeconds: 30
     service:
       metadata:
         annotations:
@@ -107,4 +112,3 @@ spec:
         issuerRef: kuberploy-dns01-production
         redirectHttp: true
       middlewareRefs: []
-
