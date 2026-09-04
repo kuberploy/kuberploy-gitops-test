@@ -45,7 +45,7 @@ spec:
         tcpSocket:
           port: "http"
         timeoutSeconds: 1
-    replicas: 2
+    replicas: 1
     resources:
       limits:
         cpu: "100m"
@@ -107,3 +107,4 @@ spec:
         issuerRef: kuberploy-dns01-production
         redirectHttp: true
       middlewareRefs: []
+
