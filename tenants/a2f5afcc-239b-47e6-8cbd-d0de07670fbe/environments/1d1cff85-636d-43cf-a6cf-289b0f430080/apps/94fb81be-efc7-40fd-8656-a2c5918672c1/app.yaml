@@ -1,0 +1,59 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "94fb81be-efc7-40fd-8656-a2c5918672c1"
+  name: "web"
+spec:
+  projectId: "a2f5afcc-239b-47e6-8cbd-d0de07670fbe"
+  applicationId: "94fb81be-efc7-40fd-8656-a2c5918672c1"
+  environmentId: "1d1cff85-636d-43cf-a6cf-289b0f430080"
+  delivery:
+    mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-main"
+      profileRevision: 1
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/a2f5afcc-239b-47e6-8cbd-d0de07670fbe/services/94fb81be-efc7-40fd-8656-a2c5918672c1/image"
+      digest: "sha256:7ef0d239a9fb00055d57579c36e201833a93c936ab6e4f57c8187e48b0d9e857"
+  runtime:
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      liveness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 10
+        timeoutSeconds: 2
+      readiness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+      startup:
+        failureThreshold: 30
+        periodSeconds: 2
+        tcpSocket:
+          port: "http"
+        timeoutSeconds: 1
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
