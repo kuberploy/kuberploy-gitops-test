@@ -1,0 +1,32 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "60ad1727-b438-44b0-b8ff-b8928a2103e2"
+  name: "rc414-gitssh-app-7805b73a"
+spec:
+  projectId: "2b5d5baf-bf06-4809-a18b-179082054c7b"
+  applicationId: "60ad1727-b438-44b0-b8ff-b8928a2103e2"
+  environmentId: "f837907c-aba6-4495-b05c-05624a3bd3ec"
+  delivery:
+    mode: image
+    registryPull:
+      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      profileName: "managed-main"
+      profileRevision: 1
+    release:
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/2b5d5baf-bf06-4809-a18b-179082054c7b/services/60ad1727-b438-44b0-b8ff-b8928a2103e2/image"
+      digest: "sha256:61c0aa97ed95ac47fc5558ae4bdf889f71dd4df1ae7e9f8413b1dc5144605553"
+  runtime:
+    ports:
+      -
+        containerPort: 3000
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "100Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
