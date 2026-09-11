@@ -93,3 +93,17 @@ spec:
         mode: letsencrypt
         issuerRef: kuberploy-http01-production
         redirectHttp: true
+    - id: dns01
+      host: kuberploy-dns01.adminchatmate.com
+      path: /
+      port: http
+      ingressClassName: traefik
+      dns:
+        mode: externalDns
+        integrationRef: kuberploy-cloudflare
+        ttl: 60
+      tls:
+        mode: letsencrypt
+        issuerRef: kuberploy-dns01-production
+        redirectHttp: true
+      middlewareRefs: []
