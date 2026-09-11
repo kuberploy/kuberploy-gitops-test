@@ -1,0 +1,80 @@
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "d71ab1a7-2afb-4b6e-b244-4bd49fa063ec",
+    "name": "web"
+  },
+  "spec": {
+    "applicationId": "d71ab1a7-2afb-4b6e-b244-4bd49fa063ec",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-main",
+        "profileRevision": 1,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:c03e70afc51eb1aaca48613c04a7319dcf3e0bfda45bc1cf5a4ba499981a7537",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/2b5d5baf-bf06-4809-a18b-179082054c7b/services/d71ab1a7-2afb-4b6e-b244-4bd49fa063ec/image"
+      }
+    },
+    "environmentId": "27fbbcf3-227b-48d0-b23f-27be9cf7aab5",
+    "projectId": "2b5d5baf-bf06-4809-a18b-179082054c7b",
+    "runtime": {
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "probes": {
+        "liveness": {
+          "failureThreshold": 3,
+          "httpGet": {
+            "path": "/",
+            "port": "http",
+            "scheme": "HTTP"
+          },
+          "periodSeconds": 10,
+          "timeoutSeconds": 2
+        },
+        "readiness": {
+          "failureThreshold": 3,
+          "httpGet": {
+            "path": "/",
+            "port": "http",
+            "scheme": "HTTP"
+          },
+          "periodSeconds": 3,
+          "timeoutSeconds": 2
+        },
+        "startup": {
+          "failureThreshold": 30,
+          "periodSeconds": 2,
+          "tcpSocket": {
+            "port": "http"
+          },
+          "timeoutSeconds": 1
+        }
+      },
+      "replicas": 2,
+      "resources": {
+        "limits": {
+          "cpu": "100m",
+          "memory": "64Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "16Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
