@@ -56,6 +56,14 @@ spec:
     strategy:
       type: RollingUpdate
     workloadType: Deployment
+    env:
+      - name: RC402_RUNTIME_SECRET
+        valueFrom:
+          secretBindingRef:
+            bindingId: 50813e8b-be10-429c-9cbe-5d7e4b415e99
+            name: rc402-runtime-3877d276
+            key: apiKey
+            version: 2
   overrides:
     deployment:
       spec:
@@ -80,16 +88,17 @@ spec:
         annotations:
           eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/kuberploy-rc414
   routes:
-    - id: public
-      host: kuberploy-app-test.adminchatmate.com
+    - id: qualification
+      host: kuberploy-qualification.adminchatmate.com
       path: /
       port: http
-      ingressClassName: traefik
       dns:
-        mode: externalDns
-        integrationRef: kuberploy-cloudflare
-        ttl: 60
+        mode: manual
       tls:
-        mode: letsencrypt
-        issuerRef: kuberploy-http01-production
+        mode: customCertificate
+        secretRef:
+          bindingId: 71f8d00b-ea8e-4a7e-9949-21e37147f3f8
+          name: rc402-custom-cert-3877d276
+          version: 2
         redirectHttp: true
+      middlewareRefs: []
