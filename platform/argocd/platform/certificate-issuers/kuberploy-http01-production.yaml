@@ -27,7 +27,7 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: "kuberploy-ci-observer-c8cf23ced899cc19285c"
+  name: "kuberploy-ci-observer-c4bbacfcef0bbfb351c0"
   labels:
     app.kubernetes.io/managed-by: "kuberploy"
     kuberploy.io/certificate-issuer-profile: "kuberploy-http01-production"
@@ -44,14 +44,14 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: "kuberploy-ci-observer-c8cf23ced899cc19285c"
+  name: "kuberploy-ci-observer-c4bbacfcef0bbfb351c0"
   labels:
     app.kubernetes.io/managed-by: "kuberploy"
     kuberploy.io/certificate-issuer-profile: "kuberploy-http01-production"
 roleRef:
   apiGroup: "rbac.authorization.k8s.io"
   kind: ClusterRole
-  name: "kuberploy-ci-observer-c8cf23ced899cc19285c"
+  name: "kuberploy-ci-observer-c4bbacfcef0bbfb351c0"
 subjects:
   - kind: ServiceAccount
     name: "kuberploy-worker"
