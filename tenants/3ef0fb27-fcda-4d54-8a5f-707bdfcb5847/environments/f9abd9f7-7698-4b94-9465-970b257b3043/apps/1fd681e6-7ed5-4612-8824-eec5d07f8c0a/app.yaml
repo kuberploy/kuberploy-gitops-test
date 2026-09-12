@@ -22,7 +22,7 @@ spec:
     env:
       -
         name: "RC414_RUNTIME"
-        value: "changed"
+        value: "initial"
     ports:
       -
         containerPort: 8080
@@ -52,7 +52,7 @@ spec:
         tcpSocket:
           port: "http"
         timeoutSeconds: 1
-    replicas: 2
+    replicas: 1
     resources:
       limits:
         cpu: "100m"
