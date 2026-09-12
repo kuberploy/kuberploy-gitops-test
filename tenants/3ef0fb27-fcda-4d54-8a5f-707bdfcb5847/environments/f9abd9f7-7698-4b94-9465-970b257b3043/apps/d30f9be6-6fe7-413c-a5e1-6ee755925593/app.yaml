@@ -18,8 +18,7 @@ spec:
       digest: "sha256:b3f31620d00ce925969866cc2ea52c99b5de3971f93e49f9625bf86f5e18e048"
   runtime:
     ports:
-      -
-        containerPort: 8080
+      - containerPort: 8080
         name: "http"
         protocol: "TCP"
         servicePort: 80
@@ -57,3 +56,26 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+    env:
+      - name: RC402_RUNTIME_SECRET
+        valueFrom:
+          secretBindingRef:
+            bindingId: ce2f5f41-f59a-4661-9e95-43c4d27c1396
+            name: rc402-runtime-2d494958
+            key: apiKey
+            version: 2
+  routes:
+    - id: qualification
+      host: kuberploy-qualification.adminchatmate.com
+      path: /
+      port: http
+      dns:
+        mode: manual
+      tls:
+        mode: customCertificate
+        secretRef:
+          bindingId: 2ebdf092-8aba-4358-aa57-42affee52d7d
+          name: rc402-custom-cert-2d494958
+          version: 2
+        redirectHttp: true
+      middlewareRefs: []
