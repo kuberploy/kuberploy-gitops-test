@@ -1,0 +1,100 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+    name: kp-rc414-source-20260911191913-rc448-secret-clone-6b7cade1
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: ea8e109b-7b24-4e33-bb33-7780a7683500
+        kuberploy.io/project-id: 2b5d5baf-bf06-4809-a18b-179082054c7b
+    annotations:
+        argocd.argoproj.io/sync-options: PruneLast=true
+        argocd.argoproj.io/sync-wave: "-10"
+        kuberploy.io/git-binding-id: 68bdf49b-1d92-4743-8dce-b47195be5d19
+        kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:94b7d1afd001594abce5b8f3cbceb214ee66a80185d1b50601748c20a1a65315
+        kuberploy.io/runtime-chart-digest: sha256:cd38ad632f4bd96d8b6f3a9c5eae8e39aa371723cbaf9faadd7913bf8f026418
+spec:
+    sourceRepos:
+        - '*'
+    destinations:
+        - namespace: kp-rc414-source-20260911191913-rc448-secret-clone-6b7cade1
+          server: https://kubernetes.default.svc
+    clusterResourceWhitelist: []
+    namespaceResourceWhitelist:
+        - group: '*'
+          kind: '*'
+    orphanedResources:
+        warn: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+    name: kp-e-ea8e109b7b244e33bb337780a7683500
+    namespace: argocd
+    labels:
+        app.kubernetes.io/managed-by: kuberploy
+        kuberploy.io/environment-id: ea8e109b-7b24-4e33-bb33-7780a7683500
+        kuberploy.io/project-id: 2b5d5baf-bf06-4809-a18b-179082054c7b
+    annotations:
+        argocd.argoproj.io/sync-wave: "0"
+        kuberploy.io/git-binding-id: 68bdf49b-1d92-4743-8dce-b47195be5d19
+        kuberploy.io/runtime-chart-digest: sha256:cd38ad632f4bd96d8b6f3a9c5eae8e39aa371723cbaf9faadd7913bf8f026418
+spec:
+    goTemplate: true
+    goTemplateOptions:
+        - missingkey=error
+    generators:
+        - list:
+            elements: []
+    template:
+        metadata:
+            name: '{{.applicationName}}'
+            namespace: argocd
+            labels:
+                app.kubernetes.io/managed-by: kuberploy
+                kuberploy.io/application-id: '{{.applicationId}}'
+                kuberploy.io/deployment-id: '{{.deploymentId}}'
+                kuberploy.io/environment-id: ea8e109b-7b24-4e33-bb33-7780a7683500
+                kuberploy.io/project-id: 2b5d5baf-bf06-4809-a18b-179082054c7b
+                kuberploy.io/service: '{{.applicationId}}'
+            annotations:
+                kuberploy.io/git-binding-id: 68bdf49b-1d92-4743-8dce-b47195be5d19
+                kuberploy.io/renderer-image: ghcr.io/kuberploy/kuberploy-worker@sha256:94b7d1afd001594abce5b8f3cbceb214ee66a80185d1b50601748c20a1a65315
+                kuberploy.io/runtime-chart-digest: sha256:cd38ad632f4bd96d8b6f3a9c5eae8e39aa371723cbaf9faadd7913bf8f026418
+                kuberploy.io/runtime-chart-version: 0.1.0-rc.448
+        spec:
+            project: kp-rc414-source-20260911191913-rc448-secret-clone-6b7cade1
+            sources:
+                - repoURL: oci://ghcr.io/kuberploy/charts/kuberploy-runtime
+                  path: .
+                  targetRevision: sha256:cd38ad632f4bd96d8b6f3a9c5eae8e39aa371723cbaf9faadd7913bf8f026418
+                  helm:
+                    valueFiles:
+                        - $values/tenants/2b5d5baf-bf06-4809-a18b-179082054c7b/variables.yaml
+                        - $values/tenants/2b5d5baf-bf06-4809-a18b-179082054c7b/environments/ea8e109b-7b24-4e33-bb33-7780a7683500/variables.yaml
+                        - $values/{{.applicationPath}}
+                    ignoreMissingValueFiles: true
+                    parameters:
+                        - name: kuberployExpectedIdentity.projectId
+                          value: 2b5d5baf-bf06-4809-a18b-179082054c7b
+                          forceString: true
+                        - name: kuberployExpectedIdentity.environmentId
+                          value: ea8e109b-7b24-4e33-bb33-7780a7683500
+                          forceString: true
+                        - name: kuberployExpectedIdentity.applicationId
+                          value: '{{.applicationId}}'
+                          forceString: true
+                - repoURL: https://github.com/kuberploy/kuberploy-gitops-test.git
+                  targetRevision: '{{.valuesRevision}}'
+                  ref: values
+            destination:
+                namespace: kp-rc414-source-20260911191913-rc448-secret-clone-6b7cade1
+                server: https://kubernetes.default.svc
+            syncPolicy:
+                automated:
+                    allowEmpty: false
+                    prune: true
+                    selfHeal: true
+                syncOptions:
+                    - CreateNamespace=false
+                    - ServerSideApply=true
