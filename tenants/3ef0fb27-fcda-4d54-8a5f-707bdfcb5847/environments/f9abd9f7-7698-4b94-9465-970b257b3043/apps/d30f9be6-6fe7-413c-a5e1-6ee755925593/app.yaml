@@ -56,10 +56,15 @@ spec:
     strategy:
       type: RollingUpdate
     workloadType: Deployment
+    command:
+      - /definitely-not-present
+    args:
+      - qualification
   overrides:
     deployment:
       spec:
         revisionHistoryLimit: 7
+        progressDeadlineSeconds: 30
       metadata:
         annotations:
           qualification.kuberploy.io/deployment: rc414
