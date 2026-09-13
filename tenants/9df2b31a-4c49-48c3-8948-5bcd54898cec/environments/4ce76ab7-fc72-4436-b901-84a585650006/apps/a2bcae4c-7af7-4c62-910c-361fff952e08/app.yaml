@@ -1,0 +1,37 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "a2bcae4c-7af7-4c62-910c-361fff952e08"
+  name: "clone-web"
+spec:
+  projectId: "9df2b31a-4c49-48c3-8948-5bcd54898cec"
+  applicationId: "a2bcae4c-7af7-4c62-910c-361fff952e08"
+  environmentId: "4ce76ab7-fc72-4436-b901-84a585650006"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/library/nginx"
+      digest: "sha256:72ba65eb42c10344912a84ff42408db7d34f2feb642204570ab8fc5ffd29f1d3"
+  runtime:
+    env:
+      -
+        name: "QUALIFICATION_MODE"
+        value: "source"
+    ports:
+      -
+        containerPort: 80
+        name: "http"
+        protocol: "TCP"
+    probes:
+      readiness:
+        httpGet:
+          path: "/"
+          port: 80
+    replicas: 1
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
