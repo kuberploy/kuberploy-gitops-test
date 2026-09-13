@@ -14,15 +14,30 @@ spec:
       digest: "sha256:bd43d3d8fdbbe597c36fea489886796466a9ea5b662e8c50897d53e190c88a3d"
   runtime:
     ports:
-      -
+      - name: http
         containerPort: 80
-        name: "http"
-        protocol: "TCP"
-    replicas: 1
+        servicePort: 8081
+        protocol: TCP
+    replicas: 2
     resources:
       requests:
         cpu: "50m"
-        memory: "100Mi"
+        memory: "128Mi"
+      limits:
+        cpu: 500m
+        memory: 256Mi
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+    env: []
+    command:
+      - nginx
+    args:
+      - -g
+      - daemon off;
+    probes:
+      readiness:
+        httpGet:
+          path: /
+          port: http
+  routes: []
