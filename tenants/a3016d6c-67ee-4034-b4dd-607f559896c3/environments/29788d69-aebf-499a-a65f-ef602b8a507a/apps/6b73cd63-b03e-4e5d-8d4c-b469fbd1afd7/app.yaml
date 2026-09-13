@@ -1,0 +1,50 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "6b73cd63-b03e-4e5d-8d4c-b469fbd1afd7"
+  name: "pr-config-review"
+spec:
+  projectId: "a3016d6c-67ee-4034-b4dd-607f559896c3"
+  applicationId: "6b73cd63-b03e-4e5d-8d4c-b469fbd1afd7"
+  environmentId: "29788d69-aebf-499a-a65f-ef602b8a507a"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/library/nginx"
+      digest: "sha256:bd43d3d8fdbbe597c36fea489886796466a9ea5b662e8c50897d53e190c88a3d"
+  runtime:
+    args:
+      - "-c"
+      - "printf '%s\n' 'worker_processes 1;' 'pid /tmp/pr-review-nginx.pid;' 'events { worker_connections 64; }' 'http { access_log /dev/stdout; error_log /dev/stderr warn; server { listen 8080; location / { return 200 \"protected review fixture healthy\\n\"; } } }' >/tmp/pr-review-nginx.conf; exec nginx -c /tmp/pr-review-nginx.conf -g 'daemon off;' "
+    command:
+      - "/bin/sh"
+    env:
+      -
+        name: "PR_REVIEW_FIXTURE"
+        value: "baseline"
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      readiness:
+        failureThreshold: 10
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
