@@ -24,7 +24,7 @@
                 {
                   annotations: { qualification.kuberploy.io/deployment: rc455-runtime-20260913034244 }
                 },
-              spec: { replicas: 4, revisionHistoryLimit: 4 }
+              spec: { replicas: 3, revisionHistoryLimit: 4 }
             },
           "ingress":
             {
@@ -33,8 +33,7 @@
                   annotations:
                     {
                       external-dns.alpha.kubernetes.io/cloudflare-proxied: "false",
-                      qualification.kuberploy.io/ingress: rc455-runtime-20260913034244-rc460-chrome,
-                      external-dns.alpha.kubernetes.io/ttl: "120"
+                      qualification.kuberploy.io/ingress: rc455-runtime-20260913034244
                     }
                 }
             },
@@ -44,7 +43,7 @@
                 {
                   annotations: { qualification.kuberploy.io/service: rc455-runtime-20260913034244 }
                 },
-              spec: { sessionAffinity: None }
+              spec: { sessionAffinity: ClientIP }
             },
           "serviceAccount":
             {
@@ -53,7 +52,7 @@
                   annotations:
                     {
                       eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/qualification,
-                      qualification.kuberploy.io/identity: rc455-runtime-20260913034244-rc460-chrome
+                      qualification.kuberploy.io/identity: rc455-runtime-20260913034244
                     }
                 }
             }
