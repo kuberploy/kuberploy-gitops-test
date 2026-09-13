@@ -15,7 +15,7 @@ spec:
   runtime:
     args:
       - "-c"
-      - "mkdir -p /tmp/runtime-dense; printf 'runtime fixture healthy\\n' >/tmp/runtime-dense/index.html; busybox httpd -f -p 8080 -h /tmp/runtime-dense & awk 'BEGIN { for (i=1;i<=12000;i++) printf \"RUNTIME_DENSE %08d %0500d\\n\", i, 0 }'; wait"
+      - "printf '%s\\n' 'worker_processes 1;' 'pid /tmp/runtime-nginx.pid;' 'events { worker_connections 128; }' 'http { access_log /dev/stdout; error_log /dev/stderr warn; server { listen 8080; location / { return 200 \"runtime fixture healthy\\n\"; } } }' >/tmp/runtime-nginx.conf; awk 'BEGIN { for (i=1;i<=12000;i++) printf \"RUNTIME_DENSE %08d %0500d\\n\", i, 0 }'; exec nginx -c /tmp/runtime-nginx.conf -g 'daemon off;'"
     command:
       - "/bin/sh"
     ports:
