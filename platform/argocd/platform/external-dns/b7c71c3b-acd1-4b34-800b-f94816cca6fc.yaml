@@ -24,7 +24,7 @@
     "labelFilter": "kuberploy.io/dns-integration=rc455-runtime-20260913034244",
     "management": "managed",
     "policy": "sync",
-    "providerConfigRef": "rc455-runtime-20260913034244-rc462-missing-provider",
+    "providerConfigRef": "rc455-runtime-20260913034244-provider-zone",
     "providerKind": "cloudflare",
     "txtOwnerId": "rc455-runtime-20260913034244"
   },
@@ -47,10 +47,10 @@
   "kind": "Deployment",
   "metadata": {
     "annotations": {
-      "kuberploy.io/edge-spec-digest": "sha256:69c018b09ea34a2e9c789b5c057824b66b0115d3f86d9b6ee4ea02242e14474d",
+      "kuberploy.io/edge-spec-digest": "sha256:f453c7bcbb53f9b03c4a44a3c259358348324d8903245f2b3873933aca27627b",
       "kuberploy.io/egress-config-ref": "rc455-runtime-20260913034244-egress",
-      "kuberploy.io/provider-config-ref": "rc455-runtime-20260913034244-rc462-missing-provider",
-      "kuberploy.io/runtime-revision": "6"
+      "kuberploy.io/provider-config-ref": "rc455-runtime-20260913034244-provider-zone",
+      "kuberploy.io/runtime-revision": "7"
     },
     "labels": {
       "app.kubernetes.io/managed-by": "kuberploy",
@@ -109,7 +109,7 @@
             "envFrom": [
               {
                 "configMapRef": {
-                  "name": "rc455-runtime-20260913034244-rc462-missing-provider"
+                  "name": "rc455-runtime-20260913034244-provider-zone"
                 }
               }
             ],
