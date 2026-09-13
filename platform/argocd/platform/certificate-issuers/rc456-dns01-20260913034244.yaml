@@ -6,14 +6,14 @@ metadata:
     app.kubernetes.io/managed-by: "kuberploy"
     kuberploy.io/certificate-issuer-profile: "rc456-dns01-20260913034244"
   annotations:
-    kuberploy.io/certificate-issuer-spec-digest: "sha256:958ea8bf79dba914758261345fd8f38c2a5310cca98a1c6f2f292850c244ab75"
-    kuberploy.io/certificate-issuer-revision: "1"
+    kuberploy.io/certificate-issuer-spec-digest: "sha256:66c8b908330c27f17bab0b1bbbaeea1f467cfb1d0dc06af70473ba7ffdd1ee93"
+    kuberploy.io/certificate-issuer-revision: "2"
 spec:
   acme:
     email: "admin@adminchatmate.com"
     server: "https://acme-v02.api.letsencrypt.org/directory"
     privateKeySecretRef:
-      name: "rc456-dns01-20260913034244-account"
+      name: "rc460-dns01-admin-20260913034244-account"
     solvers:
       - selector:
           dnsZones:
