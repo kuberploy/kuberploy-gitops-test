@@ -1,0 +1,28 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "d8e51af6-5b94-4728-9e37-c1326995ba78"
+  name: "rc463-ui-oci"
+spec:
+  projectId: "6ae93554-6107-4700-87f9-36f8b8bcd8aa"
+  applicationId: "d8e51af6-5b94-4728-9e37-c1326995ba78"
+  environmentId: "5497dae7-8a91-47b7-ac50-c4c988ce20a4"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/library/nginx"
+      digest: "sha256:bd43d3d8fdbbe597c36fea489886796466a9ea5b662e8c50897d53e190c88a3d"
+  runtime:
+    ports:
+      -
+        containerPort: 80
+        name: "http"
+        protocol: "TCP"
+    replicas: 1
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "100Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
