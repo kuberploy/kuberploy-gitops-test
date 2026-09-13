@@ -1,0 +1,46 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "701d0422-a0c1-436d-8bc9-d40ec8c94eaf"
+  name: "runtime-dense-logs"
+spec:
+  projectId: "2a9e74d1-ece3-4cad-918a-3054b6181d4c"
+  applicationId: "701d0422-a0c1-436d-8bc9-d40ec8c94eaf"
+  environmentId: "6e3e7058-368d-438a-9719-a66bb0b7bd46"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/library/nginx"
+      digest: "sha256:72ba65eb42c10344912a84ff42408db7d34f2feb642204570ab8fc5ffd29f1d3"
+  runtime:
+    args:
+      - "-c"
+      - "mkdir -p /tmp/runtime-dense; printf 'runtime fixture healthy\\n' >/tmp/runtime-dense/index.html; busybox httpd -f -p 8080 -h /tmp/runtime-dense & awk 'BEGIN { for (i=1;i<=12000;i++) printf \"RUNTIME_DENSE %08d %0500d\\n\", i, 0 }'; wait"
+    command:
+      - "/bin/sh"
+    ports:
+      -
+        containerPort: 8080
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      readiness:
+        failureThreshold: 10
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+    replicas: 2
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
