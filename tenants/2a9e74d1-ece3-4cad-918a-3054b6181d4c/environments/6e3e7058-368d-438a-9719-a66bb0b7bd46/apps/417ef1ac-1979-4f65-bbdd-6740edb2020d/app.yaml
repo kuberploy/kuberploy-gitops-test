@@ -1,0 +1,46 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "417ef1ac-1979-4f65-bbdd-6740edb2020d"
+  name: "rc465-dns-cleanup-fixed-20260913210131"
+spec:
+  projectId: "2a9e74d1-ece3-4cad-918a-3054b6181d4c"
+  applicationId: "417ef1ac-1979-4f65-bbdd-6740edb2020d"
+  environmentId: "6e3e7058-368d-438a-9719-a66bb0b7bd46"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/library/nginx"
+      digest: "sha256:bd43d3d8fdbbe597c36fea489886796466a9ea5b662e8c50897d53e190c88a3d"
+  runtime:
+    args:
+      - "-c"
+      - "exec nginx -g \"daemon off;\""
+    command:
+      - "/bin/sh"
+    ports:
+      -
+        containerPort: 80
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      readiness:
+        failureThreshold: 10
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "64Mi"
+      requests:
+        cpu: "10m"
+        memory: "16Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
