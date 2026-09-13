@@ -1,0 +1,210 @@
+{
+  "apiVersion": "v1",
+  "kind": "ServiceAccount",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+    },
+    "name": "kuberploy-external-dns-managed-67516bda066e4b74a8f94da30159a6ff",
+    "namespace": "kuberploy-system"
+  }
+}
+
+---
+{
+  "apiVersion": "v1",
+  "data": {
+    "annotationFilter": "",
+    "credentialSecretRef": "external-dns-cloudflare-qualification",
+    "domainFilters": "rc464-admin-managed.adminchatmate.com",
+    "egressConfigRef": "cloudflare-egress-qualification",
+    "labelFilter": "kuberploy.io/dns-integration=rc464-admin-managed",
+    "management": "managed",
+    "policy": "upsert-only",
+    "providerConfigRef": "cloudflare-provider-qualification",
+    "providerKind": "cloudflare",
+    "txtOwnerId": "rc464-admin-managed"
+  },
+  "kind": "ConfigMap",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+    },
+    "name": "external-dns-rc464-admin-managed-profile",
+    "namespace": "kuberploy-system"
+  }
+}
+
+---
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {
+      "kuberploy.io/edge-spec-digest": "sha256:7bd3b094dd6ee9295b52d3b4716742799bef160533aa4e4c957d0d46f302ad6f",
+      "kuberploy.io/egress-config-ref": "cloudflare-egress-qualification",
+      "kuberploy.io/provider-config-ref": "cloudflare-provider-qualification",
+      "kuberploy.io/runtime-revision": "1"
+    },
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+    },
+    "name": "external-dns-rc464-admin-managed",
+    "namespace": "kuberploy-system"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app.kubernetes.io/managed-by": "kuberploy",
+          "app.kubernetes.io/name": "external-dns",
+          "app.kubernetes.io/version": "v0.21.0",
+          "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "args": [
+              "--source=ingress",
+              "--provider=cloudflare",
+              "--registry=txt",
+              "--txt-prefix=%{record_type}-",
+              "--managed-record-types=A",
+              "--managed-record-types=AAAA",
+              "--managed-record-types=CNAME",
+              "--managed-record-types=TXT",
+              "--policy=upsert-only",
+              "--txt-owner-id=rc464-admin-managed",
+              "--label-filter=kuberploy.io/dns-integration=rc464-admin-managed",
+              "--domain-filter=rc464-admin-managed.adminchatmate.com"
+            ],
+            "env": [
+              {
+                "name": "CF_API_TOKEN",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "apiToken",
+                    "name": "external-dns-cloudflare-qualification",
+                    "optional": false
+                  }
+                }
+              }
+            ],
+            "envFrom": [
+              {
+                "configMapRef": {
+                  "name": "cloudflare-provider-qualification"
+                }
+              }
+            ],
+            "image": "registry.k8s.io/external-dns/external-dns@sha256:f53faaf71cb270d1ca9dce6ea0c94bfebf1a18696263487f0fbc74b9bf2bd7ff",
+            "name": "external-dns",
+            "resources": {
+              "limits": {
+                "cpu": "500m",
+                "memory": "256Mi"
+              },
+              "requests": {
+                "cpu": "25m",
+                "memory": "64Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              },
+              "readOnlyRootFilesystem": true,
+              "runAsGroup": 65532,
+              "runAsNonRoot": true,
+              "runAsUser": 65532
+            }
+          }
+        ],
+        "securityContext": {
+          "fsGroup": 65534,
+          "runAsNonRoot": true,
+          "seccompProfile": {
+            "type": "RuntimeDefault"
+          }
+        },
+        "serviceAccountName": "kuberploy-external-dns-managed-67516bda066e4b74a8f94da30159a6ff"
+      }
+    }
+  }
+}
+
+---
+{
+  "apiVersion": "rbac.authorization.k8s.io/v1",
+  "kind": "ClusterRole",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+    },
+    "name": "external-dns-rc464-admin-managed"
+  },
+  "rules": [
+    {
+      "apiGroups": [
+        "networking.k8s.io"
+      ],
+      "resources": [
+        "ingresses"
+      ],
+      "verbs": [
+        "get",
+        "list",
+        "watch"
+      ]
+    }
+  ]
+}
+
+---
+{
+  "apiVersion": "rbac.authorization.k8s.io/v1",
+  "kind": "ClusterRoleBinding",
+  "metadata": {
+    "labels": {
+      "app.kubernetes.io/managed-by": "kuberploy",
+      "app.kubernetes.io/name": "external-dns",
+      "app.kubernetes.io/version": "v0.21.0",
+      "kuberploy.io/dns-integration": "67516bda-066e-4b74-a8f9-4da30159a6ff"
+    },
+    "name": "external-dns-rc464-admin-managed"
+  },
+  "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "external-dns-rc464-admin-managed"
+  },
+  "subjects": [
+    {
+      "kind": "ServiceAccount",
+      "name": "kuberploy-external-dns-managed-67516bda066e4b74a8f94da30159a6ff",
+      "namespace": "kuberploy-system"
+    }
+  ]
+}
