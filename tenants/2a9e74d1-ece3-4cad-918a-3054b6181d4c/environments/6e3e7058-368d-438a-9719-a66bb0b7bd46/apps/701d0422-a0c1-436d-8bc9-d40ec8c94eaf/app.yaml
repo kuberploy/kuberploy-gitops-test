@@ -67,17 +67,7 @@
               "ingressClassName": "traefik",
               "path": "/",
               "port": "http",
-              "tls":
-                {
-                  mode: customCertificate,
-                  secretRef:
-                    {
-                      bindingId: c0e09f61-c51e-45ac-9f41-9b162088d23a,
-                      name: rc455-runtime-20260913034244-tls,
-                      version: 3
-                    },
-                  redirectHttp: true
-                },
+              "tls": { mode: httpOnly },
               middlewareRefs: []
             }
         ],
