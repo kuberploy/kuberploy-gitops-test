@@ -45,12 +45,7 @@ spec:
         - missingkey=error
     generators:
         - list:
-            elements:
-                - deploymentId: 99dc6038-f680-441b-a302-f25fa9f42620
-                  applicationId: 456bb933-cf4f-40ad-807c-615bf6ffb70a
-                  applicationName: kp-d-99dc6038f680441ba302f25fa9f42620
-                  applicationPath: tenants/0d60a002-4fe1-4a15-9a7a-4ffc08cdb17a/environments/cdb01c3c-6925-4da8-8c7d-9942431a428e/apps/456bb933-cf4f-40ad-807c-615bf6ffb70a/app.yaml
-                  valuesRevision: b90215d0c639a054c8f63b3152a675658f607e13
+            elements: []
     template:
         metadata:
             name: '{{.applicationName}}'
