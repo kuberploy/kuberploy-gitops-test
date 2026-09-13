@@ -71,7 +71,7 @@
               "tls":
                 {
                   mode: letsencrypt,
-                  issuerRef: rc456-http01-20260913034244,
+                  issuerRef: rc460-http01-fresh-20260913034244,
                   redirectHttp: true
                 }
             }
