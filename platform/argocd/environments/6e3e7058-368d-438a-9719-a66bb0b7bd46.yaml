@@ -55,7 +55,7 @@ spec:
                   applicationId: 1d2d7e32-2b36-4009-921b-0280c9d79904
                   applicationName: kp-d-98c37739d90b48238bc1aa006409a6d9
                   applicationPath: tenants/2a9e74d1-ece3-4cad-918a-3054b6181d4c/environments/6e3e7058-368d-438a-9719-a66bb0b7bd46/apps/1d2d7e32-2b36-4009-921b-0280c9d79904/app.yaml
-                  valuesRevision: 1b90edb1edf85da2edd824df23648861d9c97e3a
+                  valuesRevision: b28ab14c644f314f56e3ab659158d3980648fd01
     template:
         metadata:
             name: '{{.applicationName}}'
