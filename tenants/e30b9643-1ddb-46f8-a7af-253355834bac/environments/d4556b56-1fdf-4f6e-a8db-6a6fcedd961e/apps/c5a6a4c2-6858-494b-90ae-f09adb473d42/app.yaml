@@ -1,46 +1,65 @@
-apiVersion: config.kuberploy.io/v1alpha1
-kind: AppConfig
-metadata:
-  id: "c5a6a4c2-6858-494b-90ae-f09adb473d42"
-  name: "github-source"
-spec:
-  projectId: "e30b9643-1ddb-46f8-a7af-253355834bac"
-  applicationId: "c5a6a4c2-6858-494b-90ae-f09adb473d42"
-  environmentId: "d4556b56-1fdf-4f6e-a8db-6a6fcedd961e"
-  delivery:
-    mode: image
-    registryPull:
-      targetId: "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
-      profileName: "managed-main"
-      profileRevision: 1
-    release:
-      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/e30b9643-1ddb-46f8-a7af-253355834bac/services/c5a6a4c2-6858-494b-90ae-f09adb473d42/image"
-      digest: "sha256:e996caadfb4e19fbcbae1fbc84516adf07dad594637df685acefe84132345335"
-  runtime:
-    ports:
-      -
-        containerPort: 8080
-        name: "http"
-        protocol: "TCP"
-        servicePort: 80
-    replicas: 1
-    resources:
-      limits:
-        cpu: "200m"
-        memory: "128Mi"
-      requests:
-        cpu: "10m"
-        memory: "32Mi"
-    strategy:
-      type: "RollingUpdate"
-    workloadType: "Deployment"
-  routes:
-    - id: route-6cc354d5ea
-      host: "kp-d2054fa110fe36f95e55.103-117-151-86.sslip.io"
-      path: "/"
-      ingressClassName: "traefik"
-      port: "http"
-      dns:
-        mode: sslip
-      tls:
-        mode: httpOnly
+{
+  "apiVersion": "config.kuberploy.io/v1alpha1",
+  "kind": "AppConfig",
+  "metadata": {
+    "id": "c5a6a4c2-6858-494b-90ae-f09adb473d42",
+    "name": "github-source"
+  },
+  "spec": {
+    "applicationId": "c5a6a4c2-6858-494b-90ae-f09adb473d42",
+    "delivery": {
+      "mode": "image",
+      "registryPull": {
+        "profileName": "managed-main",
+        "profileRevision": 1,
+        "targetId": "f0b03740-c7a9-4ca0-a852-e807c97d2fc8"
+      },
+      "release": {
+        "digest": "sha256:221ec85c29249160076b5c3ef3daa5f5f74639efdaf999ceeacd428746b3ab35",
+        "repository": "registry.adminchatmate.com/kuberploy-qualification/projects/e30b9643-1ddb-46f8-a7af-253355834bac/services/c5a6a4c2-6858-494b-90ae-f09adb473d42/image"
+      }
+    },
+    "environmentId": "d4556b56-1fdf-4f6e-a8db-6a6fcedd961e",
+    "projectId": "e30b9643-1ddb-46f8-a7af-253355834bac",
+    "routes": [
+      {
+        "dns": {
+          "mode": "sslip"
+        },
+        "host": "kp-d2054fa110fe36f95e55.103-117-151-86.sslip.io",
+        "id": "route-6cc354d5ea",
+        "ingressClassName": "traefik",
+        "path": "/",
+        "port": "http",
+        "tls": {
+          "mode": "httpOnly"
+        }
+      }
+    ],
+    "runtime": {
+      "ports": [
+        {
+          "containerPort": 8080,
+          "name": "http",
+          "protocol": "TCP",
+          "servicePort": 80
+        }
+      ],
+      "replicas": 1,
+      "resources": {
+        "limits": {
+          "cpu": "200m",
+          "memory": "128Mi"
+        },
+        "requests": {
+          "cpu": "10m",
+          "memory": "32Mi"
+        }
+      },
+      "strategy": {
+        "type": "RollingUpdate"
+      },
+      "workloadType": "Deployment"
+    }
+  }
+}
