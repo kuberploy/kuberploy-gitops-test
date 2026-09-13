@@ -8,7 +8,7 @@
       "app.kubernetes.io/version": "v0.21.0",
       "kuberploy.io/dns-integration": "b7c71c3b-acd1-4b34-800b-f94816cca6fc"
     },
-    "name": "kuberploy-external-dns-managed",
+    "name": "kuberploy-external-dns-managed-b7c71c3bacd14b34800bf94816cca6fc",
     "namespace": "kuberploy-system"
   }
 }
@@ -47,10 +47,10 @@
   "kind": "Deployment",
   "metadata": {
     "annotations": {
-      "kuberploy.io/edge-spec-digest": "sha256:c533c4c7420f3cfd24fd22ed15c891532d708c82be66c3ba87c2fa2e1f728fc4",
+      "kuberploy.io/edge-spec-digest": "sha256:519366f54a86eb03df52bd9e39d73ce299e8037fa4c130f110af1966caf81520",
       "kuberploy.io/egress-config-ref": "rc455-runtime-20260913034244-egress",
       "kuberploy.io/provider-config-ref": "rc455-runtime-20260913034244-provider-zone",
-      "kuberploy.io/runtime-revision": "2"
+      "kuberploy.io/runtime-revision": "3"
     },
     "labels": {
       "app.kubernetes.io/managed-by": "kuberploy",
@@ -146,7 +146,7 @@
             "type": "RuntimeDefault"
           }
         },
-        "serviceAccountName": "kuberploy-external-dns-managed"
+        "serviceAccountName": "kuberploy-external-dns-managed-b7c71c3bacd14b34800bf94816cca6fc"
       }
     }
   }
@@ -203,7 +203,7 @@
   "subjects": [
     {
       "kind": "ServiceAccount",
-      "name": "kuberploy-external-dns-managed",
+      "name": "kuberploy-external-dns-managed-b7c71c3bacd14b34800bf94816cca6fc",
       "namespace": "kuberploy-system"
     }
   ]
