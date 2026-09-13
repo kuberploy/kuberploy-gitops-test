@@ -21,14 +21,14 @@
         "profileRef": {
           "assignmentsDigest": "sha256:33f70be460aa77d99c32b654f003e0837f5229e6979072024845e3198d9a41e1",
           "profileId": "c27711fa-c8e0-4e15-96b5-183c128c10b9",
-          "revision": 1,
-          "specDigest": "sha256:e6e695f49d794a225894b4490bee006a3b0e9d28547b82cbfde1a0511c1ccc9b"
+          "revision": 2,
+          "specDigest": "sha256:e2acbb6682b138d7738036fa779ecffd523cf10324816396fee1003f97d786b0"
         },
         "spec": {
           "headers": {
             "contentTypeNosniff": true,
             "customResponseHeaders": {
-              "X-Kuberploy-Qualification": "initial"
+              "X-Kuberploy-Qualification": "updated"
             },
             "frameDeny": true
           }
