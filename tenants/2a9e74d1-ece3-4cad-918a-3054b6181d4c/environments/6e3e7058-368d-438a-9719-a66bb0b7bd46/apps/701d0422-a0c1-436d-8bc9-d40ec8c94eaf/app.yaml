@@ -100,7 +100,7 @@
           "replicas": 2,
           "resources":
             {
-              "limits": { cpu: 100m, memory: 64Mi },
+              "limits": { cpu: 110m, memory: 64Mi },
               "requests": { "cpu": "10m", "memory": "16Mi" }
             },
           "strategy": { "type": "RollingUpdate" },
