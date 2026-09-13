@@ -14,14 +14,15 @@ spec:
       profileName: "managed-main"
       profileRevision: 1
     release:
-      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/6ae93554-6107-4700-87f9-36f8b8bcd8aa/services/3004bb2d-08a3-477c-a349-6662fb640946/image"
+      repository: "registry.adminchatmate.com/kuberploy-qualification/projects/6ae935\
+        54-6107-4700-87f9-36f8b8bcd8aa/services/3004bb2d-08a3-477c-a349-6662fb6\
+        40946/image"
       digest: "sha256:0f3bfad647ab616774eae1a679a4509ebf2b9578fefed762e7f7a5c9d7d080f9"
   runtime:
     ports:
-      -
-        containerPort: 3000
-        name: "http"
-        protocol: "TCP"
+      - name: http
+        containerPort: 8080
+        protocol: TCP
     replicas: 1
     resources:
       requests:
@@ -30,3 +31,10 @@ spec:
     strategy:
       type: "RollingUpdate"
     workloadType: "Deployment"
+    env: []
+    probes:
+      readiness:
+        httpGet:
+          path: /
+          port: http
+  routes: []
