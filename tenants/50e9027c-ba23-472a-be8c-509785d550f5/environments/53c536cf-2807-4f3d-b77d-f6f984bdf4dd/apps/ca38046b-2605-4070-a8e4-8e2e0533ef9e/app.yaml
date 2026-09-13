@@ -1,0 +1,46 @@
+apiVersion: config.kuberploy.io/v1alpha1
+kind: AppConfig
+metadata:
+  id: "ca38046b-2605-4070-a8e4-8e2e0533ef9e"
+  name: "state-normal"
+spec:
+  projectId: "50e9027c-ba23-472a-be8c-509785d550f5"
+  applicationId: "ca38046b-2605-4070-a8e4-8e2e0533ef9e"
+  environmentId: "53c536cf-2807-4f3d-b77d-f6f984bdf4dd"
+  delivery:
+    mode: image
+    release:
+      repository: "docker.io/library/nginx"
+      digest: "sha256:bd43d3d8fdbbe597c36fea489886796466a9ea5b662e8c50897d53e190c88a3d"
+  runtime:
+    args:
+      - "-g"
+      - "daemon off;"
+    command:
+      - "nginx"
+    ports:
+      -
+        containerPort: 80
+        name: "http"
+        protocol: "TCP"
+        servicePort: 80
+    probes:
+      readiness:
+        failureThreshold: 3
+        httpGet:
+          path: "/"
+          port: "http"
+          scheme: "HTTP"
+        periodSeconds: 3
+        timeoutSeconds: 2
+    replicas: 1
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "128Mi"
+      requests:
+        cpu: "10m"
+        memory: "32Mi"
+    strategy:
+      type: "RollingUpdate"
+    workloadType: "Deployment"
